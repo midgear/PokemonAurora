@@ -1,0 +1,46 @@
+RealToon V5.0.3 (LWRP)
+===========================================================
+Note:
+===========================================================
+
+Currently only "Default" and "Fade Transparency" are avaiable.
+Tessellation will be coming soon and refraction also.
+
+You can also use this for mobile games.
+
+Currently Shadow for Pointlight is not yet available on LWRP.
+It maybe be available on Unity 2019.2 or 2019.3.
+
+===========================================================
+===========================================================
+
+(To use this you need):
+*Unity 2018 with LWRP version 4.0.0 or latest.
+
+How To Update LWRP:
+1.Go to Window > Package Manager.
+2.Select "All" then select "Lightweight Render and select "Version 4.0.0" or latest.
+
+
+===========================================================
+New Options/Features for LWRP
+===========================================================
+
+- Use Traditonal Light Blend.
+*Use the traditional light blend stye.
+
+===========================================================
+Changes for LWRP
+===========================================================
+
+- Main Color changed RGB default values from 128 to 55 because the Color Picker is HDR.
+- Change Reduce Shadow (Directional Light) default value from 0 to 0.5.
+
+
+
+
+*************************************************************************************
+Note for users who already used RealToon and update their current project with RealToon to this new version 5.0.3.
+*************************************************************************************
+- Color Picker has beed changed to HDR, the color might get a-bit bright, You need to adjust it.
+- Always backup before procced to update.

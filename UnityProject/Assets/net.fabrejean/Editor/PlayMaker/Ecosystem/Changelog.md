@@ -1,5 +1,31 @@
 #Ecosystem Change log
 
+###0.6.6
+**Release:** 20/05/2019 
+
+**Update:** Removed some updateable api to prevent mess in 2019 and up when api updater doesn't perform
+
+###0.6.5
+**Release:** 30/04/2019 
+
+**Update:** Support for Unity 2019
+
+###0.6.4
+**Release:** 23/01/2019 
+
+**Fixed:** moved JSON into namespace  Net.FabreJean.UnityEditor to avoid conflict with other publishers using JSON too.
+
+###0.6.3
+**Release:** 8/11/2018 
+
+**Update:** Remove WWW obsolete warnings on 2018.3 and newer
+
+###0.6.2
+**Release:** 18/10/2018 
+
+**New:** authoring tool updated for latest unity and playmaker versions and 2018 github rep
+
+
 ###0.6.1
 **Release:** 28/03/2018 
 

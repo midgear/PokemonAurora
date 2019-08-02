@@ -46,8 +46,8 @@ MonoBehaviour:
   settings:
     _location: 0
     path: SaveData.es3
-    encryptionType: 0
-    encryptionPassword: password
+    encryptionType: 1
+    encryptionPassword: BananasAreGood4U!
     directory: 0
     format: 0
     bufferSize: 2048

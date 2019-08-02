@@ -1,0 +1,5 @@
+newmtl Leather
+map_Kd brown_leathere1.jpg
+Kd 0.5 0.5 0.5
+d 1
+
