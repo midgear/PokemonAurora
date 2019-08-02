@@ -1,0 +1,4 @@
+This package requires the full version of EasyRoads3D Pro
+
+https://assetstore.unity.com/packages/tools/terrain/easyroads3d-pro-v3-469
+
