@@ -1,0 +1,39 @@
+Name: Vaporeon
+Ability1: Water Absorb
+Ability2: 
+Ability3: Hydration
+Type1: WATER
+Type2: 
+HasGender: true
+PercentChanceFemale: 12.5
+HatchTIme: 8739 - 8995
+EggGroup1: Field
+EggGroup2: 
+Height: 1
+Weight: 29
+Hp: 130
+Attack: 65
+Defense: 60
+SpAttack: 110
+SpDefense: 95
+Speed: 65
+LevelingType: Medium Fast
+CatchRate: 45 
+EvolutionLevel: 
+EvolutionItem: 
+Moves:
+Tackle/-
+Tail Whip/-
+Water Gun/-
+Sand Attack/5
+Baby-Doll Eyes/9
+Quick Attack/13
+Water Pulse/17
+Aurora Beam/20
+Aqua Ring/25
+Aqua Tail/27
+Acid Armor/29
+Haze/33
+Muddy Water/37
+Last Resort/41
+Hydro Pump/45
