@@ -48,7 +48,22 @@ ModelImporter:
   - first:
       74: -6400176625350540979
     second: 011_Metapod_skeleton|PM011_R_Idle
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: 4770d2b172b577a448001f1b7becb696, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pm0011_00_Body1.tga
+    second: {fileID: 2100000, guid: bd76e8ab5c6d58a4e95a7e8d2cb172f0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pm0011_00_Eye1.tga
+    second: {fileID: 2100000, guid: 530097bd7a5259240ac0ab689aedb1c6, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -204,7 +219,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -320,7 +335,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -349,7 +364,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -378,7 +393,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -560,7 +575,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.0001673683
+    globalScale: 0.01673683
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

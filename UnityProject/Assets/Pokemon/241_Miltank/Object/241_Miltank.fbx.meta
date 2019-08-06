@@ -57,7 +57,22 @@ ModelImporter:
   - first:
       74: 7064241667466030897
     second: 241_Miltank_skeleton|pm241_R_WakeUp
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pm0241_00_Body1.tga
+    second: {fileID: 2100000, guid: 130c92b9ee98c50439e386846a4186f3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pm0241_00_Eye1.tga
+    second: {fileID: 2100000, guid: 07a09aad9e4d9ec4882bcd8e8728ccba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pm0241_00_Iris1.tga
+    second: {fileID: 2100000, guid: c2da4c30286216a45bfdec1d72ff48a7, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -329,7 +344,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -358,7 +373,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -387,7 +402,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -656,7 +671,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.0000829105
+    globalScale: 0.00829105
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

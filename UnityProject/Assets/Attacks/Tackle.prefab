@@ -88,7 +88,7 @@ MonoBehaviour:
         - 
         - 
         actionEnabled: 01010101010101
-        actionIsOpen: 00000001000001
+        actionIsOpen: 01010001000001
         actionStartIndex: 000000000200000004000000070000000a0000000f00000014000000
         actionHashCodes: d97b7202d97b7202280cdd05f90ba70187604502876045024d51cf04
         unityObjectParams: []
@@ -317,7 +317,7 @@ MonoBehaviour:
         - 
         - 
         actionEnabled: 01010101010101
-        actionIsOpen: 01000000000001
+        actionIsOpen: 01000100000001
         actionStartIndex: 000000000500000009000000120000001a0000001f00000024000000
         actionHashCodes: bf83c900ea32a105979e4104d5799805f91525035f91350448c01101
         unityObjectParams: []
@@ -1378,8 +1378,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 732.625
-        y: 1739.1641
+        x: 718.625
+        y: 1664.1641
         width: 100
         height: 16
       isBreakpoint: 0
@@ -2039,8 +2039,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 823.25
-        y: 563.47656
+        x: 718.71094
+        y: 565.7578
         width: 100
         height: 32
       isBreakpoint: 0
@@ -2116,8 +2116,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 854.4453
-        y: 634.8906
+        x: 749.90625
+        y: 637.1719
         width: 100
         height: 32
       isBreakpoint: 0
@@ -8202,8 +8202,8 @@ MonoBehaviour:
       colorIndex: 4
       position:
         serializedVersion: 2
-        x: 1633.2969
-        y: 697.2969
+        x: 1619.7188
+        y: 684.2344
         width: 121.2
         height: 32
       isBreakpoint: 0
@@ -11779,8 +11779,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 1070.3516
-        y: 612.6719
+        x: 965.8125
+        y: 614.9531
         width: 117.2
         height: 32
       isBreakpoint: 0
