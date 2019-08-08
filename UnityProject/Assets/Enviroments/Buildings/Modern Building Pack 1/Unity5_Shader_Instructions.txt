@@ -1,0 +1,15 @@
+To set up a Unity 5 Material, follow the steps:
+
+- Create a new Material
+- Select "Standard-Specular Setup" Shader
+- Rendering Mode: Opaque
+- In the Albedo spot, attach texture called "BuildingPack1Diffuse.jpg" from the Modern Building Pack 1\Textures\Legacy folder
+- Albedo color modifier: pure white
+- In the specular slot, add "BuildingPack1Specular_Standard.psd" from the Building Pack 1\Textures\Standard folder
+- In the normal map slot, add "BuildingPack1Bump_Legacy.psd" from the Building Pack 1\Textures\Legacy folder with modifier 0.02
+
+Also, don't forget the add a skybox in the Lighting tab so the buildings have something to reflect
+
+That is all, enjoy and thank you for purchasing :D
+
+For any problems/questions, please contact me at norbert.iacob@gmail.com
