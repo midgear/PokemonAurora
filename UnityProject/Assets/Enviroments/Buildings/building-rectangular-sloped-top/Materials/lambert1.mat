@@ -204,7 +204,7 @@ Material:
     - _OutlineExtrudeMethod: 0
     - _OutlineLightingMix: 1
     - _OutlineScaledMaxDistance: 1
-    - _OutlineWidth: 1
+    - _OutlineWidth: 0.5
     - _OutlineWidthAffectedByViewDistance: 0
     - _OutlineWidthMode: 2
     - _OutlineZPostionInCamera: 0
