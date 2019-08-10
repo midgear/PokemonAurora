@@ -10,7 +10,7 @@ using UnityEngine;
 
 # region GameStructuresAndEnumerations
 // yo these all need filling out
-enum pokemon_type
+public enum pokemon_type
 {
     NORMAL = 0,
     FIGHTING,
@@ -34,19 +34,34 @@ enum pokemon_type
     elementCount
 };
 
+/*
 enum pokemon_egg_group
 {
 
 };
+*/
+
+public enum pokemon_move_class
+{
+    MELEE,
+    PROJECTILE,
+    AOE
+}
 
 /* This struct is used to contain information about a single move. The game 
  * basically stores a whole list of all the moves where each element of the list
  * is one of these structs! Rad!
      */ 
-struct pokemon_move_data
+public class pokemon_move_data
 {
     // TODO(BluCloos): Fill this struct out fam!
-    //public string name;
+    public string name;
+    public pokemon_type type;
+    public pokemon_move_class moveClass;
+    public float powerPoints;
+    public float basePower;
+    // TODO(BluCloos): At some point we are going to have to implement status
+    // effects. But as of now, who the fuck cares?
 };
 
 // TODO(BluCloos): I can't seem to find the right name for this...
@@ -56,11 +71,45 @@ struct pokemon_move_meta
     public byte levelLearnedAt;
 };
 
+// NOTE(BluCloos): Okay so basically I just figured out how I am going to make this backend 
+// interface properly with fsm addons! So I can just fire events and provide static methods that
+// can be called. This is by far the best solution to the problem. Awesome stuff.
+
 /* This structure stores save file information for a particular pokemon
  * */
 public struct pokemon_profile
 {
     public int auroraDexNumber;
+
+    uint experiencePoints;
+    // Every time the experience points increase, the level is recalculated. If it is such that
+    // the pokemon has gained a level, the stats are then updated. An event is then raised that
+    // the pokemon has gained a level!  
+    uint level;
+
+    public List<string> learnedMoves;
+    public int[] currentMoves; // Set of 4 ints that point into the learnedMoves array.
+    // these specify the set of 'activeMoves' that the pokemon has.
+
+    // Current calculated stats based on the level of the pokemon.
+    // these are updated using the base stats of the pokemon every time 
+    // the pokemon levels up! Awesome, huh?
+    public byte hpStat;
+    public byte attackStat;
+    public byte defenseStat;
+    public byte spAttackStat;
+    public byte spDefenseStat;
+    public byte speedStat;
+
+    // these are the current stats and can differ from the calculated stats for
+    // the any number of reasons. For example, the pokemon may be damaged from battle.
+    // they may be using stat boosters like those X defend things.
+    public byte cHpStat;
+    public byte cattackStat;
+    public byte cdefenseStat;
+    public byte cspAttackStat;
+    public byte cspDefenseStat;
+    public byte cspeedStat;
 };
 
 // TODO(BluCloos): For memory saving purposes, should we not remove a bunch of the junk
@@ -72,19 +121,21 @@ class pokemon_data
 {
     public string name;
     // TODO(BluCloos): Should this be an enumeration?
-    public string ability1;
-    public string ability2;
-    public string ability3;
+    //public string ability1;
+    //public string ability2;
+    //public string ability3;
     public pokemon_type type1;
     public pokemon_type type2;
-    public bool hasGender;
-    public float percentChanceFemale;
-    public uint minHatchSteps;
-    public uint maxHatchSteps;
-    public pokemon_egg_group eggGroup1;
-    public pokemon_egg_group eggGroup2;
+    //public bool hasGender;
+    //public float percentChanceFemale;
+    //public uint minHatchSteps;
+    //public uint maxHatchSteps;
+    //public pokemon_egg_group eggGroup1;
+    //public pokemon_egg_group eggGroup2;
     public float height;
     public float weight;
+    public float walkingSpeed; // this is in meters per second
+    public float runningSpeed; // this is in meters per second
     public byte hpBaseStat;
     public byte attackBaseStat;
     public byte defenseBaseStat;
@@ -94,9 +145,9 @@ class pokemon_data
     public string levelingType;
     // TODO(BluCloos): Is this value actually an integer from 0 through 255?
     public byte catchRate;
-    public byte evolutionLevel;
+    //public byte evolutionLevel;
     // TODO(BluCloos): Should this remain a string or an enumeration?
-    public string evolutionItem;
+    //public string evolutionItem;
     public List<pokemon_move_meta> moves;
 
     public override string ToString()
@@ -124,6 +175,13 @@ public class GameManager : MonoBehaviour
     #region PublicVariables
     [Tooltip("Total amount of pokemon in the Aurora regional dex.")]
     public uint totalPokemon;
+    [Tooltip("Total amount of moves in the game.")]
+    public uint totalMoves;
+    [Tooltip("The default walking speed of spawned Pokemon.")]
+    public float defaultWalkingSpeed = 1.4f;
+    [Tooltip("The default running speed of spawned Pokemon.")]
+    public float defaultRunningSpeed = 3.3f;
+    // This is a debug parameter. I use it to spawn any pokemon I want! Crazy!
     public uint pokemonToSpawn;
     #endregion
 
@@ -233,8 +291,11 @@ public class GameManager : MonoBehaviour
         {
             string[] lines = textFile.text.Split('\n');
             bool inMoves = false;
+
             pokemon_data pokemonData = new pokemon_data();
             pokemonData.moves = new List<pokemon_move_meta>();
+            pokemonData.walkingSpeed = defaultWalkingSpeed;
+            pokemonData.runningSpeed = defaultRunningSpeed;
 
             for (uint i = 0; i < lines.Length; i++)
             {
@@ -261,6 +322,12 @@ public class GameManager : MonoBehaviour
                             break;
                         case "weight":
                             pokemonData.weight = FloatFromString(content);
+                            break;
+                        case "walkingspeed":
+                            pokemonData.walkingSpeed = FloatFromString(content);
+                            break;
+                        case "runningspeed":
+                            pokemonData.runningSpeed = FloatFromString(content);
                             break;
                         case "hp":
                             pokemonData.hpBaseStat = (byte)UnsignedIntFromString(content);
@@ -320,6 +387,62 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private pokemon_move_data ParsePokemonMoveDataResource(string resourceName)
+    {
+        var textFile = Resources.Load<TextAsset>(resourceName);
+        if (textFile != null)
+        {
+            string[] lines = textFile.text.Split('\n');
+            pokemon_move_data moveData = new pokemon_move_data();
+            for (int i = 0; i < lines.Length; i++)
+            {
+                // TODO(BluCloos): This code here is very similar to the fucking
+                // other code in the other parse function. This should be abstracted because
+                // that's what we programmers do! Fuck yeah!
+                string line = lines[i];
+                string[] lineSplit = line.Split(':');
+                string handle = lineSplit[0].ToLower();
+                string content = StringTrimWhitespace(lineSplit[1]);
+
+                switch (handle)
+                {
+                    case "name":
+                        moveData.name = content;
+                        break;
+                    case "pp":
+                        moveData.powerPoints = UnsignedIntFromString(content);
+                        break;
+                    case "power":
+                        moveData.powerPoints = UnsignedIntFromString(content);
+                        break;
+                    case "type":
+                        moveData.type = PokemonTypeFromString(content);
+                        break;
+                    case "class":
+                        switch (content.ToLower())
+                        {
+                            case "melee":
+                                moveData.moveClass = pokemon_move_class.MELEE;
+                                break;
+                            case "aoe":
+                                moveData.moveClass = pokemon_move_class.AOE;
+                                break;
+                            case "projectile":
+                                moveData.moveClass = pokemon_move_class.PROJECTILE;
+                                break;
+                        }
+                        break;
+                }
+            }
+
+            return moveData;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     /* As of now, this function loads all data regarding every Pokemon in
        the Aurora Pokedex. It also loads all the different moves in the game. 
     */
@@ -332,6 +455,14 @@ public class GameManager : MonoBehaviour
             pokemon_data pokemonData = ParsePokemonDataResource(resName);
             pokemonTable.Add(pokemonData);
         }
+
+        // Load all the moves
+        for (int i = 0; i < totalMoves; i++)
+        {
+            string resName = (i + 1).ToString() + "_move";
+            pokemon_move_data pokemonMoveData = ParsePokemonMoveDataResource(resName);
+            pokemonMoveTable.Add(pokemonMoveData.name, pokemonMoveData);
+        }
     }
     #endregion
 
@@ -340,10 +471,28 @@ public class GameManager : MonoBehaviour
     public static void SwitchPlayer(PlayerController pc)
     {
         // TODO(BluCloos): Auto position the camera to avoid the fast teleport of the camera!
-        currentPlayerController.Deactivate();
+        // NOTE(BluCloos): The above is only applicable when the camera has smooth follow on,
+        // which of course we have to assume is like all the time...
+        if (currentPlayerController != null)
+            currentPlayerController.Deactivate();
         currentPlayerController = pc;
         currentPlayerController.Activate();
+
+        // modify the camera rig to target the current player controller and
+        // change the zoom settings so that it 'feels better'.
+        // TODO(Noah): Right now the mapping for the maximum character zoom is not really setup
+        // at all.
         mainCameraRig.target = currentPlayerController.gameObject.transform;
+        CharacterController cc = currentPlayerController.GetComponent<CharacterController>();
+        mainCameraRig.offset = new Vector3(0.0f, cc.height / 2.0f, 0.5f);
+        
+        // NOTE(Reader): This math is basically a cheese. Im just using 
+        // known value pairs of minCameraDistances and character heights
+        // to create the appropriate linear mapping from the character height to 
+        // the minimum camera distance. Think grade 9 maths. y=mx+b 
+        float m = (2.0f / 1.1f);
+        float b = 4.0f - m * 1.5f;
+        mainCameraRig.minDistance = m * cc.height + b;
     }
 
     public static Pokemon InstantiatePokemon(pokemon_profile profile, bool newPokemon, Vector3 worldPos)
@@ -370,8 +519,8 @@ public class GameManager : MonoBehaviour
             PlayerController pc = pokeObj.AddComponent<PlayerController>();
             pc.rootMotion = false;
             pc.walkingLayerMask = ~(1 << 8);
-            pc.walkingSpeed = pc.walkingSpeed * pokeData.height;
-            pc.runningSpeed = pc.runningSpeed * pokeData.height;
+            pc.walkingSpeed = pokeData.walkingSpeed;
+            pc.runningSpeed = pokeData.runningSpeed;
             pc.feetPosOffsetFromOrigin = 0.0f;
 
             // Grab the animator for your boi and attach that son of a bitch!
@@ -428,13 +577,17 @@ public class GameManager : MonoBehaviour
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
             if (playerObj != null)
             {
-                currentPlayerController = playerObj.GetComponent<PlayerController>();
-                mainCameraRig.target = playerObj.transform;
-                currentPlayerController.Activate();
+                PlayerController pc = playerObj.GetComponent<PlayerController>();
+                SwitchPlayer(pc);
             }
             else
                 Debug.Log("Warning: Could not find the player!");
         }
+
+        // spawn a stupid lil debug pokemon, could be fun!
+        pokemon_profile stupidPoke = new pokemon_profile();
+        stupidPoke.auroraDexNumber = 23;
+        InstantiatePokemon(stupidPoke, false, new Vector3(1.0f, 2.0f, 1.0f));
     }
 
     bool playingPokemon = false;
@@ -446,11 +599,12 @@ public class GameManager : MonoBehaviour
             if (!playingPokemon)
             {
                 // spawn a random, new pokemon and switch to it
-                pokemon_profile newProfile;
+                pokemon_profile newProfile = new pokemon_profile();
                 newProfile.auroraDexNumber = (int)pokemonToSpawn;
                 Pokemon newPoke = InstantiatePokemon(newProfile, true, Vector3.zero + 2.0f * Vector3.up);
                 PlayerController pc = newPoke.gameObject.GetComponent<PlayerController>();
                 SwitchPlayer(pc);
+
                 playingPokemon = true;
             }
             else

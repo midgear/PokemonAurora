@@ -20,5 +20,7 @@ Speed: 100
 LevelingType: Slow
 CatchRate: 45
 EvolutionLevel: 
-EvolutionItem: 
+EvolutionItem:
+WalkingSpeed: 1.0
+RunningSpeed: 3.3
 Moves:

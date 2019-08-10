@@ -1,0 +1,5 @@
+Name: Ember
+Type: Fire
+Class: Projectile
+PP: 25
+Power: 40

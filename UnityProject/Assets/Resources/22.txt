@@ -21,6 +21,8 @@ LevelingType: Medium Fast
 CatchRate: 255
 EvolutionLevel: 7
 EvolutionItem: 
+WalkingSpeed: 1.0
+RunningSpeed: 2.5
 Moves:
 String Shot/-
 Tackle/-

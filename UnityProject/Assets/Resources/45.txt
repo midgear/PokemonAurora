@@ -1,0 +1,15 @@
+Name: Mimikyu
+Type1: Ghost
+Type2: Fairy
+Height: 0.4
+Weight: 2.8
+Hp: 55
+Attack: 90
+Defense: 80
+SpAttack: 50
+SpDefense: 105
+Speed: 96
+LevelingType: Medium Fast
+CatchRate: 45
+WalkingSpeed: 1.4
+RunningSpeed: 3.3

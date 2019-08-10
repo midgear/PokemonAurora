@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6204792381160220558}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Middle3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1015135391084674332}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_LowerLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1858172716361434272}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Index1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7832065619750419039}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Middle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2297480505975967989}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HairJoint-ffa04e94-e1c2-4f79-987e-e7f1598b75cf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 834934383072009910}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_ToeBase_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1893246260844316475}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_SkirtFront_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,11 +228,9 @@ GameObject:
   - component: {fileID: 4241798712781609414}
   - component: {fileID: 604939519992294555}
   - component: {fileID: 604939519992294552}
-  - component: {fileID: 604939519992294554}
   - component: {fileID: 2007675996256771934}
-  - component: {fileID: 161226639155892781}
-  - component: {fileID: 5996879288129317743}
-  m_Layer: 0
+  - component: {fileID: 3995401119310066341}
+  m_Layer: 2
   m_Name: PlayerFemale
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -258,6 +256,7 @@ Transform:
   - {fileID: 6584301720152144017}
   - {fileID: 1903861519350183705}
   - {fileID: 1609077335848345780}
+  - {fileID: 8053370616590675033}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -753,10 +752,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fixTransforms: 1
   solver:
-    IKPosition: {x: 0.8209896, y: 0.009999961, z: -3.6121547}
+    IKPosition: {x: 0.00021496984, y: 1.1879976, z: 2.9848526}
     IKPositionWeight: 1
     root: {fileID: 9152616809772851109}
-    target: {fileID: 1609077335848345780}
+    target: {fileID: 8053370616590675033}
     spine:
     - transform: {fileID: 740321097286675793}
       weight: 0
@@ -861,12 +860,14 @@ MonoBehaviour:
   walkingLayerMask:
     serializedVersion: 2
     m_Bits: 1
+  walkingSpeed: 1.4
+  runningSpeed: 3.3
   airMovementSpeed: 1.4
   rotationsPerMinute: 80
   gravityAcceleration: -9.81
   jumpHeight: 1.75
-  landingThreshold: 0.1
-  maintanenceThreshold: 0.5
+  feetPosOffsetFromOrigin: 0
+  rootMotion: 1
 --- !u!143 &604939519992294552
 CharacterController:
   m_ObjectHideFlags: 0
@@ -885,378 +886,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.83, z: 0}
---- !u!114 &604939519992294554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 604939519992294553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1384774831, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fsm:
-    dataVersion: 2
-    usedInTemplate: {fileID: 0}
-    name: CameraSet
-    startState: set
-    states:
-    - name: set
-      description: finds player and cam
-      colorIndex: 0
-      position:
-        serializedVersion: 2
-        x: 50
-        y: 100
-        width: 130.8
-        height: 32
-      isBreakpoint: 0
-      isSequence: 0
-      hideUnused: 0
-      transitions:
-      - fsmEvent:
-          name: FINISHED
-          isSystemEvent: 1
-          isGlobal: 0
-        toState: Set cam
-        linkStyle: 0
-        linkConstraint: 0
-        colorIndex: 0
-      actionData:
-        actionNames:
-        - HutongGames.PlayMaker.Actions.GetOwner
-        - HutongGames.PlayMaker.Actions.FindGameObject
-        customNames:
-        - 
-        - 
-        actionEnabled: 0101
-        actionIsOpen: 0101
-        actionStartIndex: 0000000001000000
-        actionHashCodes: 5c004505786b3902
-        unityObjectParams: []
-        fsmGameObjectParams:
-        - useVariable: 1
-          name: Player
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: {fileID: 0}
-        - useVariable: 1
-          name: MainCam
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: {fileID: 0}
-        fsmOwnerDefaultParams: []
-        animationCurveParams: []
-        functionCallParams: []
-        fsmTemplateControlParams: []
-        fsmEventTargetParams: []
-        fsmPropertyParams: []
-        layoutOptionParams: []
-        fsmStringParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: FreeLookCameraRig
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: Untagged
-        fsmObjectParams: []
-        fsmVarParams: []
-        fsmArrayParams: []
-        fsmEnumParams: []
-        fsmFloatParams: []
-        fsmIntParams: []
-        fsmBoolParams: []
-        fsmVector2Params: []
-        fsmVector3Params: []
-        fsmColorParams: []
-        fsmRectParams: []
-        fsmQuaternionParams: []
-        stringParams: []
-        byteData: 
-        arrayParamSizes: 
-        arrayParamTypes: []
-        customTypeSizes: 
-        customTypeNames: []
-        paramDataType: 13000000120000001200000013000000
-        paramName:
-        - storeGameObject
-        - objectName
-        - withTag
-        - store
-        paramDataPos: 00000000000000000100000001000000
-        paramByteDataSize: 00000000000000000000000000000000
-    - name: Set cam
-      description: turns on FSM on cam
-      colorIndex: 0
-      position:
-        serializedVersion: 2
-        x: 275.5
-        y: 107
-        width: 132
-        height: 32
-      isBreakpoint: 0
-      isSequence: 0
-      hideUnused: 0
-      transitions:
-      - fsmEvent:
-          name: FINISHED
-          isSystemEvent: 1
-          isGlobal: 0
-        toState: Turn off
-        linkStyle: 0
-        linkConstraint: 0
-        colorIndex: 0
-      actionData:
-        actionNames:
-        - HutongGames.PlayMaker.Actions.EnableFSM
-        customNames:
-        - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 87aa9700
-        unityObjectParams: []
-        fsmGameObjectParams: []
-        fsmOwnerDefaultParams:
-        - ownerOption: 1
-          gameObject:
-            useVariable: 1
-            name: MainCam
-            tooltip: 
-            showInInspector: 0
-            networkSync: 0
-            value: {fileID: 0}
-        animationCurveParams: []
-        functionCallParams: []
-        fsmTemplateControlParams: []
-        fsmEventTargetParams: []
-        fsmPropertyParams: []
-        layoutOptionParams: []
-        fsmStringParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: Tracking
-        fsmObjectParams: []
-        fsmVarParams: []
-        fsmArrayParams: []
-        fsmEnumParams: []
-        fsmFloatParams: []
-        fsmIntParams: []
-        fsmBoolParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 1
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        fsmVector2Params: []
-        fsmVector3Params: []
-        fsmColorParams: []
-        fsmRectParams: []
-        fsmQuaternionParams: []
-        stringParams: []
-        byteData: 
-        arrayParamSizes: 
-        arrayParamTypes: []
-        customTypeSizes: 
-        customTypeNames: []
-        paramDataType: 14000000120000001100000011000000
-        paramName:
-        - gameObject
-        - fsmName
-        - enable
-        - resetOnExit
-        paramDataPos: 00000000000000000000000001000000
-        paramByteDataSize: 00000000000000000000000000000000
-    - name: Turn off
-      description: turns off fsm on cam
-      colorIndex: 0
-      position:
-        serializedVersion: 2
-        x: 474
-        y: 117
-        width: 123.6
-        height: 16
-      isBreakpoint: 0
-      isSequence: 0
-      hideUnused: 0
-      transitions: []
-      actionData:
-        actionNames:
-        - HutongGames.PlayMaker.Actions.EnableFSM
-        customNames:
-        - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 87aa9700
-        unityObjectParams: []
-        fsmGameObjectParams: []
-        fsmOwnerDefaultParams:
-        - ownerOption: 0
-          gameObject:
-            useVariable: 0
-            name: 
-            tooltip: 
-            showInInspector: 0
-            networkSync: 0
-            value: {fileID: 0}
-        animationCurveParams: []
-        functionCallParams: []
-        fsmTemplateControlParams: []
-        fsmEventTargetParams: []
-        fsmPropertyParams: []
-        layoutOptionParams: []
-        fsmStringParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: CameraSet
-        fsmObjectParams: []
-        fsmVarParams: []
-        fsmArrayParams: []
-        fsmEnumParams: []
-        fsmFloatParams: []
-        fsmIntParams: []
-        fsmBoolParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        fsmVector2Params: []
-        fsmVector3Params: []
-        fsmColorParams: []
-        fsmRectParams: []
-        fsmQuaternionParams: []
-        stringParams: []
-        byteData: 
-        arrayParamSizes: 
-        arrayParamTypes: []
-        customTypeSizes: 
-        customTypeNames: []
-        paramDataType: 14000000120000001100000011000000
-        paramName:
-        - gameObject
-        - fsmName
-        - enable
-        - resetOnExit
-        paramDataPos: 00000000000000000000000001000000
-        paramByteDataSize: 00000000000000000000000000000000
-    events:
-    - name: FINISHED
-      isSystemEvent: 1
-      isGlobal: 0
-    - name: IsMine
-      isSystemEvent: 0
-      isGlobal: 0
-    - name: IsNotMine
-      isSystemEvent: 0
-      isGlobal: 0
-    globalTransitions: []
-    variables:
-      floatVariables: []
-      intVariables: []
-      boolVariables: []
-      stringVariables: []
-      vector2Variables: []
-      vector3Variables: []
-      colorVariables: []
-      rectVariables: []
-      quaternionVariables: []
-      gameObjectVariables:
-      - useVariable: 1
-        name: MainCam
-        tooltip: 
-        showInInspector: 0
-        networkSync: 0
-        value: {fileID: 0}
-      - useVariable: 1
-        name: Player
-        tooltip: 
-        showInInspector: 0
-        networkSync: 0
-        value: {fileID: 0}
-      objectVariables: []
-      materialVariables: []
-      textureVariables: []
-      arrayVariables: []
-      enumVariables: []
-      categories:
-      - 
-      variableCategoryIDs: 0000000000000000
-    description: 
-    docUrl: 
-    showStateLabel: 0
-    maxLoopCount: 0
-    watermark: 
-    password: 
-    locked: 0
-    manualUpdate: 0
-    keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
-    ExposedEvents: []
-    RestartOnEnable: 1
-    EnableDebugFlow: 0
-    EnableBreakpoints: 1
-    editorFlags: 1
-    activeStateName: 
-    mouseEvents: 0
-    handleLevelLoaded: 0
-    handleTriggerEnter2D: 0
-    handleTriggerExit2D: 0
-    handleTriggerStay2D: 0
-    handleCollisionEnter2D: 0
-    handleCollisionExit2D: 0
-    handleCollisionStay2D: 0
-    handleTriggerEnter: 0
-    handleTriggerExit: 0
-    handleTriggerStay: 0
-    handleCollisionEnter: 0
-    handleCollisionExit: 0
-    handleCollisionStay: 0
-    handleParticleCollision: 0
-    handleControllerColliderHit: 0
-    handleJointBreak: 0
-    handleJointBreak2D: 0
-    handleOnGUI: 0
-    handleFixedUpdate: 0
-    handleLateUpdate: 0
-    handleApplicationEvents: 0
-    handleUiEvents: 0
-    handleLegacyNetworking: 0
-    handleAnimatorMove: 0
-    handleAnimatorIK: 0
-  fsmTemplate: {fileID: 0}
-  eventHandlerComponentsAdded: 1
 --- !u!114 &2007675996256771934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1264,7 +893,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 604939519992294553}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 1384774831, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
   m_Name: 
@@ -5978,7 +5607,7 @@ MonoBehaviour:
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
   eventHandlerComponentsAdded: 0
---- !u!114 &161226639155892781
+--- !u!114 &3995401119310066341
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5987,759 +5616,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 604939519992294553}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1384774831, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
+  m_Script: {fileID: 11500000, guid: 968d3382b35046346bb2ad1cf53c255c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fsm:
-    dataVersion: 2
-    usedInTemplate: {fileID: 0}
-    name: LookAtPokemonInBattle
-    startState: Listner
-    states:
-    - name: Listner
-      description: 
-      colorIndex: 0
-      position:
-        serializedVersion: 2
-        x: 50
-        y: 100
-        width: 100
-        height: 32
-      isBreakpoint: 0
-      isSequence: 0
-      hideUnused: 0
-      transitions:
-      - fsmEvent:
-          name: False
-          isSystemEvent: 0
-          isGlobal: 0
-        toState: Look at pokemon
-        linkStyle: 0
-        linkConstraint: 0
-        colorIndex: 0
-      actionData:
-        actionNames:
-        - HutongGames.PlayMaker.Actions.GetOwner
-        - HutongGames.PlayMaker.Actions.GetTag
-        - HutongGames.PlayMaker.Actions.StringCompare
-        customNames:
-        - 
-        - 
-        - 
-        actionEnabled: 010101
-        actionIsOpen: 010101
-        actionStartIndex: 000000000100000004000000
-        actionHashCodes: 5c00450571c75a030c0e5502
-        unityObjectParams: []
-        fsmGameObjectParams:
-        - useVariable: 1
-          name: Trainer
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: {fileID: 0}
-        - useVariable: 1
-          name: Trainer
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: {fileID: 0}
-        fsmOwnerDefaultParams: []
-        animationCurveParams: []
-        functionCallParams: []
-        fsmTemplateControlParams: []
-        fsmEventTargetParams: []
-        fsmPropertyParams: []
-        layoutOptionParams: []
-        fsmStringParams:
-        - useVariable: 1
-          name: Tag
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 
-        - useVariable: 1
-          name: Tag
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: Player
-        fsmObjectParams: []
-        fsmVarParams: []
-        fsmArrayParams: []
-        fsmEnumParams: []
-        fsmFloatParams: []
-        fsmIntParams: []
-        fsmBoolParams:
-        - useVariable: 1
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        fsmVector2Params: []
-        fsmVector3Params: []
-        fsmColorParams: []
-        fsmRectParams: []
-        fsmQuaternionParams: []
-        stringParams:
-        - 
-        - False
-        byteData: 0101
-        arrayParamSizes: 
-        arrayParamTypes: []
-        customTypeSizes: 
-        customTypeNames: []
-        paramDataType: 13000000130000001200000001000000120000001200000017000000170000001100000001000000
-        paramName:
-        - storeGameObject
-        - gameObject
-        - storeResult
-        - everyFrame
-        - stringVariable
-        - compareTo
-        - equalEvent
-        - notEqualEvent
-        - storeResult
-        - everyFrame
-        paramDataPos: 00000000010000000000000000000000010000000200000000000000010000000000000001000000
-        paramByteDataSize: 00000000000000000000000001000000000000000000000000000000000000000000000001000000
-    - name: Look at pokemon
-      description: 
-      colorIndex: 0
-      position:
-        serializedVersion: 2
-        x: 241
-        y: 123
-        width: 144.4
-        height: 32
-      isBreakpoint: 0
-      isSequence: 0
-      hideUnused: 0
-      transitions:
-      - fsmEvent:
-          name: True
-          isSystemEvent: 0
-          isGlobal: 0
-        toState: Listner
-        linkStyle: 0
-        linkConstraint: 0
-        colorIndex: 0
-      actionData:
-        actionNames:
-        - HutongGames.PlayMaker.Actions.FindGameObject
-        - HutongGames.PlayMaker.Actions.SmoothLookAt
-        - HutongGames.PlayMaker.Actions.GetTag
-        - HutongGames.PlayMaker.Actions.StringCompare
-        customNames:
-        - 
-        - 
-        - 
-        - 
-        actionEnabled: 01010101
-        actionIsOpen: 01010101
-        actionStartIndex: 00000000030000000c0000000f000000
-        actionHashCodes: 786b39024e66130171c75a030c0e5502
-        unityObjectParams: []
-        fsmGameObjectParams:
-        - useVariable: 1
-          name: Pokemon
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: {fileID: 0}
-        - useVariable: 1
-          name: Pokemon
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: {fileID: 0}
-        - useVariable: 1
-          name: Trainer
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: {fileID: 0}
-        fsmOwnerDefaultParams:
-        - ownerOption: 0
-          gameObject:
-            useVariable: 0
-            name: 
-            tooltip: 
-            showInInspector: 0
-            networkSync: 0
-            value: {fileID: 0}
-        animationCurveParams: []
-        functionCallParams: []
-        fsmTemplateControlParams: []
-        fsmEventTargetParams: []
-        fsmPropertyParams: []
-        layoutOptionParams: []
-        fsmStringParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: Player
-        - useVariable: 1
-          name: Tag
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 
-        - useVariable: 1
-          name: Tag
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: Player
-        fsmObjectParams: []
-        fsmVarParams: []
-        fsmArrayParams: []
-        fsmEnumParams: []
-        fsmFloatParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 1
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        fsmIntParams: []
-        fsmBoolParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 1
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        - useVariable: 1
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        fsmVector2Params: []
-        fsmVector3Params:
-        - useVariable: 1
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: {x: 0, y: 0, z: 0}
-        - useVariable: 1
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: {x: 0, y: 0, z: 0}
-        fsmColorParams: []
-        fsmRectParams: []
-        fsmQuaternionParams: []
-        stringParams:
-        - 
-        - True
-        - 
-        byteData: 0101
-        arrayParamSizes: 
-        arrayParamTypes: []
-        customTypeSizes: 
-        customTypeNames: []
-        paramDataType: 12000000120000001300000014000000130000001c0000001c000000110000000f000000110000000f00000017000000130000001200000001000000120000001200000017000000170000001100000001000000
-        paramName:
-        - objectName
-        - withTag
-        - store
-        - gameObject
-        - targetObject
-        - targetPosition
-        - upVector
-        - keepVertical
-        - speed
-        - debug
-        - finishTolerance
-        - finishEvent
-        - gameObject
-        - storeResult
-        - everyFrame
-        - stringVariable
-        - compareTo
-        - equalEvent
-        - notEqualEvent
-        - storeResult
-        - everyFrame
-        paramDataPos: 000000000100000000000000000000000100000000000000010000000000000000000000010000000100000000000000020000000200000000000000030000000400000001000000020000000200000001000000
-        paramByteDataSize: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000001000000
-    events:
-    - name: False
-      isSystemEvent: 0
-      isGlobal: 0
-    - name: True
-      isSystemEvent: 0
-      isGlobal: 0
-    globalTransitions: []
-    variables:
-      floatVariables: []
-      intVariables: []
-      boolVariables: []
-      stringVariables:
-      - useVariable: 1
-        name: Tag
-        tooltip: 
-        showInInspector: 0
-        networkSync: 0
-        value: 
-      vector2Variables: []
-      vector3Variables: []
-      colorVariables: []
-      rectVariables: []
-      quaternionVariables: []
-      gameObjectVariables:
-      - useVariable: 1
-        name: Trainer
-        tooltip: 
-        showInInspector: 0
-        networkSync: 0
-        value: {fileID: 0}
-      - useVariable: 1
-        name: Pokemon
-        tooltip: 
-        showInInspector: 0
-        networkSync: 0
-        value: {fileID: 0}
-      objectVariables: []
-      materialVariables: []
-      textureVariables: []
-      arrayVariables: []
-      enumVariables: []
-      categories:
-      - 
-      variableCategoryIDs: 000000000000000000000000
-    description: 
-    docUrl: 
-    showStateLabel: 0
-    maxLoopCount: 0
-    watermark: 
-    password: 
-    locked: 0
-    manualUpdate: 0
-    keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
-    ExposedEvents: []
-    RestartOnEnable: 1
-    EnableDebugFlow: 0
-    EnableBreakpoints: 1
-    editorFlags: 1
-    activeStateName: 
-    mouseEvents: 0
-    handleLevelLoaded: 0
-    handleTriggerEnter2D: 0
-    handleTriggerExit2D: 0
-    handleTriggerStay2D: 0
-    handleCollisionEnter2D: 0
-    handleCollisionExit2D: 0
-    handleCollisionStay2D: 0
-    handleTriggerEnter: 0
-    handleTriggerExit: 0
-    handleTriggerStay: 0
-    handleCollisionEnter: 0
-    handleCollisionExit: 0
-    handleCollisionStay: 0
-    handleParticleCollision: 0
-    handleControllerColliderHit: 0
-    handleJointBreak: 0
-    handleJointBreak2D: 0
-    handleOnGUI: 0
-    handleFixedUpdate: 0
-    handleLateUpdate: 0
-    handleApplicationEvents: 0
-    handleUiEvents: 0
-    handleLegacyNetworking: 0
-    handleAnimatorMove: 0
-    handleAnimatorIK: 0
-  fsmTemplate: {fileID: 0}
-  eventHandlerComponentsAdded: 0
---- !u!114 &5996879288129317743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 604939519992294553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1384774831, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fsm:
-    dataVersion: 2
-    usedInTemplate: {fileID: 0}
-    name: StartStopPlayerMovement
-    startState: Do nothing
-    states:
-    - name: Do nothing
-      description: 
-      colorIndex: 0
-      position:
-        serializedVersion: 2
-        x: 50
-        y: 115
-        width: 100.4
-        height: 16
-      isBreakpoint: 0
-      isSequence: 0
-      hideUnused: 0
-      transitions: []
-      actionData:
-        actionNames: []
-        customNames: []
-        actionEnabled: 
-        actionIsOpen: 
-        actionStartIndex: 
-        actionHashCodes: 
-        unityObjectParams: []
-        fsmGameObjectParams: []
-        fsmOwnerDefaultParams: []
-        animationCurveParams: []
-        functionCallParams: []
-        fsmTemplateControlParams: []
-        fsmEventTargetParams: []
-        fsmPropertyParams: []
-        layoutOptionParams: []
-        fsmStringParams: []
-        fsmObjectParams: []
-        fsmVarParams: []
-        fsmArrayParams: []
-        fsmEnumParams: []
-        fsmFloatParams: []
-        fsmIntParams: []
-        fsmBoolParams: []
-        fsmVector2Params: []
-        fsmVector3Params: []
-        fsmColorParams: []
-        fsmRectParams: []
-        fsmQuaternionParams: []
-        stringParams: []
-        byteData: 
-        arrayParamSizes: 
-        arrayParamTypes: []
-        customTypeSizes: 
-        customTypeNames: []
-        paramDataType: 
-        paramName: []
-        paramDataPos: 
-        paramByteDataSize: 
-    - name: Start
-      description: 
-      colorIndex: 0
-      position:
-        serializedVersion: 2
-        x: 254
-        y: 115
-        width: 219.6
-        height: 16
-      isBreakpoint: 0
-      isSequence: 0
-      hideUnused: 0
-      transitions: []
-      actionData:
-        actionNames:
-        - HutongGames.PlayMaker.Actions.EnableBehaviour
-        - HutongGames.PlayMaker.Actions.NextFrameEvent
-        customNames:
-        - 
-        - 
-        actionEnabled: 0101
-        actionIsOpen: 0101
-        actionStartIndex: 0000000005000000
-        actionHashCodes: 3a4cad0588611604
-        unityObjectParams:
-        - {fileID: 604939519992294555}
-        fsmGameObjectParams: []
-        fsmOwnerDefaultParams:
-        - ownerOption: 0
-          gameObject:
-            useVariable: 0
-            name: 
-            tooltip: 
-            showInInspector: 0
-            networkSync: 0
-            value: {fileID: 0}
-        animationCurveParams: []
-        functionCallParams: []
-        fsmTemplateControlParams: []
-        fsmEventTargetParams: []
-        fsmPropertyParams: []
-        layoutOptionParams: []
-        fsmStringParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 
-        fsmObjectParams: []
-        fsmVarParams: []
-        fsmArrayParams: []
-        fsmEnumParams: []
-        fsmFloatParams: []
-        fsmIntParams: []
-        fsmBoolParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 1
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        fsmVector2Params: []
-        fsmVector3Params: []
-        fsmColorParams: []
-        fsmRectParams: []
-        fsmQuaternionParams: []
-        stringParams:
-        - DoNothing
-        byteData: 
-        arrayParamSizes: 
-        arrayParamTypes: []
-        customTypeSizes: 
-        customTypeNames: []
-        paramDataType: 140000001200000005000000110000001100000017000000
-        paramName:
-        - gameObject
-        - behaviour
-        - component
-        - enable
-        - resetOnExit
-        - sendEvent
-        paramDataPos: 000000000000000000000000000000000100000000000000
-        paramByteDataSize: 000000000000000000000000000000000000000000000000
-    - name: stop
-      description: 
-      colorIndex: 0
-      position:
-        serializedVersion: 2
-        x: 526
-        y: 109
-        width: 211.6
-        height: 16
-      isBreakpoint: 0
-      isSequence: 0
-      hideUnused: 0
-      transitions: []
-      actionData:
-        actionNames:
-        - HutongGames.PlayMaker.Actions.EnableBehaviour
-        - HutongGames.PlayMaker.Actions.NextFrameEvent
-        customNames:
-        - 
-        - 
-        actionEnabled: 0101
-        actionIsOpen: 0101
-        actionStartIndex: 0000000005000000
-        actionHashCodes: 3a4cad0588611604
-        unityObjectParams:
-        - {fileID: 604939519992294555}
-        fsmGameObjectParams: []
-        fsmOwnerDefaultParams:
-        - ownerOption: 0
-          gameObject:
-            useVariable: 0
-            name: 
-            tooltip: 
-            showInInspector: 0
-            networkSync: 0
-            value: {fileID: 0}
-        animationCurveParams: []
-        functionCallParams: []
-        fsmTemplateControlParams: []
-        fsmEventTargetParams: []
-        fsmPropertyParams: []
-        layoutOptionParams: []
-        fsmStringParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 
-        fsmObjectParams: []
-        fsmVarParams: []
-        fsmArrayParams: []
-        fsmEnumParams: []
-        fsmFloatParams: []
-        fsmIntParams: []
-        fsmBoolParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        fsmVector2Params: []
-        fsmVector3Params: []
-        fsmColorParams: []
-        fsmRectParams: []
-        fsmQuaternionParams: []
-        stringParams:
-        - DoNothing
-        byteData: 
-        arrayParamSizes: 
-        arrayParamTypes: []
-        customTypeSizes: 
-        customTypeNames: []
-        paramDataType: 140000001200000005000000110000001100000017000000
-        paramName:
-        - gameObject
-        - behaviour
-        - component
-        - enable
-        - resetOnExit
-        - sendEvent
-        paramDataPos: 000000000000000000000000000000000100000000000000
-        paramByteDataSize: 000000000000000000000000000000000000000000000000
-    events:
-    - name: BackToListner
-      isSystemEvent: 0
-      isGlobal: 0
-    - name: DoNothing
-      isSystemEvent: 0
-      isGlobal: 0
-    - name: START_PLAYER_MOVEMENT
-      isSystemEvent: 0
-      isGlobal: 1
-    - name: STOP_PLAYER_MOVEMENT
-      isSystemEvent: 0
-      isGlobal: 1
-    globalTransitions:
-    - fsmEvent:
-        name: STOP_PLAYER_MOVEMENT
-        isSystemEvent: 0
-        isGlobal: 1
-      toState: stop
-      linkStyle: 0
-      linkConstraint: 0
-      colorIndex: 0
-    - fsmEvent:
-        name: START_PLAYER_MOVEMENT
-        isSystemEvent: 0
-        isGlobal: 1
-      toState: Start
-      linkStyle: 0
-      linkConstraint: 0
-      colorIndex: 0
-    - fsmEvent:
-        name: DoNothing
-        isSystemEvent: 0
-        isGlobal: 0
-      toState: Do nothing
-      linkStyle: 0
-      linkConstraint: 0
-      colorIndex: 0
-    variables:
-      floatVariables: []
-      intVariables: []
-      boolVariables: []
-      stringVariables: []
-      vector2Variables: []
-      vector3Variables: []
-      colorVariables: []
-      rectVariables: []
-      quaternionVariables: []
-      gameObjectVariables: []
-      objectVariables: []
-      materialVariables: []
-      textureVariables: []
-      arrayVariables: []
-      enumVariables: []
-      categories:
-      - 
-      variableCategoryIDs: 
-    description: 
-    docUrl: 
-    showStateLabel: 0
-    maxLoopCount: 0
-    watermark: 
-    password: 
-    locked: 0
-    manualUpdate: 0
-    keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
-    ExposedEvents: []
-    RestartOnEnable: 1
-    EnableDebugFlow: 0
-    EnableBreakpoints: 1
-    editorFlags: 1
-    activeStateName: 
-    mouseEvents: 0
-    handleLevelLoaded: 0
-    handleTriggerEnter2D: 0
-    handleTriggerExit2D: 0
-    handleTriggerStay2D: 0
-    handleCollisionEnter2D: 0
-    handleCollisionExit2D: 0
-    handleCollisionStay2D: 0
-    handleTriggerEnter: 0
-    handleTriggerExit: 0
-    handleTriggerStay: 0
-    handleCollisionEnter: 0
-    handleCollisionExit: 0
-    handleCollisionStay: 0
-    handleParticleCollision: 0
-    handleControllerColliderHit: 0
-    handleJointBreak: 0
-    handleJointBreak2D: 0
-    handleOnGUI: 0
-    handleFixedUpdate: 0
-    handleLateUpdate: 0
-    handleApplicationEvents: 0
-    handleUiEvents: 0
-    handleLegacyNetworking: 0
-    handleAnimatorMove: 0
-    handleAnimatorIK: 0
-  fsmTemplate: {fileID: 0}
-  eventHandlerComponentsAdded: 0
+  searchRadius: 5
+  searchMask:
+    serializedVersion: 2
+    m_Bits: 1
+  staticLookAtPoint: {fileID: 1609077335848345780}
+  dynamicLookAtPoint: {fileID: 8053370616590675033}
 --- !u!1 &643027225830089694
 GameObject:
   m_ObjectHideFlags: 0
@@ -6749,7 +5634,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4076765406081274214}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_Bust2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6780,7 +5665,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6870360374707126464}
   - component: {fileID: 5400755909443722220}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_UpperArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6832,7 +5717,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2985760510990257925}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Adj_R_FaceEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6862,7 +5747,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5043758516609724848}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Index3_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6892,7 +5777,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6922376184706024460}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_SkirtSide2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6923,7 +5808,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4160514653406350833}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_TipSleeve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6954,7 +5839,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3686819085749491246}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Middle3_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6984,7 +5869,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6056161661174985999}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_SkirtSide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7015,7 +5900,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1435254424815445909}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HairJoint-ee19dda9-b810-4c49-9f4f-64d6df4822e2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7045,7 +5930,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3447437544823884301}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_LowerArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7075,7 +5960,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1899911909157772783}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HairJoint-c27867d3-4a24-460c-bdb2-ddbdbac6228e
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7107,7 +5992,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6215864854372832226}
   - component: {fileID: 4457022949703666669}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7159,7 +6044,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2302113752580899220}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Ring3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7190,7 +6075,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5757923175458779280}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_SkirtFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7221,7 +6106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4628779370758849810}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Little2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7252,7 +6137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 746549489708838601}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_UpperArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7282,7 +6167,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2488558620391954975}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Middle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7313,7 +6198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3846976226331762302}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_SkirtBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7344,7 +6229,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 376363094504425253}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Index2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7375,7 +6260,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 432349112659015197}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Thumb3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7406,7 +6291,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4500796032238097912}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_ToeBase_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7436,7 +6321,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8596808864526151583}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_ToeBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7469,7 +6354,7 @@ GameObject:
   - component: {fileID: 3324067730909656311}
   - component: {fileID: 6015246980701900481}
   - component: {fileID: 19978302574932536}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: hat01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7544,7 +6429,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8234115777110242987}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Little3_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7574,7 +6459,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1047146653305671097}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_SkirtSide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7605,7 +6490,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 766227958464274121}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_LowerLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7635,7 +6520,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3315539697156357422}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_SkirtSide1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7666,7 +6551,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7989057140070852583}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HairJoint-b39447f3-a172-4ea6-85fc-355215947709
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7698,7 +6583,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3505044386232435807}
   - component: {fileID: 8831957013293642900}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_C_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7750,7 +6635,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7536022053650965874}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Shoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7781,7 +6666,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7691093438116268508}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_SkirtFront2_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7811,7 +6696,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7726045729630099426}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Index3_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7841,7 +6726,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7592887061555035907}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_LowerSleeve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7874,7 +6759,7 @@ GameObject:
   - component: {fileID: 3008469057279106438}
   - component: {fileID: 6096532577478191024}
   - component: {fileID: 551609038033705801}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7949,7 +6834,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 740321097286675793}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_C_Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7981,7 +6866,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7744856294286766550}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HairJoint-74d136b4-a043-479d-9984-f92399aabe08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8011,7 +6896,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2199065270610380605}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Adj_L_FaceEyeSet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8042,7 +6927,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3231967764295288655}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8073,7 +6958,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2288417631348633822}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_LowerSleeve_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8103,7 +6988,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7750696901144079849}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_TipSleeve_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8133,7 +7018,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9016434865514500750}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Shoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8164,7 +7049,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9024799406173436470}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Thumb2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8195,7 +7080,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7826867118412291231}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_SkirtSide2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8226,7 +7111,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1415969588686447789}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_SkirtBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8257,7 +7142,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7947536359920868113}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_LowerLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8289,7 +7174,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6385395333211033936}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_SkirtBack_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8319,7 +7204,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3465954271072457598}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Thumb2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8350,7 +7235,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3877725395832831088}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HairJoint-3e55abe3-bf28-4f66-8ac6-29a47925919a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8381,7 +7266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 96666579193343034}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Ring2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8413,7 +7298,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7005126347885508214}
   - component: {fileID: 4431114877744649397}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_UpperArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8465,7 +7350,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3301923927279278585}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_SkirtFront1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8496,7 +7381,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4955553925093948554}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HairJoint-234bf850-b31b-4752-82d8-ee66204e2a79
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8527,7 +7412,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3010436520747809988}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Middle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8558,7 +7443,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6761376008649595808}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_SkirtSide1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8590,7 +7475,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5804418385871769125}
   - component: {fileID: 1638416384202242717}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8812,7 +7697,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1981475367583781229}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_SkirtBack1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8843,7 +7728,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3224940035706259829}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_UpperLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8874,7 +7759,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5999340896338875358}
   - component: {fileID: 8804121619047307800}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_LowerArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8929,7 +7814,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2473251549311150538}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Ring3_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8959,7 +7844,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3004334919821678603}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HairJoint-cb5fd974-f8ff-4507-bdce-e3e353e33011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8992,7 +7877,7 @@ GameObject:
   - component: {fileID: 5378904169918203648}
   - component: {fileID: 3980813147769692287}
   - component: {fileID: 3909468667970572335}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9069,7 +7954,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 357276001184880448}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_LowerSleeve_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9099,7 +7984,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4667254142474470258}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Little3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9130,7 +8015,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4671705849431621478}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_SkirtBack_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9160,7 +8045,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6220194145813655474}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_SkirtBack2_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9190,7 +8075,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7250860716572726988}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_ToeBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9221,7 +8106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4118982271468020728}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HairJoint-4d7cc8f7-90ee-42cb-b5c8-934e2049e489
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9252,7 +8137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7008952523853191825}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HairJoint-9893fa6b-a049-43f2-9a50-35d32734f2a1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9283,7 +8168,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4685168183420309041}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_UpperLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9313,7 +8198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3305146759222554297}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_SkirtBack2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9344,7 +8229,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6702088896325062851}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_LowerSleeve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9375,7 +8260,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5188177635927939869}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_SkirtBack1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9406,7 +8291,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 599368312473526722}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Ring2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9437,7 +8322,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 506751854405549697}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HairJoint-c6a6a913-3ac7-4682-9d25-78cc4b533d30
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9468,7 +8353,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4840028370407304929}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_LowerLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9500,7 +8385,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1118046411764716671}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Thumb3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9531,7 +8416,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1464847831041465036}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Index3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9562,7 +8447,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2042650242955362567}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_LowerArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9592,7 +8477,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5162375699792500527}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Hairs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9623,7 +8508,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1282150838396774709}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Thumb1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9654,7 +8539,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7476291414321709461}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Middle3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9691,7 +8576,7 @@ GameObject:
   - component: {fileID: 5682667201461922048}
   - component: {fileID: 8813005995746238143}
   - component: {fileID: 6081858737599164860}
-  m_Layer: 10
+  m_Layer: 2
   m_Name: BattleSpeachCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10834,7 +9719,7 @@ GameObject:
   m_Component:
   - component: {fileID: 613473214144128424}
   - component: {fileID: 5128669732477010147}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Hair001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11055,7 +9940,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7531825022184294009}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Ring3_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11085,7 +9970,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1448025881240661896}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Index2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11116,7 +10001,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 48378627919969881}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HairJoint-743a4e05-1425-4b17-836a-7dd25bc66a0b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11147,7 +10032,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2057129031509118305}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11178,7 +10063,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8995675196488209198}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Little1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11209,7 +10094,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8309186279666753595}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HairJoint-20e84a45-1d39-4ed6-9b06-82c16af3b454
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11240,7 +10125,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5499064303447365555}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_SkirtSide2_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11270,7 +10155,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1119413911288813361}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Adj_R_FaceEyeSet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11301,7 +10186,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7982590062159888923}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Ring3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11332,7 +10217,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6821120768025792254}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_SkirtSide_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11362,7 +10247,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8669700462268448755}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_Bust2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11392,7 +10277,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8507140153610365400}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Index3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11423,7 +10308,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2421875559703528340}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_SkirtFront2_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11453,7 +10338,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6584301720152144017}
-  m_Layer: 10
+  m_Layer: 2
   m_Name: MountPoint
   m_TagString: Untagged
   m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
@@ -11483,7 +10368,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9115547627999992953}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Thumb1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11514,7 +10399,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 941355863357333491}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Little3_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11545,7 +10430,7 @@ GameObject:
   m_Component:
   - component: {fileID: 928311893744441045}
   - component: {fileID: 7874521078653930418}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_UpperLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11602,7 +10487,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5381282896401448634}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_SkirtSide_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11632,7 +10517,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6905853685965709238}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_SkirtFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11664,7 +10549,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7893493185843718853}
   - component: {fileID: 2509013176078961583}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_C_Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11711,7 +10596,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2111968209117627600}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Little3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11742,7 +10627,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3453256658699253577}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_SkirtFront1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11773,7 +10658,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1136897225394004390}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Middle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11804,7 +10689,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4080451910459160994}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_UpperArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11835,7 +10720,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9199153735212830320}
   - component: {fileID: 3349087932902794928}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_UpperLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11893,7 +10778,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7416052082746617566}
   - component: {fileID: 6817137443839158130}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_LowerArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11948,7 +10833,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2893738368625027520}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_SkirtSide2_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11978,7 +10863,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4138628488919599084}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_TipSleeve_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12008,7 +10893,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1357981424602518682}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Ring1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12039,7 +10924,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3480726643911117930}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Ring1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12071,7 +10956,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4914687992107524837}
   - component: {fileID: 4436662404290499783}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12301,7 +11186,7 @@ GameObject:
   - component: {fileID: 1601341622753554084}
   - component: {fileID: 3670573514553483989}
   - component: {fileID: 3858052397225101110}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: secondary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12516,7 +11401,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 565277243291155975}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12547,7 +11432,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3449160781461051477}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Global
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12578,7 +11463,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2131770967542673839}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_SkirtFront_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12608,7 +11493,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4346990074221628216}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Middle3_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12638,7 +11523,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6708229296893656579}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RightHandMount
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
@@ -12668,7 +11553,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5269304467241127411}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_Bust1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12701,7 +11586,7 @@ GameObject:
   - component: {fileID: 6447423016035970921}
   - component: {fileID: 520228852878346283}
   - component: {fileID: 1819108311006481757}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: SpeachBubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12774,7 +11659,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6798862008699464795}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HairJoint-eb253531-8657-45c1-b5f9-a40ad7b31691
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12804,7 +11689,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5127935858701388244}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_SkirtBack2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12835,8 +11720,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1609077335848345780}
-  - component: {fileID: 7542662176496905614}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: LookAtPoint
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
@@ -12857,293 +11741,6 @@ Transform:
   m_Father: {fileID: 9152616809772851109}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7542662176496905614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8036263194723609818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1384774831, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fsm:
-    dataVersion: 2
-    usedInTemplate: {fileID: 0}
-    name: Reset
-    startState: State 1
-    states:
-    - name: State 1
-      description: 
-      colorIndex: 0
-      position:
-        serializedVersion: 2
-        x: 50
-        y: 116
-        width: 100
-        height: 16
-      isBreakpoint: 0
-      isSequence: 0
-      hideUnused: 0
-      transitions: []
-      actionData:
-        actionNames:
-        - HutongGames.PlayMaker.Actions.GetPosition
-        customNames:
-        - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 5552ad05
-        unityObjectParams: []
-        fsmGameObjectParams: []
-        fsmOwnerDefaultParams:
-        - ownerOption: 0
-          gameObject:
-            useVariable: 0
-            name: 
-            tooltip: 
-            showInInspector: 0
-            networkSync: 0
-            value: {fileID: 0}
-        animationCurveParams: []
-        functionCallParams: []
-        fsmTemplateControlParams: []
-        fsmEventTargetParams: []
-        fsmPropertyParams: []
-        layoutOptionParams: []
-        fsmStringParams: []
-        fsmObjectParams: []
-        fsmVarParams: []
-        fsmArrayParams: []
-        fsmEnumParams: []
-        fsmFloatParams:
-        - useVariable: 1
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        - useVariable: 1
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        - useVariable: 1
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        fsmIntParams: []
-        fsmBoolParams: []
-        fsmVector2Params: []
-        fsmVector3Params:
-        - useVariable: 1
-          name: StartingLocation
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: {x: 0, y: 0, z: 0}
-        fsmColorParams: []
-        fsmRectParams: []
-        fsmQuaternionParams: []
-        stringParams: []
-        byteData: 0100000000
-        arrayParamSizes: 
-        arrayParamTypes: []
-        customTypeSizes: 
-        customTypeNames: []
-        paramDataType: 140000001c0000000f0000000f0000000f0000000700000001000000
-        paramName:
-        - gameObject
-        - vector
-        - x
-        - y
-        - z
-        - space
-        - everyFrame
-        paramDataPos: 00000000000000000000000001000000020000000000000004000000
-        paramByteDataSize: 00000000000000000000000000000000000000000400000001000000
-    - name: State 2
-      description: 
-      colorIndex: 0
-      position:
-        serializedVersion: 2
-        x: 200
-        y: 113
-        width: 161.2
-        height: 16
-      isBreakpoint: 0
-      isSequence: 0
-      hideUnused: 0
-      transitions: []
-      actionData:
-        actionNames:
-        - HutongGames.PlayMaker.Actions.SetPosition
-        customNames:
-        - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: f6e5be03
-        unityObjectParams: []
-        fsmGameObjectParams: []
-        fsmOwnerDefaultParams:
-        - ownerOption: 0
-          gameObject:
-            useVariable: 0
-            name: 
-            tooltip: 
-            showInInspector: 0
-            networkSync: 0
-            value: {fileID: 0}
-        animationCurveParams: []
-        functionCallParams: []
-        fsmTemplateControlParams: []
-        fsmEventTargetParams: []
-        fsmPropertyParams: []
-        layoutOptionParams: []
-        fsmStringParams: []
-        fsmObjectParams: []
-        fsmVarParams: []
-        fsmArrayParams: []
-        fsmEnumParams: []
-        fsmFloatParams:
-        - useVariable: 1
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        - useVariable: 1
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        - useVariable: 1
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        fsmIntParams: []
-        fsmBoolParams: []
-        fsmVector2Params: []
-        fsmVector3Params:
-        - useVariable: 1
-          name: StartingLocation
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: {x: 0, y: 0, z: 0}
-        fsmColorParams: []
-        fsmRectParams: []
-        fsmQuaternionParams: []
-        stringParams: []
-        byteData: 010000000000
-        arrayParamSizes: 
-        arrayParamTypes: []
-        customTypeSizes: 
-        customTypeNames: []
-        paramDataType: 140000001c0000000f0000000f0000000f000000070000000100000001000000
-        paramName:
-        - gameObject
-        - vector
-        - x
-        - y
-        - z
-        - space
-        - everyFrame
-        - lateUpdate
-        paramDataPos: 0000000000000000000000000100000002000000000000000400000005000000
-        paramByteDataSize: 0000000000000000000000000000000000000000040000000100000001000000
-    events:
-    - name: RETURN_POKEMON
-      isSystemEvent: 0
-      isGlobal: 1
-    globalTransitions:
-    - fsmEvent:
-        name: RETURN_POKEMON
-        isSystemEvent: 0
-        isGlobal: 1
-      toState: State 2
-      linkStyle: 0
-      linkConstraint: 0
-      colorIndex: 0
-    variables:
-      floatVariables: []
-      intVariables: []
-      boolVariables: []
-      stringVariables: []
-      vector2Variables: []
-      vector3Variables:
-      - useVariable: 1
-        name: StartingLocation
-        tooltip: 
-        showInInspector: 0
-        networkSync: 0
-        value: {x: 0, y: 0, z: 0}
-      colorVariables: []
-      rectVariables: []
-      quaternionVariables: []
-      gameObjectVariables: []
-      objectVariables: []
-      materialVariables: []
-      textureVariables: []
-      arrayVariables: []
-      enumVariables: []
-      categories:
-      - 
-      variableCategoryIDs: 00000000
-    description: 
-    docUrl: 
-    showStateLabel: 0
-    maxLoopCount: 0
-    watermark: 
-    password: 
-    locked: 0
-    manualUpdate: 0
-    keepDelayedEventsOnStateExit: 0
-    preprocessed: 1
-    ExposedEvents: []
-    RestartOnEnable: 1
-    EnableDebugFlow: 0
-    EnableBreakpoints: 1
-    editorFlags: 1
-    activeStateName: 
-    mouseEvents: 0
-    handleLevelLoaded: 0
-    handleTriggerEnter2D: 0
-    handleTriggerExit2D: 0
-    handleTriggerStay2D: 0
-    handleCollisionEnter2D: 0
-    handleCollisionExit2D: 0
-    handleCollisionStay2D: 0
-    handleTriggerEnter: 0
-    handleTriggerExit: 0
-    handleTriggerStay: 0
-    handleCollisionEnter: 0
-    handleCollisionExit: 0
-    handleCollisionStay: 0
-    handleParticleCollision: 0
-    handleControllerColliderHit: 0
-    handleJointBreak: 0
-    handleJointBreak2D: 0
-    handleOnGUI: 0
-    handleFixedUpdate: 0
-    handleLateUpdate: 0
-    handleApplicationEvents: 0
-    handleUiEvents: 0
-    handleLegacyNetworking: 0
-    handleAnimatorMove: 0
-    handleAnimatorIK: 0
-  fsmTemplate: {fileID: 0}
-  eventHandlerComponentsAdded: 0
 --- !u!1 &8064847869362961393
 GameObject:
   m_ObjectHideFlags: 0
@@ -13154,7 +11751,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8708664131067829693}
   - component: {fileID: 2018147131887421894}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13207,7 +11804,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5181055572017248198}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_SkirtFront2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13238,7 +11835,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2490505975270042361}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Little2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13269,7 +11866,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1988950671542253724}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_L_TipSleeve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13300,7 +11897,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1758256012121007699}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Thumb3_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13330,7 +11927,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1296019430690612920}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Adj_L_FaceEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13360,7 +11957,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1232104339743333967}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_C_Hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13395,7 +11992,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8616844962235823281}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_L_Index1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13426,7 +12023,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1111107053136150441}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Little1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13457,7 +12054,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7910371696122878041}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_SkirtBack2_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13487,7 +12084,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7628363810195884978}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13519,7 +12116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 756682236352661187}
   - component: {fileID: 3105786863449362140}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_C_UpperChest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13574,7 +12171,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8220706742843029643}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_SkirtFront2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13605,7 +12202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6537407914532056359}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HairJoint-c96ccd83-9643-4e9d-93e0-f661e7f5acf4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13637,7 +12234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6891290062894946826}
   - component: {fileID: 1340734194518890248}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_C_Spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13684,7 +12281,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8991844323706954196}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Bip_R_Thumb3_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13714,7 +12311,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7332613452141001073}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: J_Sec_R_Bust1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13735,4 +12332,34 @@ Transform:
   - {fileID: 8669700462268448755}
   m_Father: {fileID: 756682236352661187}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9143358212266415514
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8053370616590675033}
+  m_Layer: 2
+  m_Name: DynamicLookAtPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8053370616590675033
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9143358212266415514}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.346, z: 1.53}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9152616809772851109}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

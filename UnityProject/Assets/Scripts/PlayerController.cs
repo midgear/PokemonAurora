@@ -43,7 +43,8 @@ public class PlayerController : MonoBehaviour
     /* These functions are called to manage if the character controller responds to inputs. */
     public void Activate() { ignoreInput = false; }
     public void Deactivate() { ignoreInput = true; }
-
+    public bool IsActivated() { return (!ignoreInput); }
+    
     List<draw_sphere_request> sphereRequestBuffer = new List<draw_sphere_request>();
 
     void DebugDrawSphere(Vector3 pos, float radius, Color color)
@@ -55,7 +56,7 @@ public class PlayerController : MonoBehaviour
         sphereRequestBuffer.Add(sphereRequest);
     }
 
-    private Vector3 ControllerFeetPos()
+    public Vector3 ControllerFeetPos()
     {
         return transform.position;
     }
