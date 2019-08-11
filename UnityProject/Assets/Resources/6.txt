@@ -1,0 +1,43 @@
+Aurora Dex: 6
+Name: Umbreon
+Ability1: Synchronize
+Ability2: Inner Focus
+Ability3: Hidden Ability
+Type1: Dark
+Type2: 
+HasGender: True
+PercentChanceFemale: 12.5
+HatchTIme: 8995 - 9251
+EggGroup1: Field
+EggGroup2: 
+Height: 1
+Weight: 27
+Hp: 95
+Attack: 65
+Defense: 110
+SpAttack: 60
+SpDefense: 130
+Speed: 65
+LevelingType: Medium Fast 
+CatchRate: 11.9
+EvolutionLevel: 
+EvolutionItem: Moon Shard
+WalkingSpeed: 1.2
+RunningSpeed: 3.3
+Moves:
+Pursuit / -
+Helping Hand / -
+Tackle / -
+Tail Whip / -
+Pursuit / -
+Sand Attack / 5
+Baby-Doll Eyes / 9
+Quick Attack / 13
+Confuse Ray / 17
+Feint Attack / 20
+Assurance / 25
+Screech / 29
+Moonlight / 33
+Mean Look / 37
+Last Resort / 41
+Guard Swap / 45

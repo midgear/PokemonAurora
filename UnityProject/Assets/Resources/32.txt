@@ -1,0 +1,43 @@
+Name: Buneary
+Ability1: Run Away
+Ability2: Klutz
+Ability3: Limber
+Type1: Normal
+Type2: 
+HasGender: True
+PercentChanceFemale: 50
+HatchTIme: 5140 - 5396
+EggGroup1: Field
+EggGroup2: Human-Like
+Height: 0.4
+Weight: 5.5
+Hp: 55
+Attack: 66
+Defense: 44
+SpAttack: 44
+SpDefense: 56
+Speed: 85
+LevelingType: Medium Fast
+CatchRate: 190
+EvolutionLevel: 
+EvolutionItem: Frindship
+WalkingSpeed: 1.2
+RunningSpeed: 3.3
+Moves:
+Frustration/-
+Defense Curl/-
+Splash/-
+Pound/-
+Foresight/-
+Endure/6
+Baby-Doll Eyes/13
+Quick Attack/16
+Jump Kick/23
+Baton Pass/26
+Agility/33
+Dizzy Punch/36
+After You/43
+Charm/46
+Entrainment/50
+Bounce/56
+Healing Wish/63

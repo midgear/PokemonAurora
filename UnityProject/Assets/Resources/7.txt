@@ -1,0 +1,43 @@
+Aurora Dex: 7
+Name: Leafeon
+Ability1: Leaf Guard
+Ability2: Chlorophyll
+Ability3: Hidden Ability
+Type1: Grass
+Type2: 
+HasGender: True
+PercentChanceFemale: 12.5
+HatchTIme: 8995 - 9251
+EggGroup1: Field
+EggGroup2: 
+Height: 1
+Weight: 25.5
+Hp: 65
+Attack: 110
+Defense: 110
+SpAttack: 130
+SpDefense: 60
+Speed: 95
+LevelingType: Medium Fast 
+CatchRate: 11.9
+EvolutionLevel: 
+EvolutionItem: Moss Rock
+WalkingSpeed: 1.2
+RunningSpeed: 3.3
+Moves:
+Razor Leaf / -
+Helping Hand / -
+Tackle / -
+Tail Whip / -
+Razor Leaf / -
+Sand Attack / 5
+Baby-Doll Eyes / 9
+Quick Attack / 13
+Grass Whistle / 17
+Magical Leaf / 20
+Giga Drain / 25
+Sword Dance / 29
+Synthesis / 33
+Sunny Day / 37
+Last Resort / 41
+Leaf Blade / 45

@@ -1,0 +1,42 @@
+Aurora Dex:3
+Name: Jolteon
+Ability1: Volt Absorb
+Ability2: Quick Feet
+Ability3: Hidden Ability
+Type1: Electric
+Type2: 
+HasGender: True
+PercentChanceFemale: 12.5
+HatchTIme: 8995 - 9251
+EggGroup1: Field
+EggGroup2: 
+Height: 0.8
+Weight: 24.5
+Hp: 65
+Attack: 65
+Defense: 60
+SpAttack: 110
+SpDefense: 95
+Speed: 130
+LevelingType: Medium Fast 
+CatchRate: 11.9
+EvolutionLevel: 
+EvolutionItem: Thunder Stone
+WalkingSpeed: 1.2
+RunningSpeed: 3.3
+Moves:
+Thunder Shock / -
+Yawn / -
+Tackle / -
+Growl / -
+Tail Whip / -
+Sand Attack / -
+Tail Whip / 3
+Quick Attack / 6
+Double Kick / 10
+Sand Attack / 14
+Pin Missile / 17
+Thunder Wave / 21
+Agility / 24
+Helping Hand / 28
+Thunder / 31

@@ -1,0 +1,43 @@
+Aurora Dex: 8
+Name: Glaceon
+Ability1: Snow Cloak
+Ability2: Ice Body
+Ability3: Hidden Ability
+Type1: Ice
+Type2: 
+HasGender: True
+PercentChanceFemale: 12.5
+HatchTIme: 8995 - 9251
+EggGroup1: Field
+EggGroup2: 
+Height: 0.8
+Weight: 25.9
+Hp: 65
+Attack: 60
+Defense: 110
+SpAttack: 130
+SpDefense: 95
+Speed: 65
+LevelingType: Medium Fast 
+CatchRate: 11.9
+EvolutionLevel: 
+EvolutionItem: Ice Rock
+WalkingSpeed: 1.2
+RunningSpeed: 3.3
+Moves:
+Icy Wind / -
+Helping Hand / -
+Tackle / -
+Tail Whip / -
+Icy Wind / -
+Sand Attack / 5
+Baby-Doll Eyes / 9
+Quick Attack / 13
+Bite / 17
+Ice Fang / 20
+Ice Shard / 25
+Barrier / 29
+Mirror Coat / 33
+Hail / 37
+Last Resort / 41
+Blizzard / 45

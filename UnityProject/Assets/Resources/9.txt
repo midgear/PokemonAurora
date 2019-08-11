@@ -1,0 +1,44 @@
+Aurora Dex: 9
+Name: Sylceon
+Ability1: Cute Charm
+Ability2: Pixilate
+Ability3: Hidden Ability
+Type1: Fairy
+Type2: 
+HasGender: True
+PercentChanceFemale: 12.5
+HatchTIme: 8995 - 9251
+EggGroup1: Field
+EggGroup2: 
+Height: 1
+Weight: 23.5
+Hp: 95
+Attack: 65
+Defense: 65
+SpAttack: 110
+SpDefense: 130
+Speed: 60
+LevelingType: Medium Fast 
+CatchRate: 11.9
+EvolutionLevel: 
+EvolutionItem: Affection
+WalkingSpeed: 1.2
+RunningSpeed: 3.3
+Moves:
+Fairy Wind / -
+Disarming Voice / -
+Helping Hand / -
+Tackle / -
+Tail Whip / -
+Fairy Wind / -
+Sand Attack / 5
+Baby-Doll Eyes / 9
+Quick Attack / 13
+Swift / 17
+Draining Kiss / 20
+Skill Swap / 25
+Misty Terrain / 29
+Light Screen / 33
+Moon Blast / 37
+Last Resort / 41
+Psych Up / 45

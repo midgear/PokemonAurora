@@ -1,0 +1,42 @@
+Aurora Dex: 4
+Name: Flareon
+Ability1: Flash Fire
+Ability2: Guts
+Ability3: Hidden Ability
+Type1: Fire
+Type2:
+HasGender: True
+PercentChanceFemale: 12.5
+HatchTIme: 8995 - 9251
+EggGroup1: Field
+EggGroup2: 
+Height: 0.9
+Weight: 25
+Hp: 65
+Attack: 130
+Defense: 60
+SpAttack: 95
+SpDefense: 110
+Speed: 65
+LevelingType: Medium Fast
+CatchRate: 11.9
+EvolutionLevel: 
+EvolutionItem: Fire Stone
+WalkingSpeed: 1.2
+RunningSpeed: 3.3
+Moves:
+Ember / -
+Yawn / -
+Tackle / -
+Growl / -
+Tail Whip / -
+Sand Attack / -
+Tail Whip / 3
+Quick Attack / 6
+Double Kick / 10
+Sand Attack / 14
+Fire Spin / 17
+Smog / 21
+Focus Energy / 24
+Helping Hand / 28
+Flare Blitz / 31

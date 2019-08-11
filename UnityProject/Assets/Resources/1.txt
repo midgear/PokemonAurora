@@ -1,0 +1,44 @@
+Name: Eevee
+Ability1: Run Away
+Ability2: Adaptability
+Ability3: Anticipation
+Type1: Normal
+Type2: 
+HasGender: True
+PercentChanceFemale: 12.5
+HatchTIme: 8739 – 8995
+EggGroup1: Field
+EggGroup2: 
+Height: 0.3
+Weight: 6.5
+Hp: 55
+Attack: 55
+Defense: 50
+SpAttack: 45
+SpDefense: 65
+Speed: 55
+LevelingType: Medium Fast
+CatchRate: 45
+EvolutionLevel: 
+EvolutionItem: 
+WalkingSpeed: 1.2
+RunningSpeed: 3.3
+Moves: 
+Covet/-
+Growl/-
+Tackle/-
+Tail Whip/-
+Sand Attack/5
+Baby-Doll Eyes/9
+Protect/11
+Quick Attack/13
+Bite/17
+Swift/17
+Refresh/20
+Take Down/25
+Charm/29
+Iron Tail/30
+Baton Pass/33
+Double-Edge/37
+Last Resort/41
+Trump Card/45
