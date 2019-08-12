@@ -270,7 +270,8 @@ public class PlayerController2 : MonoBehaviour
             float delta = Mathf.Infinity;
             Vector3 hitSpherePos = rayOrigin + Vector3.down * hit.distance;
             Color hitColor = Color.red;
-            
+            float margin = GetGroundedThreshold();
+
             // These adjustment factors are basically only used by the slope pushing!
             bool shouldAdjust = false;
             Vector3 adjustmentVector = Vector3.zero;
@@ -332,8 +333,9 @@ public class PlayerController2 : MonoBehaviour
                 // some "expected" distance which we can calcualate.
                 if (nearHitValid && farHitValid && !IsWallFromNormal(nearHit.normal) && IsWallFromNormal(farHit.normal))
                 {
-                    // STANDING ON A LEDGE
-                    onLedge = true;
+                    float ogDelta = Vector3.Distance(feetSpherePos, hitSpherePos);
+                    if (ogDelta <= margin)
+                        onLedge = true;
 
                     // Now that the player is standing on a ledge, we need to know the what the distance to the ground is from said ledge.
                     // We are going to probe with a raycast to find out.
@@ -382,6 +384,8 @@ public class PlayerController2 : MonoBehaviour
                             groundDistance = Vector3.Dot(deltaVec, Vector3.down);
                         }
                     }
+
+
                 }
                 else if (IsWallFromNormal(hit.normal))
                 {
@@ -433,7 +437,6 @@ public class PlayerController2 : MonoBehaviour
             } 
 
             // TODO(BluCloos): Is the way I am checking the normal here alright?
-            float margin = GetGroundedThreshold();
             if (delta <= margin && !IsWallFromNormal(latestHit.normal))
             {
                 // The player is said to be grounded! Clamp that bitch!
@@ -578,8 +581,6 @@ public class PlayerController2 : MonoBehaviour
                 if (showGroundDistanceCheck)
                     Debug.DrawLine(GetFeetPos(), GetFeetPos() + Vector3.down * groundDistance);
 
-                bool shouldPush = true;
-
                 // NOTE(Reader): Only at the transition do we set the ground distance.
                 // What is the ground distance you ask? Why it's used by the animator 
                 // to determine what type of falling animation to do!
@@ -591,24 +592,24 @@ public class PlayerController2 : MonoBehaviour
                     if (hits.Count >= 3)
                         signedDot = Vector3.Dot(directionVector, hits[2].normal);
 
-                    if (onLedge && running && !localGrounded && signedDot >= 0.5f)
+                    if (onLedge && running && !localGrounded && signedDot >= 0.3f)
                     {
                         //Debug.Log("Set the Ledge jump bool to true!");
                         playerAnimator.SetBool("ledgeJump", true);
-                        shouldPush = false;
                     }
                 }
 
-                grounded = localGrounded; // Actaully commit the local grounded
-
-                if (onLedge && !grounded && shouldPush)
+                if (onLedge && !localGrounded && !playerAnimator.GetBool("ledgeJump"))
                 {
-                    //Debug.Log("GET THE FUCK OFF MY LAWN!");
+                    Debug.Log("GET THE FUCK OFF MY LAWN!");
                     // Push that little shit off the ledge RIGHT NOW
                     Vector3 pushVector = new Vector3(hits[2].normal.x, 0.0f, hits[2].normal.z);
                     pushVector = pushVector.normalized * Time.deltaTime * 4.0f;
                     controller.Move(pushVector);
                 }
+
+                grounded = localGrounded; // Actaully commit the local grounded
+
             }
 
             // Initialize the movement vector with the vertical movement
