@@ -634,9 +634,10 @@ GameObject:
   - component: {fileID: 7603718339838526445}
   - component: {fileID: 4788842099246542386}
   - component: {fileID: 4788842099246542387}
+  - component: {fileID: 6337436188203167604}
   m_Layer: 2
   m_Name: DebugPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -692,7 +693,7 @@ CharacterController:
   m_Height: 1.87
   m_Radius: 0.25
   m_SlopeLimit: 55
-  m_StepOffset: 0.3
+  m_StepOffset: 0.275
   m_SkinWidth: 0.01
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.92, z: 0}
@@ -703,7 +704,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3554623865205333124}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fccc00825ba400428749c7e3ac9e1a0, type: 3}
   m_Name: 
@@ -711,12 +712,46 @@ MonoBehaviour:
   walkingLayerMask:
     serializedVersion: 2
     m_Bits: 1
+  walkingSpeed: 0.5
+  runningSpeed: 1
   airMovementSpeed: 1.4
   rotationsPerMinute: 80
-  gravityAcceleration: -9.81
+  gravityAcceleration: -11
   jumpHeight: 1.75
-  landingThreshold: 0.1
-  maintanenceThreshold: 0.5
+  feetPosOffsetFromOrigin: 0
+  rootMotion: 1
+--- !u!114 &6337436188203167604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3554623865205333124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da47361d8264fb84b8b4982495f7f0bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkingSpeed: 0.5
+  runningSpeed: 1
+  jumpHeight: 1
+  gravityAcceleration: -9.81
+  airMovementFactor: 0.5
+  rotationsPerMinute: 80
+  terminalVelocity: -53
+  showDirectionVector: 0
+  showGroundedHitPos: 0
+  showEdgeCheck: 0
+  showGroundDistanceCheck: 0
+  slopeLimit: 55
+  walkingLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  localCapsuleSphere1: {x: 0, y: 1.53, z: 0}
+  localCapsuleSphere2: {x: 0, y: 0.29, z: 0}
+  capsuleRadius: 0.29
+  rootMotion: 1
+  feetOffset: 0
 --- !u!1 &3561565920544008417
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,9 +6,10 @@ Oh, it also contains all of the data structures that I have defined!
 
 using System.Collections.Generic;
 using System;
-using UnityEngine; 
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
-# region GameStructuresAndEnumerations
+#region GameStructuresAndEnumerations
 // yo these all need filling out
 public enum pokemon_type
 {
@@ -187,7 +188,7 @@ public class GameManager : MonoBehaviour
 
     #region PrivateVariables
     private static CameraRig mainCameraRig; // initialized in start
-    private static PlayerController currentPlayerController; // initialized in start
+    private static PlayerController2 currentPlayerController; // initialized in start
     private static GameManager gm; // initialized in awake
     private static List<pokemon_data> pokemonTable = new List<pokemon_data>(); // initialized in start
     private static Dictionary<string, pokemon_move_data> pokemonMoveTable = new Dictionary<string, pokemon_move_data>(); // initialized in start
@@ -468,7 +469,7 @@ public class GameManager : MonoBehaviour
 
     #region PublicFunctions
 
-    public static void SwitchPlayer(PlayerController pc)
+    public static void SwitchPlayer(PlayerController2 pc)
     {
         // TODO(BluCloos): Auto position the camera to avoid the fast teleport of the camera!
         // NOTE(BluCloos): The above is only applicable when the camera has smooth follow on,
@@ -483,8 +484,7 @@ public class GameManager : MonoBehaviour
         // TODO(Noah): Right now the mapping for the maximum character zoom is not really setup
         // at all.
         mainCameraRig.target = currentPlayerController.gameObject.transform;
-        CharacterController cc = currentPlayerController.GetComponent<CharacterController>();
-        mainCameraRig.offset = new Vector3(0.0f, cc.height / 2.0f, 0.5f);
+        mainCameraRig.offset = new Vector3(0.0f, currentPlayerController.GetHeight() / 2.0f, 0.5f);
         
         // NOTE(Reader): This math is basically a cheese. Im just using 
         // known value pairs of minCameraDistances and character heights
@@ -492,7 +492,7 @@ public class GameManager : MonoBehaviour
         // the minimum camera distance. Think grade 9 maths. y=mx+b 
         float m = (2.0f / 1.1f);
         float b = 4.0f - m * 1.5f;
-        mainCameraRig.minDistance = m * cc.height + b;
+        mainCameraRig.minDistance = m * currentPlayerController.GetHeight() + b;
     }
 
     public static Pokemon InstantiatePokemon(pokemon_profile profile, bool newPokemon, Vector3 worldPos)
@@ -516,12 +516,12 @@ public class GameManager : MonoBehaviour
             cc.height = pokeData.height;
 
             // Setup the player controller component
-            PlayerController pc = pokeObj.AddComponent<PlayerController>();
+            PlayerController2 pc = pokeObj.AddComponent<PlayerController2>();
             pc.rootMotion = false;
             pc.walkingLayerMask = ~(1 << 8);
-            pc.walkingSpeed = pokeData.walkingSpeed;
-            pc.runningSpeed = pokeData.runningSpeed;
-            pc.feetPosOffsetFromOrigin = 0.0f;
+            pc.SetWalkingSpeed(pokeData.walkingSpeed);
+            pc.SetRunningSpeed(pokeData.runningSpeed);
+            pc.feetOffset = 0.0f;
 
             // Grab the animator for your boi and attach that son of a bitch!
             RuntimeAnimatorController animatorController = Resources.Load<RuntimeAnimatorController>("animator_" + profile.auroraDexNumber);
@@ -577,7 +577,7 @@ public class GameManager : MonoBehaviour
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
             if (playerObj != null)
             {
-                PlayerController pc = playerObj.GetComponent<PlayerController>();
+                PlayerController2 pc = playerObj.GetComponent<PlayerController2>();
                 SwitchPlayer(pc);
             }
             else
@@ -587,7 +587,7 @@ public class GameManager : MonoBehaviour
         // spawn a stupid lil debug pokemon, could be fun!
         pokemon_profile stupidPoke = new pokemon_profile();
         stupidPoke.auroraDexNumber = 23;
-        InstantiatePokemon(stupidPoke, false, new Vector3(1.0f, 2.0f, 1.0f));
+        //InstantiatePokemon(stupidPoke, false, new Vector3(1.0f, 2.0f, 1.0f));
     }
 
     bool playingPokemon = false;
@@ -596,13 +596,14 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetButtonDown("DebugAction"))
         {
+            /*
             if (!playingPokemon)
             {
                 // spawn a random, new pokemon and switch to it
                 pokemon_profile newProfile = new pokemon_profile();
                 newProfile.auroraDexNumber = (int)pokemonToSpawn;
                 Pokemon newPoke = InstantiatePokemon(newProfile, true, Vector3.zero + 2.0f * Vector3.up);
-                PlayerController pc = newPoke.gameObject.GetComponent<PlayerController>();
+                PlayerController2 pc = newPoke.gameObject.GetComponent<PlayerController2>();
                 SwitchPlayer(pc);
 
                 playingPokemon = true;
@@ -612,10 +613,16 @@ public class GameManager : MonoBehaviour
                 // destroy the instantiated pokemon
                 Destroy(currentPlayerController.gameObject);
                 // switch back to the player
-                PlayerController pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+                PlayerController2 pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController2>();
                 SwitchPlayer(pc);
                 playingPokemon = false;
             }
+            */
+
+            Destroy(currentPlayerController.gameObject);
+            GameObject newPlayer = Resources.Load<GameObject>("DebugPlayer");
+            PlayerController2 pc2 = Instantiate(newPlayer, new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity).GetComponent<PlayerController2>();
+            SwitchPlayer(pc2);
         }
     }
     #endregion
