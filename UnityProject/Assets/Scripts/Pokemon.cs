@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pokemon : MonoBehaviour
 {
     private pokemon_profile profile;
-    private PlayerController pc;
+    private PlayerController2 pc;
     private Animator animator;
     // NOTE(Reader): This function is not to be called during normal use. It is simply a hook
     // used by the game manager whenever one of these bad boys is created.
@@ -15,7 +15,7 @@ public class Pokemon : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        pc = GetComponent<PlayerController>();
+        pc = GetComponent<PlayerController2>();
     }
 
     private void TryAttack(uint moveIndex)

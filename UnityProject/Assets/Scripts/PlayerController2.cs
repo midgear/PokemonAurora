@@ -31,12 +31,18 @@ public class PlayerController2 : MonoBehaviour
     public float rotationsPerMinute = 80.0f;
     [Tooltip("The maximum velocity of the player while in freefall.")]
     public float terminalVelocity = -53.0f;
+    [Tooltip("This value overrides the step offset of the characterController script.")]
+    public float stepOffset = 0.3f;
+    [Tooltip("Should the player be aloud to jump?")]
+    public bool canJump = false;
 
     [Header("Debug")]
     public bool showDirectionVector = false;
     public bool showGroundedHitPos = false;
     public bool showEdgeCheck = false;
     public bool showGroundDistanceCheck = false;
+    public bool showStepCheck = false;
+    public bool showSurfaceNomral = false;
 
     [Header("Restrictions")]
     [Tooltip("The player will not be able to walk up slopes steeper than this angle.")]
@@ -72,6 +78,9 @@ public class PlayerController2 : MonoBehaviour
     private bool grounded = false;
     private float verticalVelocity = 0.0f;
     private Vector3 airInertia = Vector3.zero;
+    // NOTE(Reader): The inertial full stop works like this. If whilst in the air and the player hits a wall
+    // due to their inertia, we are going to apply a full stop to their intertia!
+    private bool inertiaFullStop = false;
     private Transform cameraTransform; // initialized in Start
     private Animator playerAnimator; // initialized in Start
     private CharacterController controller;
@@ -84,23 +93,12 @@ public class PlayerController2 : MonoBehaviour
     public bool IsActivated() { return (!ignoreInput); }
     public Vector3 GetFeetPos() { return transform.position + Vector3.up * feetOffset; }
     public Vector3 GetMidsectionPos() { return GetFeetPos() + Vector3.up * GetHeight() / 2.0f; }
-    // NOTE(Reader): I do not check if the playerCollider exists in these functions because
-    // at the time of their calling it will always exist as I delete the player if 
-    // I was unable to find a capsule collider.
     public float GetHeight() { return Mathf.Abs(localCapsuleSphere2.y - localCapsuleSphere1.y) + capsuleRadius * 2.0f; }
     public float GetRadius() { return capsuleRadius; }
     public void SetWalkingSpeed(float walkingSpeed) { this.walkingSpeed = walkingSpeed; }
     public void DisableGravity() { gravityLock = true; }
     public void EnableGravity() { gravityLock = false; }
-    public void SetRunningSpeed(float runningSpeed)
-    {
-        if (playerAnimator != null && rootMotion)
-        {
-            playerAnimator.speed = runningSpeed;
-        }
-
-        this.runningSpeed = runningSpeed;
-    }
+    public void SetRunningSpeed(float runningSpeed) { this.runningSpeed = runningSpeed; }
 
     public void TimedLock(float timeToLock)
     {
@@ -108,9 +106,27 @@ public class PlayerController2 : MonoBehaviour
         StartCoroutine(corutine);
     }
 
+    public void UpdatePlayer()
+    {
+        controller.stepOffset = 0.02f;
+        controller.slopeLimit = slopeLimit;
+        float scale = transform.localScale.x;
+        controller.height = GetHeight() / scale;
+        controller.radius = capsuleRadius / scale;
+        controller.center = (GetMidsectionPos() - transform.position) / scale;
+        playerAnimator.applyRootMotion = rootMotion;
+    }
+
     #endregion
 
     #region PlayerController2Functions
+    public void DebugControllerMove(Vector3 movementVector)
+    {
+        //if (movementVector.y > 0.0f)
+            //Debug.Log("Warning: the player was moved upwards!");
+        controller.Move(movementVector);
+    }
+
     public IEnumerator TimedLockCo(float timeToWait)
     {
         ignoreInput = true;
@@ -127,120 +143,16 @@ public class PlayerController2 : MonoBehaviour
         sphereRequest.color = color;
         sphereRequestBuffer.Add(sphereRequest);
     }
-
-    private Vector3 ProjectVectorOnPlane(Vector3 planeNormal, Vector3 vector)
-    {
-        return vector - (Vector3.Dot(vector, planeNormal) * planeNormal);
-    }
-
-    // NOTE(BluCloos): I stole this codes because I could not be bothered to write it myself.
-    private bool SimulateSphereCast(Vector3 groundNormal, out RaycastHit hit)
-    {
-        float groundAngle = Vector3.Angle(groundNormal, Vector3.up) * Mathf.Deg2Rad;
-
-        Vector3 secondaryOrigin = GetFeetPos() + Vector3.up * tolerance;
-
-        if (!Mathf.Approximately(groundAngle, 0))
-        {
-            float horizontal = Mathf.Sin(groundAngle) * GetRadius();
-            float vertical = (1.0f - Mathf.Cos(groundAngle)) * GetRadius();
-
-            // Retrieve a vector pointing up the slope
-            Vector3 r2 = Vector3.Cross(groundNormal, Vector3.down);
-            Vector3 v2 = -Vector3.Cross(r2, groundNormal);
-
-            secondaryOrigin += ProjectVectorOnPlane(Vector3.up, v2).normalized * horizontal + Vector3.up * vertical;
-        }
-
-        //Debug.DrawRay(secondaryOrigin, Vector3.down, Color.magenta);
-        if (Physics.Raycast(secondaryOrigin, Vector3.down, out hit, Mathf.Infinity, walkingLayerMask))
-        {
-            // Remove the tolerance from the distance travelled
-            hit.distance -= tolerance + tinyTolerance;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    private float WallAngleFromNormal(Vector3 normal)
-    {
-        float wallAngle = Mathf.Acos(Vector3.Dot(normal, Vector3.up)) * Mathf.Rad2Deg;
-        return wallAngle;
-    }
-
+   
     private bool IsWallFromNormal(Vector3 normal)
     {
-        float wallAngle = WallAngleFromNormal(normal);
-        if (wallAngle > slopeLimit)
+        // NOTE(if the normal is pointing down at all, that means its a wall and you cannot walk on it)
+        if (normal.y < 0.0f)
             return true;
-        else
-            return false;
-    }
 
-   /*private bool SlopeInFrontGround(out Vector3 slopeNormal)
-    {
-        Vector3 feetPos = GetFeetPos();
-        Vector3 feetSpherePos = feetPos + Vector3.up * (GetHeight() / 2.0f) + Vector3.down * (controller.stepOffset + 0.1f);
-
-        RaycastHit hit;
-        if (Physics.Raycast(feetSpherePos, transform.forward, out hit, controller.height, walkingLayerMask))
-        {
-            DebugDrawSphere(hit.point, 0.1f, Color.red);
-            float normalAngleToVertical = WallAngleFromNormal(hit.normal);
-            
-            // TODO(BluCloos): Make this work for inverse walls
-            float theta = 90.0f - normalAngleToVertical;
-            float distanceThreshold = Mathf.Tan(theta * Mathf.Deg2Rad) * (feetSpherePos.y - feetPos.y) + landingThreshold;
-            Debug.DrawLine(feetSpherePos, feetSpherePos + transform.forward * distanceThreshold, Color.green);
-
-            Vector3 hitSpherePos = hit.point - transform.forward * controller.radius;
-            //Vector3 hitSpherePos = feetSpherePos + transform.forward * hit.distance;
-            float deltaDistance = Vector3.Distance(feetSpherePos, hitSpherePos);
-            if (deltaDistance <= distanceThreshold && normalAngleToVertical > controller.slopeLimit)
-            {
-                slopeNormal = hit.normal;
-                return true;
-            }
-        }
-
-        slopeNormal = Vector3.zero;
-        return false;
-    }
-    */
-
-    private bool SlopeCheck(Vector3 cMoveVector, out Vector3 slopeNormal)
-    {
-        RaycastHit[] hits = CollisionCheck(cMoveVector);
-
-        // Here is some debug stuff, basically we are just going to draw all those gorgeous hits
-        // that we got.
-        /*
-        for (int i = 0; i < hits.Length; i++)
-        {
-            DebugDrawSphere(hits[i].point, 0.2f, Color.red);
-        }
-        */
-
-        slopeNormal = Vector3.zero;
-
-        for (int i = 0; i < hits.Length; i++)
-        {
-            RaycastHit hit = hits[i];
-            if (IsWallFromNormal(hit.normal))
-            {
-                // we have to make sure that the hit distance is sane
-                // so that we know if we are even touching the wall
-                if (hit.distance <= landingThreshold)
-                {
-                    // Okay so the above seems like a working (untested) cheese for now 
-                    slopeNormal = hit.normal;
-                    return true;
-                }
-            }
-        }
+        float angleToHorizontal = Mathf.Acos(Vector3.Dot(normal, Vector3.up)) * Mathf.Rad2Deg;
+        if (angleToHorizontal >= slopeLimit)
+            return true;
 
         return false;
     }
@@ -250,12 +162,103 @@ public class PlayerController2 : MonoBehaviour
         return (grounded) ? maintenanceThreshold : landingThreshold;
     }
 
-    private bool GroundedAndClamp(out List<RaycastHit> hits, out float groundDistance, out bool onLedge)
+    // Returns true when the ground is directly below, false in every other case
+    private void EdgeProbeGround(RaycastHit hit, Vector3 edgeWallNormal, out RaycastHit newHit)
+    {
+        newHit = new RaycastHit();
+        newHit.distance = Mathf.Infinity;
+        
+        // Now that the player is standing on a ledge, we need to know the what the distance to the ground is from said ledge.
+        // We are going to probe with a raycast to find out.
+        Vector3 pushVector = new Vector3(hit.normal.x, 0.0f, hit.normal.z);
+        pushVector = pushVector.normalized;
+        Vector3 originPoint = hit.point + pushVector * tinyTolerance;
+
+        // First, prior to raycasting along the surface, we are going to do a straight raycast down to see if we can grab some
+        // ground!
+        RaycastHit groundHit;
+        bool foundGround = false;
+        if (Physics.Raycast(originPoint, Vector3.down, out groundHit, Mathf.Infinity, walkingLayerMask))
+        {
+            if (!IsWallFromNormal(groundHit.normal))
+            {
+                foundGround = true;
+                newHit = groundHit;
+            }
+        }
+
+        if (!foundGround)
+        {
+            // Calculate the direction vector down the slope so we can do our raycast
+            Vector3 ny = Vector3.Cross(edgeWallNormal, Vector3.down);
+            Vector3 slopeVec = Vector3.Cross(ny, edgeWallNormal);
+
+            if (Physics.Raycast(originPoint, slopeVec, out groundHit, Mathf.Infinity, walkingLayerMask))
+            {
+                if (!IsWallFromNormal(groundHit.normal))
+                {
+                    newHit = groundHit;
+                }
+            }
+        }
+
+        if (newHit.distance != Mathf.Infinity && showEdgeCheck)
+            Debug.DrawLine(originPoint, groundHit.point, Color.black);
+    }
+
+    // TODO(BluCloos): There is a case here where the ray might not hit the actual surface but instead a completely
+    // diff surface. To maintain sanity, I think it might be useful to verfiy the distance of these points to
+    // some "expected" distance which we can calcualate.
+    private bool EdgeCheck(RaycastHit hit, out RaycastHit nearHit, out RaycastHit farHit)
+    {
+        nearHit = new RaycastHit();
+        farHit = new RaycastHit();
+        nearHit.distance = Mathf.Infinity;
+        farHit.distance = Mathf.Infinity;
+        bool nearHitValid = false;
+        bool farHitValid = false;
+
+        {
+            Vector3 newOrigin = hit.point + hit.normal * tolerance;
+            Vector3 rayDirection = -hit.normal;
+            Vector3 ny = Vector3.Cross(hit.normal, Vector3.up);
+            // NOTE(Reader): the delta direction is the vector who is perpendicular to the normal but 
+            // coplanar to the plane defined by the normal and VEctor3.up
+            Vector3 deltaDirection = Vector3.Cross(ny, hit.normal);
+            Vector3 origin1 = newOrigin + deltaDirection * tolerance;
+            Vector3 origin2 = newOrigin - deltaDirection * tolerance;
+
+            RaycastHit localNearHit;
+            RaycastHit localFarHit;
+
+            nearHitValid = Physics.Raycast(origin1, rayDirection, out localNearHit, Mathf.Infinity, walkingLayerMask);
+            farHitValid = Physics.Raycast(origin2, rayDirection, out localFarHit, Mathf.Infinity, walkingLayerMask);
+
+            if (nearHitValid)
+                nearHit = localNearHit;
+
+            if (farHitValid)
+                farHit = localFarHit;
+
+            if (showEdgeCheck)
+            {
+                Debug.DrawLine(origin1, nearHit.point, Color.cyan);
+                Debug.DrawLine(origin2, farHit.point, Color.magenta);
+            }
+        }
+
+        return nearHitValid && farHitValid && !IsWallFromNormal(nearHit.normal) && IsWallFromNormal(farHit.normal);
+    }
+
+    // TODO(BluCloos): I honeslty feel like this boi just needs a better interface tbh.
+    // there are just so many out params!
+    // NOTE(Reader): This guy also goofs you up the stairs
+    private bool GroundedAndClamp(bool shouldLedgePush, out List<RaycastHit> hits, out float groundDistance, out bool wasPushed)
     {
         // Default the out params in the case they never get set
         groundDistance = Mathf.Infinity;
         hits = new List<RaycastHit>(); // No hits for you!
-        onLedge = false;
+        wasPushed = false;
 
         Vector3 feetPos = GetFeetPos();
         Vector3 rayOrigin = feetPos + Vector3.up * (GetHeight() / 2.0f);
@@ -264,34 +267,27 @@ public class PlayerController2 : MonoBehaviour
         RaycastHit hit;
         if (Physics.SphereCast(rayOrigin, GetRadius(), Vector3.down, out hit, Mathf.Infinity, walkingLayerMask))
         {
-            hits.Add(hit); // default hit is always at index 1
+            hits.Add(hit); // Default hit is always at index 1
 
-            // NOTE(Reader): the values below are default unless otherwise set by the various cases below
+            // NOTE(Reader): The values below are default unless otherwise set by the various cases below
             float delta = Mathf.Infinity;
             Vector3 hitSpherePos = rayOrigin + Vector3.down * hit.distance;
             Color hitColor = Color.red;
             float margin = GetGroundedThreshold();
-
+            bool isEdge = false;
             // These adjustment factors are basically only used by the slope pushing!
-            bool shouldAdjust = false;
             Vector3 adjustmentVector = Vector3.zero;
 
-            void WriteDelta()
+            void SetDelta()
             {
-                delta = Vector3.Distance(hitSpherePos, feetSpherePos);
+                delta = Mathf.Abs(hitSpherePos.y - feetSpherePos.y);
             }
 
-            // NOTE(BluCloos): The job of the cases below is to write the delta, setup the hitSpherePos, and 
-            // set the hit if necessary, also the groundDistance.
+            // NOTE(BluCloos): The job of the cases below is to write the delta, setup the hitSpherePos, and add hits 
 
             // So the first thing I am going to do is to check if we are on perfectly flat ground. If this is the case, 
             // there is no concern for any other case. We are just like, on the ground bro.
-            if (hit.normal == new Vector3(0.0f, 1.0f, 0.0f))
-            {
-                WriteDelta();
-                groundDistance = delta;
-            }
-            else
+            if (hit.normal != Vector3.up)
             {
                 // In every other scenario, there are 4 cases
                 /* 1. Standing on generic sloped ground
@@ -303,129 +299,96 @@ public class PlayerController2 : MonoBehaviour
                 // EDGE CHECK
                 RaycastHit nearHit;
                 RaycastHit farHit;
-                bool nearHitValid = false;
-                bool farHitValid = false;
+                isEdge = EdgeCheck(hit, out nearHit, out farHit);
+                hits.Add(nearHit);
+                hits.Add(farHit);
+
+                if (isEdge)
                 {
-                    Vector3 newOrigin = hit.point + hit.normal * 0.2f;
-                    Vector3 rayDirection = -hit.normal;
-                    Vector3 ny = Vector3.Cross(hit.normal, Vector3.up);
-                    // NOTE(Reader): the delta direction is the vector who is perpendicular to the normal but 
-                    // coplanar to the plane defined by the normal and VEctor3.up
-                    Vector3 deltaDirection = Vector3.Cross(ny, hit.normal);
-                    Vector3 origin1 = newOrigin + deltaDirection * 0.2f;
-                    Vector3 origin2 = newOrigin - deltaDirection * 0.2f;
+                    if (shouldLedgePush)
+                    {
+                        wasPushed = true;
+                        Vector3 pushVector = new Vector3(farHit.normal.x, 0.0f, farHit.normal.z);
+                        pushVector = pushVector.normalized * Time.deltaTime * 4.0f;
+                        adjustmentVector = pushVector;
+                    }
                     
-                    nearHitValid = Physics.Raycast(origin1, rayDirection, out nearHit, Mathf.Infinity, walkingLayerMask);
-                    farHitValid = Physics.Raycast(origin2, rayDirection, out farHit, Mathf.Infinity, walkingLayerMask);
-
-                    hits.Add(nearHit);
-                    hits.Add(farHit);
-
-                    if (showEdgeCheck)
-                    {
-                        Debug.DrawLine(origin1, nearHit.point, Color.cyan);
-                        Debug.DrawLine(origin2, farHit.point, Color.magenta);
-                    }
-                }
-
-                // TODO(BluCloos): There is a case here where the ray might not hit the actual surface but instead a completely
-                // diff surface. To maintain sanity, I think it might be useful to verfiy the distance of these points to
-                // some "expected" distance which we can calcualate.
-                if (nearHitValid && farHitValid && !IsWallFromNormal(nearHit.normal) && IsWallFromNormal(farHit.normal))
-                {
-                    float ogDelta = Vector3.Distance(feetSpherePos, hitSpherePos);
-                    if (ogDelta <= margin)
-                        onLedge = true;
-
-                    // Now that the player is standing on a ledge, we need to know the what the distance to the ground is from said ledge.
-                    // We are going to probe with a raycast to find out.
-                    Vector3 pushVector = new Vector3(hit.normal.x, 0.0f, hit.normal.z);
-                    pushVector = pushVector.normalized;
-                    Vector3 originPoint = hit.point + pushVector * tinyTolerance;
-
-                    void ProcessHitGround(RaycastHit _groundHit)
-                    {
-                        hitSpherePos = _groundHit.point + capsuleRadius * Vector3.up;
-                        WriteDelta();
-                        hitColor = Color.cyan;
-
-                        if (showEdgeCheck)
-                        {
-                            Debug.DrawLine(originPoint, _groundHit.point, Color.black);
-                        }
-                    }
-
-                    // First, prior to raycasting along the surface, we are going to do a straight raycast down to see if we can grab some
-                    // ground!
+                    /*
                     RaycastHit groundHit;
-                    bool foundGround = false;
-                    if (Physics.Raycast(originPoint, Vector3.down, out groundHit, Mathf.Infinity, walkingLayerMask))
+                    EdgeProbeGround(hit, farHit.normal, out groundHit);
+
+                    if (groundHit.distance != Mathf.Infinity)
                     {
-                        if (!IsWallFromNormal(groundHit.normal))
-                        {
-                            foundGround = true;
-                            hits.Add(groundHit);
-                            ProcessHitGround(groundHit);
-                            groundDistance = Mathf.Abs(hitSpherePos.y - feetSpherePos.y);
-                        }
-                    }
+                        hits.Add(groundHit);
+                        hitSpherePos = groundHit.point + capsuleRadius * Vector3.up;
+                        hitColor = Color.cyan;
+                        SetDelta();
+                    }*/
 
-                    if (!foundGround)
-                    {
-                        // Calculate the direction vector down the slope so we can do our raycast
-                        Vector3 ny = Vector3.Cross(farHit.normal, Vector3.down);
-                        Vector3 slopeVec = Vector3.Cross(ny, farHit.normal);
-
-                        if (Physics.Raycast(originPoint, slopeVec, out groundHit, Mathf.Infinity, walkingLayerMask))
-                        {
-                            hits.Add(groundHit);
-                            ProcessHitGround(groundHit);
-                            Vector3 deltaVec = groundHit.point - originPoint;
-                            groundDistance = Vector3.Dot(deltaVec, Vector3.down);
-                        }
-                    }
-
-
+                    SetDelta();
                 }
                 else if (IsWallFromNormal(hit.normal))
                 {
                     // Since the sphere cast has hit a wall we are going to assume that it has simply missed the ground beneath us,
                     // raycast below to find out what's there
                     RaycastHit pushHit = hit;
-                    if (farHitValid)
+                    if (farHit.distance != Mathf.Infinity)
                         pushHit = farHit;
 
-                    Vector3 pushVector = new Vector3(pushHit.normal.x, 0.0f, pushHit.normal.z);
-                    pushVector = pushVector.normalized;
-                    shouldAdjust = true;
-                    adjustmentVector = pushVector * Time.deltaTime * 1.3f;
+                    if (showSurfaceNomral)
+                        Debug.DrawLine(hit.point, hit.point + hit.normal, Color.magenta);
+
+                    Vector3 GenPushVector(Vector3 normal)
+                    {
+                        Vector3 pushVector = new Vector3(normal.x, 0.0f, normal.z);
+                        pushVector = pushVector.normalized;
+                        return pushVector * Time.deltaTime * 2.0f;
+                    }
+
+                    wasPushed = true;
+                    adjustmentVector = GenPushVector(pushHit.normal);
+
+                    if (adjustmentVector == Vector3.zero)
+                    {
+                        // Oh no, this is obviously bad, what the heck do we do!
+                        // easy, just use the near hit if its valid
+                        if (nearHit.distance != Mathf.Infinity)
+                        {
+                            adjustmentVector = GenPushVector(nearHit.normal);
+                            if (adjustmentVector == Vector3.zero)
+                            {
+                                // oh fuck shit, what the heck do we do now?
+                                // just push em along transform.forward...
+                                adjustmentVector = GenPushVector(transform.forward);
+                                Debug.LogWarning("Was forced to use tranform.forward whilst " +
+                                    "pushing!!");
+                            }
+                        }
+                    }
 
                     RaycastHit groundHit;
                     if (Physics.Raycast(rayOrigin, Vector3.down, out groundHit, Mathf.Infinity, walkingLayerMask))
                     {
-                        hits.Add(groundHit);
-                        hitSpherePos = groundHit.point + capsuleRadius * Vector3.up;
-                        WriteDelta();
-                        hitColor = Color.green;
-
-                        if (showEdgeCheck)
+                        if (!IsWallFromNormal(groundHit.normal))
                         {
-                            Debug.DrawLine(rayOrigin, groundHit.point, Color.black);
+                            hits.Add(groundHit);
+                            hitSpherePos = groundHit.point + capsuleRadius * Vector3.up;
+                            hitColor = Color.green;
+                            SetDelta();
                         }
-
-                        groundDistance = Mathf.Abs(hitSpherePos.y - feetSpherePos.y);
                     }
                 }
                 else
                 {
-                    WriteDelta();
-                    // NOTE(BluCloos): The ground distance is set as such 
-                    // due to the fact that we are not on level ground and we are doing a sphere cast.
-                    // we need to take the deltas between the sphere positions, not the 
-                    // actual hit and foot pos, because this is not perfectly vertical.
-                    groundDistance = Mathf.Abs(hitSpherePos.y - feetSpherePos.y);
+                    SetDelta();
                 }
             }
+            else
+            {
+                SetDelta();
+            }
+
+            groundDistance = delta;
 
             // Do some debugging of the 'new' hit position!
             RaycastHit latestHit = hits[hits.Count - 1];
@@ -436,34 +399,68 @@ public class PlayerController2 : MonoBehaviour
                     DebugDrawSphere(latestHit.point, 0.1f, hitColor);
             } 
 
-            // TODO(BluCloos): Is the way I am checking the normal here alright?
-            if (delta <= margin && !IsWallFromNormal(latestHit.normal))
+            // NOTE(BluCloos): Now that there is no normal check, these things needs to be done proper prior to this check
+            if (delta <= margin)
             {
                 // The player is said to be grounded! Clamp that bitch!
                 // Also note I do a clamp to make sure we never clip the player up!
-                Vector3 moveVec = Mathf.Min((hitSpherePos.y - feetSpherePos.y), 0.0f) * Vector3.up;
-                controller.Move(moveVec);
+                Vector3 moveVec = Mathf.Min(hitSpherePos.y - feetSpherePos.y, 0.0f) * Vector3.up;
+                DebugControllerMove(moveVec);
                 return true;
             }
-            else if (shouldAdjust)
+            else if (wasPushed)
             {
-                controller.Move(adjustmentVector);
+                wasPushed = false;
+
+                // first things first, we are going to grab the distance to the ACTUAL hit point
+                // we only want these pushes to apply if we are within the correct distance to the "real"
+                // hit point.
+                Vector3 ogHitSphere = hit.point + hit.normal * GetRadius();
+                float newDelta = Vector3.Distance(ogHitSphere, feetSpherePos);
+                if (newDelta <= landingThreshold)
+                {
+                    DebugControllerMove(adjustmentVector);
+                    wasPushed = true;
+                }
             }
         }
         else
         {
-            Debug.Log("Warning: No hit in ground check! Player must have fallen off the map somehow!");
+            Debug.LogWarning("No hit in ground check! Player must have fallen off the map somehow!");
         }
         
         return false;
-    }
+    } 
 
-    private RaycastHit[] CollisionCheck(Vector3 directionVector)
+    private void StepAndClamp(Vector3 directionVector)
     {
-        Vector3 point1 = transform.position + localCapsuleSphere1;
-        Vector3 point2 = transform.position + localCapsuleSphere2;
-        RaycastHit[] hits = Physics.CapsuleCastAll(point1, point2, capsuleRadius, directionVector, GetHeight(), walkingLayerMask);
-        return hits;
+        // Okay so here is the plan boys. Shoot the capusle cast forward and make sure we got an edge. Then
+        // verify against the step distance. If all is ok, boom! Do the step! Wow, abstraction rlly makes things super simple.
+        Vector3 origin = GetMidsectionPos() + directionVector * tolerance;
+        RaycastHit stepHit;
+        if (Physics.SphereCast(origin, capsuleRadius, Vector3.down, out stepHit, Mathf.Infinity, walkingLayerMask))
+        {
+            if (showStepCheck)
+            {
+                DebugDrawSphere(stepHit.point, 0.1f, Color.blue);
+            }
+
+            RaycastHit nearHit;
+            RaycastHit farHit;
+            if (EdgeCheck(stepHit, out nearHit, out farHit))
+            {
+                Vector3 hitSpherePos = stepHit.point + Vector3.up * capsuleRadius;
+                Vector3 feetSpherePos = GetFeetPos() + Vector3.up * GetRadius();
+                float signedDelta = Mathf.Abs(hitSpherePos.y - feetSpherePos.y);
+                float unsignedDelta = Mathf.Abs(signedDelta);
+
+                if (unsignedDelta <= stepOffset)
+                {
+                    Vector3 moveVector = Vector3.up * signedDelta;
+                    DebugControllerMove(moveVector);
+                }
+            }
+        }
     }
 
     #endregion
@@ -503,28 +500,22 @@ public class PlayerController2 : MonoBehaviour
     {
         playerAnimator = GetComponent<Animator>();
         cameraTransform = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
-        playerAnimator.applyRootMotion = rootMotion;
         controller = GetComponent<CharacterController>();
 
         if (playerAnimator == null)
-            Debug.Log("Warning: No animator component attached!");
+            Debug.LogWarning("No animator component attached!");
 
         if (cameraTransform == null)
-            Debug.Log("Warning: Unable to find the main camera!");
+            Debug.LogWarning("Unable to find the main camera!");
 
         if (controller == null)
         {
-            Debug.Log("Error: No character controller!");
+            Debug.LogError("No character controller!");
+            Destroy(gameObject);
         }
 
-        // Set up the collision capsule and slope limit
-        controller.slopeLimit = slopeLimit;
-        controller.height = GetHeight();
-        controller.center = GetMidsectionPos() - transform.position;
-        controller.radius = capsuleRadius;
-
-        // Make sure the animator is up to date!
-        SetRunningSpeed(runningSpeed);
+        // Override specific character controller functionality
+        UpdatePlayer();
     }
 
     void Update()
@@ -567,64 +558,86 @@ public class PlayerController2 : MonoBehaviour
 
             // After having moved the last frame, we are going to check if that has changed 
             // the state of our grounding.
+            float groundDistance;
+            bool wasPushed;
             {
-                // NOTE(BluCloos): The grounded and clamp also applies the normal force
-                // of slopes. 
-                // NOTE(BluCloos): There are always going to be a static amount of hits,
-                // with known indices.
                 List<RaycastHit> hits; 
-                bool onLedge; // NOTE(Reader): You can be on a ledge and still on the ground
-                float groundDistance;
-                bool localGrounded = GroundedAndClamp(out hits, out groundDistance, out onLedge);
-                //Debug.Log(localGrounded);
+                bool localGrounded = GroundedAndClamp(false, out hits, out groundDistance, out wasPushed);
 
                 if (showGroundDistanceCheck)
                     Debug.DrawLine(GetFeetPos(), GetFeetPos() + Vector3.down * groundDistance);
 
-                // NOTE(Reader): Only at the transition do we set the ground distance.
-                // What is the ground distance you ask? Why it's used by the animator 
-                // to determine what type of falling animation to do!
+                // The case below is when we were just grounded, and now we are not
                 if (grounded == true && localGrounded == false)
                 {
-                    playerAnimator.SetFloat("groundDistance", groundDistance);
+                    airInertia = transform.forward * ((running) ? runningSpeed : 0.0f);
+                    playerAnimator.SetFloat("groundDistance", 0.0f);
+                }
 
-                    float signedDot = 0.0f; // this default don't even matter
-                    if (hits.Count >= 3)
-                        signedDot = Vector3.Dot(directionVector, hits[2].normal);
+                // Write the ground distance!
+                float localGroundDistance = playerAnimator.GetFloat("groundDistance");
+                if (!localGrounded)
+                {
+                    if (groundDistance > localGroundDistance)
+                        playerAnimator.SetFloat("groundDistance", groundDistance);
+                }
 
-                    if (onLedge && running && !localGrounded && signedDot >= 0.3f)
+                grounded = localGrounded; // actually commit the local boi to the global boi
+            }
+
+            // NOTE(Reader): Since we are not using the baked in step feature of the character controller (this was found to have
+            // some conflicting issues with my ground detection system), we must manually perform the step clamping.
+            // of course, we may only do the step clamping provided we are actually on the ground. Although, it may be worth removing the
+            // grounded check because it could have some interesting results. For example,  clipping to a ledge if you didn't quite make the jump
+            // (although I am quite sure the root motion sorta does the clipping already).
+            if (grounded)
+                StepAndClamp(directionVector);
+
+            // Set up the movement vector!
+            Vector3 moveVector = Vector3.zero;
+            {
+                // NOTE(Reader): In order to ensure that the characterController
+                // respects the slopeLimit we have to make sure that there is a constant downwards
+                // velocity being applied to the character.
+                float zeroGravity = -0.01f;
+                verticalVelocity = (grounded) ? zeroGravity : Mathf.Max(verticalVelocity + gravityAcceleration * Time.deltaTime, terminalVelocity);
+
+                if (gravityLock)
+                    verticalVelocity = zeroGravity;
+
+                if (Input.GetButtonDown("Jump") && grounded && !ignoreInput)
+                {
+                    verticalVelocity = Mathf.Sqrt(-2.0f * gravityAcceleration * jumpHeight);
+                    // NOTE(Reader): We set the grounding to false so that during the next frame
+                    // the grounding procedure uses a smaller threshold (This is needed so that 
+                    // we don't clip back into the ground!)
+                    grounded = false;
+
+                    // Also note that we are going to flick the player up for this frame so that you know, they actually leave the ground!
+                    DebugControllerMove(Vector3.up * (landingThreshold + tinyTolerance));
+                    airInertia = transform.forward * ((running) ? runningSpeed : 0.0f);
+                    playerAnimator.SetFloat("groundDistance", 0.0f);
+                    //playerAnimator.SetBool("Jump", true);
+                }
+
+                // application of the airIntertia!
+                if (!grounded)
+                {
+                    if (wasPushed)
                     {
-                        //Debug.Log("Set the Ledge jump bool to true!");
-                        playerAnimator.SetBool("ledgeJump", true);
+                        inertiaFullStop = true;
+                        airInertia = Vector3.zero;
                     }
                 }
 
-                if (onLedge && !localGrounded && !playerAnimator.GetBool("ledgeJump"))
-                {
-                    Debug.Log("GET THE FUCK OFF MY LAWN!");
-                    // Push that little shit off the ledge RIGHT NOW
-                    Vector3 pushVector = new Vector3(hits[2].normal.x, 0.0f, hits[2].normal.z);
-                    pushVector = pushVector.normalized * Time.deltaTime * 4.0f;
-                    controller.Move(pushVector);
-                }
+                if (!grounded && !inertiaFullStop)
+                    moveVector += airInertia;
 
-                grounded = localGrounded; // Actaully commit the local grounded
-
-            }
-
-            // Initialize the movement vector with the vertical movement
-            Vector3 moveVector = Vector3.zero;
-            {
-                verticalVelocity = (grounded) ? 0.0f : Mathf.Max(verticalVelocity + gravityAcceleration * Time.deltaTime, terminalVelocity);
-                if (gravityLock)
-                    verticalVelocity = 0.0f;
                 moveVector += Vector3.up * verticalVelocity;
-            }
 
-            // Setting up the movementVector
-            {
                 if (grounded)
                     moveVector += directionVector * ((running) ? runningSpeed : walkingSpeed);
+
                 moveVector *= Time.deltaTime;
             }
 
@@ -634,6 +647,7 @@ public class PlayerController2 : MonoBehaviour
                 {
                     playerAnimator.SetBool("Grounded", true);
                     airInertia = Vector3.zero;
+                    inertiaFullStop = false;
                 }
                 else
                 {
@@ -644,15 +658,15 @@ public class PlayerController2 : MonoBehaviour
                 playerAnimator.SetFloat("V_Move", localMoveVector.magnitude / runningSpeed);
             }
 
-            // Actually move the character using the movement vector. Oh and also account for any root motion magic!
+            // Actually move the character using the movement vector. Oh, and also account for any root motion magic!
             if (rootMotion && grounded)
             {
                 Vector3 localMoveVector = new Vector3(0.0f, moveVector.y, 0.0f);
-                controller.Move(localMoveVector);
+                DebugControllerMove(localMoveVector);
             }
             else
             {
-                controller.Move(moveVector);
+                DebugControllerMove(moveVector);
             }
 
             // Rotation code for when the character is trying to move in a direction that the character is not facing.

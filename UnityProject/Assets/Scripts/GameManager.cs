@@ -502,30 +502,48 @@ public class GameManager : MonoBehaviour
         if (pokePrefab != null && pokeData != null)
         {
             GameObject pokeObj = Instantiate(pokePrefab, worldPos, Quaternion.identity);
-            
+
+            pokeObj.layer = LayerMask.NameToLayer("Ignore Raycast");
+
             // Set the height of the pokemon
             pokeObj.transform.localScale = new Vector3(pokeData.height, pokeData.height, pokeData.height);
             float halfHeight = pokeData.height / 2.0f;
 
             // Setup the character controller
             CharacterController cc = pokeObj.AddComponent<CharacterController>();
-            cc.slopeLimit = 55;
             cc.skinWidth = 0.01f;
-            cc.center = new Vector3(0.0f, halfHeight, 0.0f);
-            cc.radius = halfHeight;
-            cc.height = pokeData.height;
 
             // Setup the player controller component
             PlayerController2 pc = pokeObj.AddComponent<PlayerController2>();
             pc.rootMotion = false;
-            pc.walkingLayerMask = ~(1 << 8);
+            pc.walkingLayerMask = 1 << LayerMask.NameToLayer("Default");
             pc.SetWalkingSpeed(pokeData.walkingSpeed);
             pc.SetRunningSpeed(pokeData.runningSpeed);
             pc.feetOffset = 0.0f;
+            pc.slopeLimit = 50;
+            pc.canJump = true;
+
+            // Setup the collision mesh for the Pokemon
+            // TODO(BluCloos): Obviously, the auto generation of the collision mesh
+            // needs more tuning! // In fact, this information may need to be precalculated,
+            // basically it needs to become loadable data. Just like the running and walkingSpeeds.
+            pc.capsuleRadius = pokeData.height * 0.3f;
+            pc.localCapsuleSphere1 = new Vector3(0.0f, pc.capsuleRadius, 0.0f);
+            pc.localCapsuleSphere2 = new Vector3(0.0f, pokeData.height - pc.capsuleRadius, 0.0f);
+
+            pc.showGroundedHitPos = true;
+            pc.showStepCheck = true;
+            pc.showEdgeCheck = true;
+            pc.showGroundDistanceCheck = true;
 
             // Grab the animator for your boi and attach that son of a bitch!
             RuntimeAnimatorController animatorController = Resources.Load<RuntimeAnimatorController>("animator_" + profile.auroraDexNumber);
             pokeObj.GetComponent<Animator>().runtimeAnimatorController = animatorController;
+
+            // NOTE(Reader): This sets up imporant hooks that may not have been set up.
+            // Take a look at the actual PlayerController script if you are curious.
+            pc.UpdatePlayer();
+
 
             Pokemon pokePoke = pokeObj.AddComponent<Pokemon>();
 
@@ -596,7 +614,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetButtonDown("DebugAction"))
         {
-            /*
+            
             if (!playingPokemon)
             {
                 // spawn a random, new pokemon and switch to it
@@ -617,12 +635,12 @@ public class GameManager : MonoBehaviour
                 SwitchPlayer(pc);
                 playingPokemon = false;
             }
-            */
+            
 
-            Destroy(currentPlayerController.gameObject);
-            GameObject newPlayer = Resources.Load<GameObject>("DebugPlayer");
-            PlayerController2 pc2 = Instantiate(newPlayer, new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity).GetComponent<PlayerController2>();
-            SwitchPlayer(pc2);
+            // Destroy(currentPlayerController.gameObject);
+            // GameObject newPlayer = Resources.Load<GameObject>("DebugPlayer");
+            // PlayerController2 pc2 = Instantiate(newPlayer, new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity).GetComponent<PlayerController2>();
+            // SwitchPlayer(pc2);
         }
     }
     #endregion
