@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50855adbe051445da42e22698f261cd, type: 3}
+  m_Name: WindowTestingStyle
+  m_EditorClassIdentifier: 
+  FancySidings:
+  - {fileID: 2100000, guid: d72e788720f85473594601572795e7df, type: 2}
+  PlainSiding: {fileID: 2100000, guid: b3a89fea6e33748b497758e4ac19f3a4, type: 2}
+  Window: {fileID: 2100000, guid: e6e438d7655a14c3d812f8e474f2e988, type: 2}
+  DoorWindowFrames: {fileID: 2100000, guid: d1a0d5f8286f0422eb10abb5af6853bc, type: 2}
+  Rooftop: {fileID: 2100000, guid: c8745dd9001da4b478bf3ee92ed786ba, type: 2}
+  Grass: {fileID: 2100000, guid: 44bad79429fe74a149885cf444999ed5, type: 2}
+  Concrete: {fileID: 2100000, guid: 401f1392e99b2415e812e5a7d3bf90eb, type: 2}
+  DirtPath: {fileID: 2100000, guid: 44bad79429fe74a149885cf444999ed5, type: 2}
+  FancyCrown:
+  - {x: -0.3, y: 0}
+  - {x: -0.3, y: 0.5}
+  - {x: 0.1, y: 0.5}
+  - {x: 0.1, y: -0.18}
+  - {x: -0, y: -0.18}
+  PlainCrown:
+  - {x: -0.35, y: 0}
+  - {x: -0.07, y: 0.2}
+  - {x: 0.1, y: 0.2}
+  - {x: 0.1, y: -0.1}
+  - {x: -0, y: -0.1}
+  OutsideFancyDoor: {fileID: 163082, guid: 7e5c95a1a1c584c1b83c12723a713009, type: 3}
+  OutsidePlainDoor: {fileID: 183044, guid: 8fa0da2b0ee4a432a8fa17069df304dd, type: 3}
+  StandardDoor: {fileID: 100164, guid: 2b27d28f4357c43b7bdf1e9d8c98f4a5, type: 3}
+  HeavyDoor: {fileID: 183044, guid: 8fa0da2b0ee4a432a8fa17069df304dd, type: 3}
+  TwoByFourStairs: {fileID: 166342, guid: d884d5629d0bf4d7d9989b43953f90d7, type: 3}
+  StairsToRoof: {fileID: 138306, guid: 97a5f9488bedc40189af62046f2c92ab, type: 3}
+  FancyWindows: []
+  FancyWindowTypes: 
+  BaseWindow: {fileID: 142842, guid: 5cd73b0ecf2364256a6f9e32cb166a29, type: 3}
+  GeneralRoomStyle:
+  - {fileID: 11400000, guid: 99d377bc6e3e643d3b60f946ffdf9c5f, type: 2}
+  LivingRoomStyle: []
+  BedroomStyle: []
+  ClosetStyle: []
+  HallwaysStyle: []
+  KitchenStyle: []
+  DiningStyle: []
+  BathroomStyle: []
+  KidsStyle: []
+  UtilityStyle: []
+  PatioStyle: []
+  GarageStyle: []
+  OfficeStyle: []
+  StoreStyle: []
+  StoreBackroomStyle: []
+  AtlasSize: 2
+  AtlasMaterials: []

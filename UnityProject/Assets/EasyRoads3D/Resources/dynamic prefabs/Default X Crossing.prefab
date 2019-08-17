@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642513071438882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 321.1243, y: 0, z: 50.368233}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4608208598699142}
@@ -76,22 +76,22 @@ MonoBehaviour:
   - 0.5
   - 0.9166667
   - 1
-  ODQOOCODDD: 
-  OOQODDDDQC: 
-  OOCQCQQDQQ: 
-  ODDQCCOQCQ: 
-  OQOQOQCQOC: 
-  ODDDQODCDO: 
-  OCCCOQQOCD: 
-  OCCCDDQDOC: 
-  ODQOOCODDDStart: 
-  OOQODDDDQCStart: 
-  OOCQCQQDQQStart: 
-  ODDQCCOQCQStart: 
-  OQOQOQCQOCStart: 
-  ODDDQODCDOStart: 
-  OCCCOQQOCDStart: 
-  OCCCDDQDOCStart: 
+  OODDDOQCQQ: 
+  ODQCDQODQO: 
+  OCDDODOCOC: 
+  OOOOCDDOQO: 
+  OOCCDDCQOQ: 
+  ODDQODQCQD: 
+  OOQOCODDOO: 
+  OOCOOOCDCO: 
+  OODDDOQCQQStart: 
+  ODQCDQODQOStart: 
+  OCDDODOCOCStart: 
+  OOOOCDDOQOStart: 
+  OOCCDDCQOQStart: 
+  ODDQODQCQDStart: 
+  OOQOCODDOOStart: 
+  OOCOOOCDCOStart: 
   frontLeftRoadInts: 
   frontRightRoadInts: 
   backLeftRoadInts: 
@@ -190,9 +190,14 @@ MonoBehaviour:
       leftSidewalkOffset: 0
       rightSidewalkOffset: 0
       outerLaneMarkingLeftIndex: -1
+      includeOuterlaneLeftInShape: 0
+      includeOuterlaneRightInShape: 0
       outerLaneMarkingRightIndex: -1
+      outerOuterLaneMarkingLeftIndex: 0
+      outerOuterLaneMarkingRightIndex: 0
       selectedNode: 0
       selectedLaneNode: 0
+      isSymmetrical: 0
       isset: 1
     minSpeed: 0
     maxSpeed: 0
@@ -212,6 +217,7 @@ MonoBehaviour:
     roadShapeUVs2:
     - 0
     - 1
+    preserveUVs: 0
     hardEdge: 
     roadShapeVecsString: 
     defaultSidewalk: 0
@@ -238,7 +244,11 @@ MonoBehaviour:
     expandLevel: 0
     smoothLevel: 0
     splatOpacity: 0
+    followTerrainContours: 0
+    terrainContoursOffset: 0
     terrainDeformation: 1
+    defaultIndent: 0
+    defaultSurrounding: 0
     castShadow: 0
     randomnessFlag: 0
     randomYPosition: 0
@@ -250,13 +260,24 @@ MonoBehaviour:
     randomMaxRotation: 0
     minRandomRotationDistance: 0
     maxRandomRotationDistance: 0
+    vegetationStudioMaskLineActive: 0
     vegetationStudioGrassPerimeter: 0
     vegetationStudioPlantPerimeter: 0
     vegetationStudioTreePerimeter: 0
     vegetationStudioObjectPerimeter: 0
     vegetationStudioLargeObjectPerimeter: 0
+    vegetationStudioBiomeMaskActive: 0
+    vegetationStudioBiomeMaskDistance: 0
+    vegetationStudioBiomeMaskBlendDistance: 0
+    vegetationStudioBiomeMaskNoiseScale: 0
     decalPresets: []
     decalClassPresets: []
+    defaultRamp: 0
+    extrusionType: 0
+    extrusionDistance: 0
+    fixedDistance: 0
+    connectionAngle: 0
+    connectionRadius: 0
   frontRoadTypeInt: 1
   frontRoadTypeID: 1
   frontRoadWidth: 6
@@ -288,7 +309,7 @@ MonoBehaviour:
   cornerPresetName: 
   selectedSidewalkPreset: 0
   sidewalkPresetName: 
-  OCCOOCOCOQCorner: 0
+  ODQQQDOQODCorner: 0
   leftBottom: {x: -3.2928934, y: 0.5, z: -3.2928932}
   rightBottom: {x: 3.2928934, y: 0.5, z: -3.2928932}
   leftTop: {x: -3.2928934, y: 0.5, z: 3.2928932}
@@ -418,9 +439,14 @@ MonoBehaviour:
         leftSidewalkOffset: 0
         rightSidewalkOffset: 0
         outerLaneMarkingLeftIndex: 0
+        includeOuterlaneLeftInShape: 0
+        includeOuterlaneRightInShape: 0
         outerLaneMarkingRightIndex: 0
+        outerOuterLaneMarkingLeftIndex: 0
+        outerOuterLaneMarkingRightIndex: 0
         selectedNode: 0
         selectedLaneNode: 0
+        isSymmetrical: 0
         isset: 0
       minSpeed: 0
       maxSpeed: 0
@@ -434,6 +460,7 @@ MonoBehaviour:
       roadShapeExtUVs: []
       roadShapeExtUVs2: []
       roadShapeUVs2: []
+      preserveUVs: 0
       hardEdge: 
       roadShapeVecsString: 
       defaultSidewalk: 0
@@ -459,7 +486,11 @@ MonoBehaviour:
       expandLevel: 0
       smoothLevel: 0
       splatOpacity: 0
+      followTerrainContours: 0
+      terrainContoursOffset: 0
       terrainDeformation: 0
+      defaultIndent: 0
+      defaultSurrounding: 0
       castShadow: 0
       randomnessFlag: 0
       randomYPosition: 0
@@ -471,13 +502,24 @@ MonoBehaviour:
       randomMaxRotation: 0
       minRandomRotationDistance: 0
       maxRandomRotationDistance: 0
+      vegetationStudioMaskLineActive: 0
       vegetationStudioGrassPerimeter: 0
       vegetationStudioPlantPerimeter: 0
       vegetationStudioTreePerimeter: 0
       vegetationStudioObjectPerimeter: 0
       vegetationStudioLargeObjectPerimeter: 0
+      vegetationStudioBiomeMaskActive: 0
+      vegetationStudioBiomeMaskDistance: 0
+      vegetationStudioBiomeMaskBlendDistance: 0
+      vegetationStudioBiomeMaskNoiseScale: 0
       decalPresets: []
       decalClassPresets: []
+      defaultRamp: 0
+      extrusionType: 0
+      extrusionDistance: 0
+      fixedDistance: 0
+      connectionAngle: 0
+      connectionRadius: 0
     roadTypeID: 0
     roadTypeAI:
       roadTypeName: 
@@ -506,9 +548,14 @@ MonoBehaviour:
         leftSidewalkOffset: 0
         rightSidewalkOffset: 0
         outerLaneMarkingLeftIndex: 0
+        includeOuterlaneLeftInShape: 0
+        includeOuterlaneRightInShape: 0
         outerLaneMarkingRightIndex: 0
+        outerOuterLaneMarkingLeftIndex: 0
+        outerOuterLaneMarkingRightIndex: 0
         selectedNode: 0
         selectedLaneNode: 0
+        isSymmetrical: 0
         isset: 0
       minSpeed: 0
       maxSpeed: 0
@@ -522,6 +569,7 @@ MonoBehaviour:
       roadShapeExtUVs: []
       roadShapeExtUVs2: []
       roadShapeUVs2: []
+      preserveUVs: 0
       hardEdge: 
       roadShapeVecsString: 
       defaultSidewalk: 0
@@ -547,7 +595,11 @@ MonoBehaviour:
       expandLevel: 0
       smoothLevel: 0
       splatOpacity: 0
+      followTerrainContours: 0
+      terrainContoursOffset: 0
       terrainDeformation: 0
+      defaultIndent: 0
+      defaultSurrounding: 0
       castShadow: 0
       randomnessFlag: 0
       randomYPosition: 0
@@ -559,13 +611,24 @@ MonoBehaviour:
       randomMaxRotation: 0
       minRandomRotationDistance: 0
       maxRandomRotationDistance: 0
+      vegetationStudioMaskLineActive: 0
       vegetationStudioGrassPerimeter: 0
       vegetationStudioPlantPerimeter: 0
       vegetationStudioTreePerimeter: 0
       vegetationStudioObjectPerimeter: 0
       vegetationStudioLargeObjectPerimeter: 0
+      vegetationStudioBiomeMaskActive: 0
+      vegetationStudioBiomeMaskDistance: 0
+      vegetationStudioBiomeMaskBlendDistance: 0
+      vegetationStudioBiomeMaskNoiseScale: 0
       decalPresets: []
       decalClassPresets: []
+      defaultRamp: 0
+      extrusionType: 0
+      extrusionDistance: 0
+      fixedDistance: 0
+      connectionAngle: 0
+      connectionRadius: 0
     roadTypeAIid: 0
     aIInit: 0
     roadTypeIndex: 0
@@ -601,6 +664,7 @@ MonoBehaviour:
     leftConnectionType: 0
     rightConnectionType: 0
     cp: {x: 0, y: 0, z: 0}
+    oldCP: {x: 0, y: 0, z: 0}
     cp1: {x: 0, y: 0, z: 0}
     lStart: {x: 0, y: 0, z: 0}
     lEnd: {x: 0, y: 0, z: 0}
@@ -624,8 +688,74 @@ MonoBehaviour:
     middleIndex: 0
     middleIndentIndexLeft: -1
     middleIndentIndexRight: -1
-    leftSidewalk: {fileID: 0}
-    rightSidewalk: {fileID: 0}
+    leftSidewalk:
+      name: 
+      id: 0
+      timestamp: 0
+      sidewalkWidth: 1.5
+      curbHeight: 0.25
+      curbDepth: 0.25
+      beveledCurb: 0
+      beveledHeight: 0
+      beveledDepth: 0
+      outerCurb: 0
+      roadSideCurbUVControl: 0
+      outerSideCurbUVControl: 0
+      material: {fileID: 0}
+      hardEdges: 0
+      shape: []
+      sidewalkUVs: []
+      curbUVs: []
+      doConnectionTri: 
+      tileRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      tileSize: 1
+      tiling: 1
+      uvRatio: 1
+      minEnd: 1
+      maxEnd: 1
+      lockUVs: 0
+      cornerRadius: 1
+      cornerSegments: 5
+      innerSegmentDistance: 0.5
+    rightSidewalk:
+      name: 
+      id: 0
+      timestamp: 0
+      sidewalkWidth: 1.5
+      curbHeight: 0.25
+      curbDepth: 0.25
+      beveledCurb: 0
+      beveledHeight: 0
+      beveledDepth: 0
+      outerCurb: 0
+      roadSideCurbUVControl: 0
+      outerSideCurbUVControl: 0
+      material: {fileID: 0}
+      hardEdges: 0
+      shape: []
+      sidewalkUVs: []
+      curbUVs: []
+      doConnectionTri: 
+      tileRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      tileSize: 1
+      tiling: 1
+      uvRatio: 1
+      minEnd: 1
+      maxEnd: 1
+      lockUVs: 0
+      cornerRadius: 1
+      cornerSegments: 5
+      innerSegmentDistance: 0.5
     leftSidewalkActive: 0
     rightSidewalkActive: 0
     leftIndentvecs: []
@@ -649,6 +779,8 @@ MonoBehaviour:
     middleInt: 0
     primaryPriorityConnection: 0
     secondaryPriorityConnection: 0
+    shapeSubSegments: 0
+    normalIndexes: 
     primarySection: 0
     laneData:
       points: []
@@ -660,6 +792,7 @@ MonoBehaviour:
         laneIndex: 0
       laneIndex: 0
       direction: 0
+    hasChanged: 0
   secondPriorityConnection:
     name: 
     road: {fileID: 0}
@@ -692,9 +825,14 @@ MonoBehaviour:
         leftSidewalkOffset: 0
         rightSidewalkOffset: 0
         outerLaneMarkingLeftIndex: 0
+        includeOuterlaneLeftInShape: 0
+        includeOuterlaneRightInShape: 0
         outerLaneMarkingRightIndex: 0
+        outerOuterLaneMarkingLeftIndex: 0
+        outerOuterLaneMarkingRightIndex: 0
         selectedNode: 0
         selectedLaneNode: 0
+        isSymmetrical: 0
         isset: 0
       minSpeed: 0
       maxSpeed: 0
@@ -708,6 +846,7 @@ MonoBehaviour:
       roadShapeExtUVs: []
       roadShapeExtUVs2: []
       roadShapeUVs2: []
+      preserveUVs: 0
       hardEdge: 
       roadShapeVecsString: 
       defaultSidewalk: 0
@@ -733,7 +872,11 @@ MonoBehaviour:
       expandLevel: 0
       smoothLevel: 0
       splatOpacity: 0
+      followTerrainContours: 0
+      terrainContoursOffset: 0
       terrainDeformation: 0
+      defaultIndent: 0
+      defaultSurrounding: 0
       castShadow: 0
       randomnessFlag: 0
       randomYPosition: 0
@@ -745,13 +888,24 @@ MonoBehaviour:
       randomMaxRotation: 0
       minRandomRotationDistance: 0
       maxRandomRotationDistance: 0
+      vegetationStudioMaskLineActive: 0
       vegetationStudioGrassPerimeter: 0
       vegetationStudioPlantPerimeter: 0
       vegetationStudioTreePerimeter: 0
       vegetationStudioObjectPerimeter: 0
       vegetationStudioLargeObjectPerimeter: 0
+      vegetationStudioBiomeMaskActive: 0
+      vegetationStudioBiomeMaskDistance: 0
+      vegetationStudioBiomeMaskBlendDistance: 0
+      vegetationStudioBiomeMaskNoiseScale: 0
       decalPresets: []
       decalClassPresets: []
+      defaultRamp: 0
+      extrusionType: 0
+      extrusionDistance: 0
+      fixedDistance: 0
+      connectionAngle: 0
+      connectionRadius: 0
     roadTypeID: 0
     roadTypeAI:
       roadTypeName: 
@@ -780,9 +934,14 @@ MonoBehaviour:
         leftSidewalkOffset: 0
         rightSidewalkOffset: 0
         outerLaneMarkingLeftIndex: 0
+        includeOuterlaneLeftInShape: 0
+        includeOuterlaneRightInShape: 0
         outerLaneMarkingRightIndex: 0
+        outerOuterLaneMarkingLeftIndex: 0
+        outerOuterLaneMarkingRightIndex: 0
         selectedNode: 0
         selectedLaneNode: 0
+        isSymmetrical: 0
         isset: 0
       minSpeed: 0
       maxSpeed: 0
@@ -796,6 +955,7 @@ MonoBehaviour:
       roadShapeExtUVs: []
       roadShapeExtUVs2: []
       roadShapeUVs2: []
+      preserveUVs: 0
       hardEdge: 
       roadShapeVecsString: 
       defaultSidewalk: 0
@@ -821,7 +981,11 @@ MonoBehaviour:
       expandLevel: 0
       smoothLevel: 0
       splatOpacity: 0
+      followTerrainContours: 0
+      terrainContoursOffset: 0
       terrainDeformation: 0
+      defaultIndent: 0
+      defaultSurrounding: 0
       castShadow: 0
       randomnessFlag: 0
       randomYPosition: 0
@@ -833,13 +997,24 @@ MonoBehaviour:
       randomMaxRotation: 0
       minRandomRotationDistance: 0
       maxRandomRotationDistance: 0
+      vegetationStudioMaskLineActive: 0
       vegetationStudioGrassPerimeter: 0
       vegetationStudioPlantPerimeter: 0
       vegetationStudioTreePerimeter: 0
       vegetationStudioObjectPerimeter: 0
       vegetationStudioLargeObjectPerimeter: 0
+      vegetationStudioBiomeMaskActive: 0
+      vegetationStudioBiomeMaskDistance: 0
+      vegetationStudioBiomeMaskBlendDistance: 0
+      vegetationStudioBiomeMaskNoiseScale: 0
       decalPresets: []
       decalClassPresets: []
+      defaultRamp: 0
+      extrusionType: 0
+      extrusionDistance: 0
+      fixedDistance: 0
+      connectionAngle: 0
+      connectionRadius: 0
     roadTypeAIid: 0
     aIInit: 0
     roadTypeIndex: 0
@@ -875,6 +1050,7 @@ MonoBehaviour:
     leftConnectionType: 0
     rightConnectionType: 0
     cp: {x: 0, y: 0, z: 0}
+    oldCP: {x: 0, y: 0, z: 0}
     cp1: {x: 0, y: 0, z: 0}
     lStart: {x: 0, y: 0, z: 0}
     lEnd: {x: 0, y: 0, z: 0}
@@ -898,8 +1074,74 @@ MonoBehaviour:
     middleIndex: 0
     middleIndentIndexLeft: -1
     middleIndentIndexRight: -1
-    leftSidewalk: {fileID: 0}
-    rightSidewalk: {fileID: 0}
+    leftSidewalk:
+      name: 
+      id: 0
+      timestamp: 0
+      sidewalkWidth: 1.5
+      curbHeight: 0.25
+      curbDepth: 0.25
+      beveledCurb: 0
+      beveledHeight: 0
+      beveledDepth: 0
+      outerCurb: 0
+      roadSideCurbUVControl: 0
+      outerSideCurbUVControl: 0
+      material: {fileID: 0}
+      hardEdges: 0
+      shape: []
+      sidewalkUVs: []
+      curbUVs: []
+      doConnectionTri: 
+      tileRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      tileSize: 1
+      tiling: 1
+      uvRatio: 1
+      minEnd: 1
+      maxEnd: 1
+      lockUVs: 0
+      cornerRadius: 1
+      cornerSegments: 5
+      innerSegmentDistance: 0.5
+    rightSidewalk:
+      name: 
+      id: 0
+      timestamp: 0
+      sidewalkWidth: 1.5
+      curbHeight: 0.25
+      curbDepth: 0.25
+      beveledCurb: 0
+      beveledHeight: 0
+      beveledDepth: 0
+      outerCurb: 0
+      roadSideCurbUVControl: 0
+      outerSideCurbUVControl: 0
+      material: {fileID: 0}
+      hardEdges: 0
+      shape: []
+      sidewalkUVs: []
+      curbUVs: []
+      doConnectionTri: 
+      tileRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      tileSize: 1
+      tiling: 1
+      uvRatio: 1
+      minEnd: 1
+      maxEnd: 1
+      lockUVs: 0
+      cornerRadius: 1
+      cornerSegments: 5
+      innerSegmentDistance: 0.5
     leftSidewalkActive: 0
     rightSidewalkActive: 0
     leftIndentvecs: []
@@ -923,6 +1165,8 @@ MonoBehaviour:
     middleInt: 0
     primaryPriorityConnection: 0
     secondaryPriorityConnection: 0
+    shapeSubSegments: 0
+    normalIndexes: 
     primarySection: 0
     laneData:
       points: []
@@ -934,6 +1178,7 @@ MonoBehaviour:
         laneIndex: 0
       laneIndex: 0
       direction: 0
+    hasChanged: 0
   adjustMainRadiusFlag: 0
   disableAdjustMainRadiusFlag: 0
   showScaleSliderAtPrimary: 0
@@ -1919,6 +2164,9 @@ MonoBehaviour:
   isIConnector: 0
   isFlexConnector: 0
   isSnapConnector: 0
+  isExitRoadConnector: 0
+  prefabCenterDummy: {x: 0, y: 0, z: 0}
+  snapRadius: 3
   roundaboutScript: {fileID: 0}
   crossingsScript: {fileID: 0}
   iConnectorScript: {fileID: 0}
@@ -2013,12 +2261,15 @@ MonoBehaviour:
   tp2: {x: 0, y: 0, z: 0}
   doTerrainDeformation: 1
   includeOuterVertices: 1
+  averageNormals: 1
   surroundingDistance: 0
   surfaceMesh: {fileID: 0}
   debugVecs1: []
   debugVecs2: []
   lightmapAdjusted: 0
   isFlexUpdating: 0
+  oldPosition: {x: 0, y: 0, z: 0}
+  oldRotation: {x: 0, y: 0, z: 0}
   lockScale: 1
   extraIndentMargin: 0
   indent: 0

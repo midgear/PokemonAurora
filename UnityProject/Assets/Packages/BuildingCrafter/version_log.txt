@@ -1,0 +1,109 @@
+This document contains the version changes for each update of Building Crafter. If you would like a past version package, please email at buildingcrafter@8bitgoose.com with your invoice #.
+
+============================
+0.8.3 - Swinging Doors  | March 31st, 2019
+============================
+
+ADDED - Set your doors to open at spawn. Change the options of your doors to see them spawn open anywhere from 0 to 90 degrees.
+
+============================
+0.8.2 - Mistake Fixin'  | March 19th, 2019
+============================
+
+FIXED - For certain walls with windows, gaps would be generated.
+
+============================
+0.8.1 - New Wall Generation Engine Update  | January 30th, 2019
+============================
+
+MAJOR - Building Crafter's base Unity version is now 2017.1.2. May work with earlier version.
+MAJOR - Building walls / floors no longer use UV tiles. All surfaces have UVs between 0 and 1 (important for baking / atlasing).
+MAJOR - Added simple Atlasing system for performance. 1 material (aka drawcall) a building's walls, floors, ceilings, roofs and overhangs.
+MAJOR - All the walls can be generated on angles or at any length. However this is ONLY internal. So the editor doesn't support this yet. This is for future updates.
+
+ADDED - Floors can be generated with top caps, useful for dungeon crawlers
+ADDED - New door/window frame generator that lines up all UVs with the corresponding wall
+ADDED - Atlas generator for building styles
+ADDED - JSON export / import for buildings
+ADDED - New building crown generation that does not use UV tiling, instead increased vertices (so buildings can atlas)
+ADDED - Simple walking script to check out doors opening and closing in the test scene
+ADDED - Option to generate a building as an Atlased building
+CHANGED - All walls are generated without the old tesselator. No UV tiling anymore, but increased vertexes
+CHANGED - All floors are generated without UV tiling, instead each floor tile is it's own square quad
+CHANGED - Rooms are now split into 3 objects (floor, wall roof) instead of being a single object with multiple submeshes
+CHANGED - Example textures no longer use tiling or offset outside of (1, 1) and (0, 0) respectively
+CHANGED - Stair cutouts use new wall generation for dropdown
+CHANGED - Outside walls no longer use submeshes for different materials, uses separate gameobjects instead per material
+CHANGED - Roof lips / crowns have a new generation method without any UV tiling
+CHANGED - Updated the Building crafter manual with how to create custom doors, JSON info, atlasing info and a few other things
+FIXED - Undoing during live view will just regenerate the building at the last layout provided instead of saving and reloading the mesh that was generated
+FIXED - Separate rooms on the same floor not connected to each other (for example, two towers) will now generate both exteriors
+FIXED - Door hinges are now aligned on all example doors
+KNOWN ISSUE - Textures meant to be atlased MUST have offset of (0,0) and tiling of (1, 1). Offset / Tile in your photo editing program
+KNOWN ISSUE - Normal maps must be proper normal maps before being imported into Unity. Do not use Unity's normal map generation with atlasing of textures
+KNOWN ISSUE - Rooms connected by kitty corner will create inverted walls and all sorts of issues
+KNOWN ISSUE - Due to floating point problems if a surface appears black, try moving the building a meter or two away. Or send the building by email and a fix may be found
+
+============================
+0.8.0p1 - No Beta Break  | July 10, 2016
+============================
+
+FIXED - BuildingCrafter now works with Unity 5.4.
+
+============================
+0.8.0 - Windows Are The Eyes to The Building  | June 11, 2016
+============================
+
+BREAKING - Must Delete All Folders except "BCAssets" before update import
+BREAKING - Moved "BCAssets" to "Packages/BuildingCrafterAssets". Please move or delete this folder.
+
+ADDED - Window mesh stretcher. Add any window mesh, cut it and add it to a wall
+ADDED - Added base window to fit into any window space
+ADDED - Eyedropper to select window and door types when creating new openings
+ADDED - Two windows (fancy and base window) for use in any project
+ADDED - Experimental Live View Mode. Some features (like roofs, yards and fancy walls) do not generate automatically. Send feedback please!
+FIXED - UV Mapping for frames
+FIXED - Number of small bugs
+FIXED - Sped up destruction of procedural objects
+CHANGED - Window frames now generate with the buildings and rooms, slight triangle increase
+CHANGED - Versioning number option MAJOR.MINOR.SMALL (example 0.8.0)
+KNOWN ISSUES - Second floors that only touch the edge of the floor below do not generate correctly
+KNOWN ISSUES - Meshes leak when using undo on experimental live view mode. Restart Unity to stop warning
+
+============================
+0.72 - Save the Mesh | April 17, 2016
+============================
+
+ADDED - FBX exporter for buildings. Check out open-source project at https://github.com/KellanHiggins/UnityFBXExporter
+ADDED - Ability to automatically export FBX meshes upon generation
+ADDED - Option to not generate LOD fillers or add LODs to the system
+ADDED - Ability to disable broken window generation
+ADDED - A tool tips to generation buttons
+FIXED - Fixed spelling mistake in create new building
+FIXED - Windows, Rooms and Doors not recording changes to their properties
+FIXED - Room Styles not being saved upon exit
+CHANGED - Update Building Crafter Manual to 1.1
+
+============================
+0.71 - Behold the Points | March 6, 2016
+============================
+
+ADDED - New editor panel to control Vector2 Arrays
+ADDED - Drag points and lines for building crown profile
+ADDED - Simple door opener script
+ADDED - Walkable example level (needs Unity Standard Assets to work)
+FIXED - Doors are no longer set to static and open by raycast
+FIXED - Building crown profiles now appear in Unity 5.3
+FIXED - Rooms with counterclockwise wall vector3 arrays no longer create inside out rooms
+FIXED - Doors and windows not redrawing when user updates their size
+FIXED - Errors when changing buildings via drag-and-drop
+CHANGED - Moved Editor Utilities into own folder
+
+
+============================
+0.7 - Initial Release | Feb 19, 2016
+============================
+
+Initial release of Building Crafter.
+
+-------

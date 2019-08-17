@@ -83,7 +83,7 @@ Material:
     - _CustomLightDirectionFollowObjectRotation: 0
     - _CustomLightDirectionIntensity: 0
     - _Cutoff: 0.33
-    - _Cutout: 0.358
+    - _Cutout: 0.282
     - _DirectionalLightIntensity: 0
     - _DoubleSided: 0
     - _DoubleSidedOutline: 1

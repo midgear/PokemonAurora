@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55e36dac27cd440aea98ae21aac2c3f1, type: 3}
+  m_Name: bathroom_style
+  m_EditorClassIdentifier: 
+  RoomMaterials:
+  - CeilingMaterial: {fileID: 2100000, guid: fec98a9322d6c4f379a5ddde83d8b852, type: 2}
+    WallMaterial: {fileID: 2100000, guid: fec98a9322d6c4f379a5ddde83d8b852, type: 2}
+    FloorMaterial: {fileID: 2100000, guid: 4751433ac25bc40e8afdfa9cbe5730b9, type: 2}
+  RoomExtenders: []

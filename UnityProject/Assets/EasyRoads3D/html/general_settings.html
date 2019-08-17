@@ -70,35 +70,37 @@
 	      <p>Especially when building complex road networks with different road types  it is recommended to setup road presets before actually building your roads in the scene. These presets will be available when <a href="toolbar.html#addroad" class="link">adding a new road</a> to the scene or when setting up crossing / connection objects and is an easy way to make sure road types look the same and match with the associated crossing types. You can also link road presets to <a href="#importData" class="link">OSM road types</a>.</p>
 	      <p>Most of the properties refer to the same properties as for<a href="scene.html" class="link"> road objects in the scene</a>. The other controls are explained below.</p>
 	      <ul>
-	        <li><span class="propertyStyle">Add New Road Type: </span>This button will create a new road type. It will be selected automatically, you can set the road type name, with and material.</li>
-	        <li><span class="propertyStyle">Add Project Road Types:</span> Scene road types are also stored in the list of project road types. This way you can reuse road types across scenes. This button will display all project road types. Those road types already available in the scene will be disabled. This button will be disabled If all project road types are already available in the scene.</li>
+	        <li><span class="propertyStyle">Add New Road Type: </span>This button will create a new road type. It will be selected automatically, you can set the road type name, with and material</li>
+	        <li><span class="propertyStyle">Add Project Road Types:</span> Scene road types are also stored in the list of project road types. This way you can reuse road types across scenes. This button will display all project road types. Those road types already available in the scene will be disabled. This button will be disabled If all project road types are already available in the scene</li>
 	        <li><span class="propertyStyle">Manage Project Road Types:</span> This will list all project road types and allows you to remove old, unused road types. Note that removed road types will added again if they still exist in a scene!</li>
 	        <li><span class="propertyStyle">Import Road Types:</span> This will open a window to import road types from another project, <a href="http://unityterraintools.com/tutorials/so_import_export.php" class="link">quick tutorial</a></li>
 	        <li><span class="propertyStyle">Export Road Types:</span> This will open a window to export road types so they can be used in another project, <a href="http://unityterraintools.com/tutorials/so_import_export.php" class="link">quick tutorial</a><br>
 	          <br>
             </li>
-	        <li><span class="propertyStyle">Road Types: </span>This dropdown will list all the scene road types.</li>
-	        <li><span class="propertyStyle">Road Name:</span> The name of the selected road type in the dropdown.</li>
+	        <li><span class="propertyStyle">Road Types: </span>This dropdown will list all the scene road types</li>
+	        <li><span class="propertyStyle">Road Name:</span> The name of the selected road type in the dropdown</li>
 	        <li><span class="propertyStyle">Resolution:</span> The geometry resolution in meters</li>
-	        <li><strong class="propertyStyle">Angle Threshold:</strong> This can be used to optimize the road geometry while still maintaining detail is bends. Try values around 5 and increase the road resolution to 10 or 20. The vertex / triangle count will drop significantly.</li>
+	        <li><strong class="propertyStyle">Angle Threshold:</strong> This can be used to optimize the road geometry while still maintaining detail is bends. Try values around 5 and increase the road resolution to 10 or 20. The vertex / triangle count will drop significantly</li>
 	        <li><span class="propertyStyle">Bumpiness Y Offset:</span> The smoothness level of the road controllable through Min Max values</li>
 	        <li><span class="propertyStyle">Bumpiness Distance:</span>The distance controlable through Min Max values</li>
 	        <li><span class="propertyStyle">Random Tilting Angles:</span>Adds additional tilting to the road controllable through Min Max values</li>
 	        <li><span class="propertyStyle">Tilting Distance:</span>The distance over which the tilting takes place</li>
-	        <li><span class="propertyStyle">Layer:</span> the default layer for this road type.</li>
+	        <li>Follow terrain Contours: The road will auto adjust to the terrain shape, this will greatly speed up the workflow as less markers will be required</li>
+	        <li>Contour Threshold: The lower values the more the road will match the terrain shape, use higher values for roads like motorways</li>
+	        <li><span class="propertyStyle">Layer:</span> the default layer for this road type</li>
 	        <li><span class="propertyStyle">Cast Shadows:</span> The object will cast shadows</li>
 	        <li><span class="propertyStyle">Road Width:</span> The width
-	      of the road.</li>
+	      of the road</li>
 	        <li><span class="propertyStyle">Sub Segments:</span> This controls sub division. Note that dynamic built-in crossings do not yet support sub segments. In order to use this within the road network oads with sub segments can be attached to an <a href="scene.html#IConnector" class="link">I Connector</a>, the road on the other end of the I Connector can be attached to built-in crossings</li>
-	        <li><span class="propertyStyle">UV Tiling:</span> The tile size of the used texture.</li>
-	        <li>Additional UV Data: Optionally more UV data can be stored in UV4, this can be data matching the terrain bounds or additional detail based on a specified distance. This distance will be recalculated based on the road distance in order to clamp these UVs just like with the main UVs.</li>
-	        <li><span class="propertyStyle">Road Material: </span>The road material. The dropdown lists all materials in /EasyRoads3D/Resources/Materials/Roads and can be used to quickly assign another material.</li>
-	        <li><span class="propertyStyle">Connection Material: </span>This refers to the connection on dynamic connection objects. When <a href="#conSettings" class="link">selecting this road type for that particular connection</a> the connection material will auto update.</li>
-	        <li><span class="propertyStyle"><a name="newConnectionPrefab" id="newConnectionPrefab"></a>Create New Connection Prefab:</span> This will auto generate a new dynamic prefab for the selected road type.</li>
-	        <li><span class="propertyStyle">Terrain Deformation:</span> This can be used to turn off terrain deformation for this particular road, for instance road types used as bridge segments.</li>
-	        <li><span class="propertyStyle">Default Indent:</span> The <a href="#defaultIndent" class="link">default indent</a> distance for this road type.</li>
+	        <li><span class="propertyStyle">UV Tiling:</span> The tile size of the used texture</li>
+	        <li>Additional UV Data: Optionally more UV data can be stored in UV4, this can be data matching the terrain bounds or additional detail based on a specified distance. This distance will be recalculated based on the road distance in order to clamp these UVs just like with the main UVs</li>
+	        <li><span class="propertyStyle">Road Material: </span>The road material. The dropdown lists all materials in /EasyRoads3D/Resources/Materials/Roads and can be used to quickly assign another material</li>
+	        <li><span class="propertyStyle">Connection Material: </span>This refers to the connection on dynamic connection objects. When <a href="#conSettings" class="link">selecting this road type for that particular connection</a> the connection material will auto update</li>
+	        <li><span class="propertyStyle"><a name="newConnectionPrefab" id="newConnectionPrefab"></a>Create New Connection Prefab:</span> This will auto generate a new dynamic prefab for the selected road type</li>
+	        <li><span class="propertyStyle">Terrain Deformation:</span> This can be used to turn off terrain deformation for this particular road, for instance road types used as bridge segments</li>
+	        <li><span class="propertyStyle">Default Indent:</span> The <a href="#defaultIndent" class="link">default indent</a> distance for this road type</li>
 	        <li><span class="propertyStyle">Default Surrounding:</span> The <a href="#defaultSurrounding" class="link">default surrounding</a> distance for this road type</li>
-	        <li><span class="propertyStyle"><a name="startEndDecals"></a>Start / End Decals: </span>Here we can add prefabs that will be auto inserted randomly at the start and end of the road. The randomly selected decal can always be update manually in the main <a href="scene.html#startEndDecals" class="link">road settings</a> of the selected road.</li>
+	        <li><span class="propertyStyle"><a name="startEndDecals"></a>Start / End Decals: </span>Here we can add prefabs that will be auto inserted randomly at the start and end of the road. The randomly selected decal can always be update manually in the main <a href="scene.html#startEndDecals" class="link">road settings</a> of the selected road</li>
 	        <li><span class="propertyStyle">Add Decal Object:</span> After dropping a prefab in this slot additional options will appear<br>
 	          <span class="propertyStyle">- Priority:</span> This can be used to have certain decals appear more often then other decals<br>
 	          <span class="propertyStyle">- Scale:</span> Decals will be rescaled relative to the road width, the scale can be used to scale the decal relative to this width<br>
@@ -108,19 +110,19 @@
             </li>
 	        <li><span class="propertyStyle">Terrain Splatmap Settings: </span>these settings are related to blending the road shape in the terrain splatmap </li>
 	        <li><span class="propertyStyle">Activate:</span> This will activate terrain splatmap blending for this road</li>
-	        <li><span class="propertyStyle">Splatmap Texture:</span> This will list all the availabe terrain splat map textures. Select which texture you want to use.</li>
-	        <li><span class="propertyStyle">Expand:</span> This will increase the size of the road shape.</li>
+	        <li><span class="propertyStyle">Splatmap Texture:</span> This will list all the availabe terrain splat map textures. Select which texture you want to use</li>
+	        <li><span class="propertyStyle">Expand:</span> This will increase the size of the road shape</li>
 	        <li><span class="propertyStyle">Smooth Level:</span> This will gradually blend the selected texture with the original terrain splatmap</li>
-	        <li><span class="propertyStyle">Opacity:</span> Use this to set the strength of the road shape in the terrain splatmap.<br>
+	        <li><span class="propertyStyle">Opacity:</span> Use this to set the strength of the road shape in the terrain splatmap<br>
 	          <br>
 	        </li>
-	        <li><span class="propertyStyle">Is Side Object:</span> When toggled on no actual road mesh will be created. This sort of &quot;road&quot; types can be used to create other ready-to-use objects like fences based on side objects by activating the specific side object for this &quot;road&quot; type (see further below). </li>
-	        <li><span class="propertyStyle">Active Side Objects:</span><span class="style1"> This will list all scene side objects. Those that are activated will be activated automatically when creating a scene instance of this road type.</span><br>
+	        <li><span class="propertyStyle">Is Side Object:</span> When toggled on no actual road mesh will be created. This sort of &quot;road&quot; types can be used to create other ready-to-use objects like fences based on side objects by activating the specific side object for this &quot;road&quot; type (see further below).</li>
+	        <li><span class="propertyStyle">Active Side Objects:</span><span class="style1"> This will list all scene side objects. Those that are activated will be activated automatically when creating a scene instance of this road type</span><br>
 	          <br>
             </li>
-	        <li><span class="propertyStyle">Create Snap Connector:</span> This will create a snap copnnector prefab in /Assets/EasyRoads3D/prefab sources/snap connectors/. Snap Connector prefabs can be attached to any other prefab in the scene. Roads / side objects of this type can be attached quickly to these prefabs or new roads / side objects can be pulled out from the prefabs.</li>
-	        <li><span class="propertyStyle">Update Scene Instances: </span>This will update all road instances in the scene and crossings that match this road type.</li>
-	        <li><span class="propertyStyle">Delete Selected Road Type: </span>This will remove the selected road type from the scene. <br>
+	        <li><span class="propertyStyle">Create Snap Connector:</span> This will create a snap copnnector prefab in /Assets/EasyRoads3D/prefab sources/snap connectors/. Snap Connector prefabs can be attached to any other prefab in the scene. Roads / side objects of this type can be attached quickly to these prefabs or new roads / side objects can be pulled out from the prefabs</li>
+	        <li><span class="propertyStyle">Update Scene Instances: </span>This will update all road instances in the scene and crossings that match this road type</li>
+	        <li><span class="propertyStyle">Delete Selected Road Type: </span>This will remove the selected road type from the scene<br>
             </li>
 	      </ul>
 <p>&nbsp;</p>
