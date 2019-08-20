@@ -1,0 +1,50 @@
+Name: Lopunny
+Ability1: Cute Charm
+Ability2: Klutz
+Ability3: Limber
+Type1: Normal
+Type2: 
+HasGender: true
+PercentChanceFemale: 50
+HatchTIme: 5140 - 5396
+EggGroup1: Field
+EggGroup2: Human-Like
+Height: 1.2
+Weight: 33.3
+Hp: 65
+Attack: 76
+Defense: 84
+SpAttack: 54
+SpDefense: 96
+Speed: 105
+LevelingType: Medium Fast
+CatchRate: 60
+EvolutionLevel: 
+EvolutionItem: 
+WalkingSpeed: 1.2
+RunningSpeed: 3.3
+Moves:
+Return/-
+Healing Wish/-
+Bounce/-
+Rototiller/-
+Mirror Coat/-
+Magic Coat/-
+Defense Curl/-
+Splash/-
+Pound/-
+Foresight/-
+Return/-
+Endure/6
+Baby-Doll Eyes/13
+Quick Attack/16
+Jump Kick/23
+Baton Pass/26
+Agility/33
+Dizzy Punch/36
+After You/43
+Charm/46
+Entrainment/53
+Bounce/56
+Healing Wish/63
+High Jump Kick/66
