@@ -7,19 +7,26 @@ public class PlayerController : MonoBehaviour
     //[HideInInspector] public static bool jumping = false;
 
     public LayerMask walkingLayerMask;
+    public float walkingSpeed = 1.4f;
+    public float runningSpeed = 3.3f;
     public float airMovementSpeed = 0.5f;
-    public float rotationsPerMinute = 60.0f; // basically one rotation every second
+    public float rotationsPerMinute = 80.0f; // basically one rotation every second
     public float gravityAcceleration = -9.81f;
     public float jumpHeight = 1.0f;
-    public float landingThreshold = 0.1f;
-    public float maintanenceThreshold = 0.5f;
+    public float feetPosOffsetFromOrigin = 0.0f;
+    public bool rootMotion = true;
+
+    private const float landingThreshold = 0.1f;
+    private const float maintanenceThreshold = 0.5f;
     //public float minWallSlope = 70.0f; // seems legit
 
     private const float tinyTolerance =  0.01f;
     private const float tolerance = 0.05f;
+    private bool ignoreInput = true;
     private bool grounded = false;
     private bool directionVectorValid = false;
     private float verticalVelocity = 0.0f; // gavityyyyy
+    private bool running = false;
     private Vector3 airInertia = Vector3.zero;
     //private bool running = false; 
     private Transform cameraTransform;
@@ -33,6 +40,11 @@ public class PlayerController : MonoBehaviour
         public Color color;
     }
 
+    /* These functions are called to manage if the character controller responds to inputs. */
+    public void Activate() { ignoreInput = false; }
+    public void Deactivate() { ignoreInput = true; }
+    public bool IsActivated() { return (!ignoreInput); }
+    
     List<draw_sphere_request> sphereRequestBuffer = new List<draw_sphere_request>();
 
     void DebugDrawSphere(Vector3 pos, float radius, Color color)
@@ -42,6 +54,11 @@ public class PlayerController : MonoBehaviour
         sphereRequest.radius = radius;
         sphereRequest.color = color;
         sphereRequestBuffer.Add(sphereRequest);
+    }
+
+    public Vector3 ControllerFeetPos()
+    {
+        return transform.position;
     }
 
     void OnDrawGizmos()
@@ -56,7 +73,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (controller != null)
-            Gizmos.DrawCube(transform.position + Vector3.up * (controller.height + 0.1f) + transform.right, new Vector3(0.25f, 0.25f, 0.25f));
+            Gizmos.DrawCube(ControllerFeetPos() + Vector3.up * (controller.height + 0.1f) + transform.right, new Vector3(0.25f, 0.25f, 0.25f));
 
         if (directionVectorValid)
         {
@@ -68,7 +85,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (controller != null)
-            Gizmos.DrawCube(transform.position + Vector3.up * (controller.height + 0.1f) - transform.right, new Vector3(0.25f, 0.25f, 0.25f));
+            Gizmos.DrawCube(ControllerFeetPos() + Vector3.up * (controller.height + 0.1f) - transform.right, new Vector3(0.25f, 0.25f, 0.25f));
 
         for (uint i = 0; i < sphereRequestBuffer.Count; i++)
         {
@@ -90,7 +107,7 @@ public class PlayerController : MonoBehaviour
     {
         float groundAngle = Vector3.Angle(groundNormal, Vector3.up) * Mathf.Deg2Rad;
 
-        Vector3 secondaryOrigin = controller.transform.position + Vector3.up * tolerance;
+        Vector3 secondaryOrigin = ControllerFeetPos() + Vector3.up * tolerance;
 
         if (!Mathf.Approximately(groundAngle, 0))
         {
@@ -117,11 +134,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private Vector3 ControllerFeetPos()
-    {
-        return transform.position;
-    }
-
     private float WallAngleFromNormal(Vector3 normal)
     {
         return Mathf.Acos(Vector3.Dot(normal, Vector3.up)) * Mathf.Rad2Deg;
@@ -129,9 +141,8 @@ public class PlayerController : MonoBehaviour
 
     private bool GroundedAndClamp(float margin)
     {
-        // NOTE(Noah): The rayOrigin is calculated assuming that the player's transform is actually on the ground.
-        Vector3 rayOrigin = transform.position + Vector3.up * (controller.height / 2.0f);
         Vector3 feetPos = ControllerFeetPos();
+        Vector3 rayOrigin = feetPos + Vector3.up * (controller.height / 2.0f);
         Vector3 feetSpherePos = feetPos + Vector3.up * controller.radius;
 
         // Debuggggggg
@@ -260,7 +271,7 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         playerAnimator = GetComponent<Animator>();
         cameraTransform = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
-        //playerAnimator.SetBool("Grounded", true);
+        playerAnimator.applyRootMotion = rootMotion;
     }
 
     // Update is called once per frame
@@ -270,6 +281,11 @@ public class PlayerController : MonoBehaviour
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
+
+            if (ignoreInput)
+            {
+                horizontal = 0.0f; vertical = 0.0f;
+            }
 
             float cameraForwardAngle = cameraTransform.eulerAngles.y * Mathf.Deg2Rad;
             float cameraRightAngle = cameraForwardAngle + Mathf.PI / 2.0f;
@@ -319,21 +335,22 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetButton("Run"))
                 {
                     playerAnimator.SetFloat("V_Move", 1.0f);
-                    //running = true;
+                    running = true;
                 }
                 else
                 {
                     playerAnimator.SetFloat("V_Move", 0.5f);
-                    //running = false;
+                    running = false;
                 }
             }
             else
             {
                 playerAnimator.SetFloat("V_Move", 0.0f);
+                running = false;
             }
 
             // NOTE(Reader): This will override the previously calculate vertical Velocity. Also note that this is the intended behaviour.
-            if (Input.GetButtonDown("Jump") && grounded)
+            if (Input.GetButtonDown("Jump") && grounded && !ignoreInput)
             {
                 verticalVelocity = Mathf.Sqrt(-2.0f * gravityAcceleration * jumpHeight);
                 //IEnumerator corutine = WindupJump(1.0f);
@@ -349,6 +366,9 @@ public class PlayerController : MonoBehaviour
             moveVector += Vector3.up * verticalVelocity;
             if (!grounded && directionVectorValid)
                 moveVector += directionVector * airMovementSpeed + airInertia;
+
+            if (!rootMotion && grounded && moving)
+                moveVector += directionVector * ((running) ? runningSpeed : walkingSpeed);  
 
             // TODO(BluCloos): Document this code so people know what the heck they are reading!
             // btw this stuff is the rotation stuff to get the character to move in a direction relative to the camera rotation.

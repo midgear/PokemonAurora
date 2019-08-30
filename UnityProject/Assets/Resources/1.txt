@@ -21,8 +21,6 @@ LevelingType: Medium Fast
 CatchRate: 45
 EvolutionLevel: 
 EvolutionItem: 
-WalkingSpeed: 1.2
-RunningSpeed: 3.3
 Moves: 
 Covet/-
 Growl/-

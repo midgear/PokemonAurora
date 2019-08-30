@@ -1,27 +1,27 @@
 Name: Miltank
-Ability1: Thick Fat
-Ability2: Scrappy
-Ability3: Sap Sipper
+Ability1: 
+Ability2: 
+Ability3: 
 Type1: Normal
-Type2: 
+Type2:
 HasGender: True
-PercentChanceFemale: 100
-HatchTIme: 5140 - 5396
-EggGroup1: Field
+PercentChanceFemale: 50
+HatchTIme: 
+EggGroup1: 
 EggGroup2: 
 Height: 1.2
 Weight: 75.5
-Hp: <hpBaseStat>
-Attack: 95
-Defense: 80
-SpAttack: 105
+Hp: 95
+Attack: 80
+Defense: 105
+SpAttack: 40
 SpDefense: 70
 Speed: 100
 LevelingType: Slow
 CatchRate: 45
 EvolutionLevel: 
-EvolutionItem: 
-WalkingSpeed: 1.2
+EvolutionItem:
+WalkingSpeed: 0.9
 RunningSpeed: 3.3
 Moves:
 Tackle/-
@@ -37,4 +37,3 @@ Captivate/35
 Gyro Ball/41
 Heal Bell/48
 Wake-Up Slap/50
-Hyper Beam/70

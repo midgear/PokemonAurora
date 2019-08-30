@@ -1,16 +1,8 @@
 Name: Mimikyu
-Ability1: Disguise
-Ability2: 
-Ability3: 
 Type1: Ghost
 Type2: Fairy
-HasGender: True
-PercentChanceFemale: 50
-HatchTIme: 5140 - 5396
-EggGroup1: Amorphous
-EggGroup2: 
-Height: .2
-Weight: .7
+Height: 0.4
+Weight: 2.8
 Hp: 55
 Attack: 90
 Defense: 80
@@ -19,25 +11,5 @@ SpDefense: 105
 Speed: 96
 LevelingType: Medium Fast
 CatchRate: 45
-EvolutionLevel: 
-EvolutionItem: 
-WalkingSpeed: 1.2
+WalkingSpeed: 1.4
 RunningSpeed: 3.3
-Moves:
-Wood Hammer/-
-Splash/-
-Scratch/-
-Astonish/-
-Copycat/-
-Double Team/5
-Baby-Doll Eyes/10
-Shadow Sneak/14
-Mimic/19
-Feint Attack/23
-Charm/28
-Slash/32
-Shadow Claw/37
-Hone Claws/41
-Shadow Ball/44
-Play Rough/46
-Pain Split/50

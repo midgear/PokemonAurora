@@ -3,10 +3,10 @@ Ability1: Shield Dust
 Ability2: 
 Ability3: Run Away
 Type1: Bug
-Type2: 
+Type2:
 HasGender: True
 PercentChanceFemale: 50
-HatchTIme: 3599 – 3855
+HatchTIme: 3599 - 3855
 EggGroup1: Bug
 EggGroup2: 
 Height: 0.3
@@ -21,8 +21,8 @@ LevelingType: Medium Fast
 CatchRate: 255
 EvolutionLevel: 7
 EvolutionItem: 
-WalkingSpeed: 1.2
-RunningSpeed: 3.3
+WalkingSpeed: 1.0
+RunningSpeed: 2.5
 Moves:
 String Shot/-
 Tackle/-
