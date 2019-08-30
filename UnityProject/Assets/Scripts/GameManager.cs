@@ -1,449 +1,54 @@
 ﻿/*
 Hello reader! This file is your one-stop shop for like
 most of the game functionality! Yay!
-Oh, it also contains all of the data structures that I have defined!
+Basically, it manages the game. 
 */
 
 using System.Collections.Generic;
-using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
-#region GameStructuresAndEnumerations
-// yo these all need filling out
-public enum pokemon_type
-{
-    NORMAL = 0,
-    FIGHTING,
-    FLYING,
-    POISON,
-    GROUND,
-    ROCK,
-    BUG,
-    GHOST,
-    STEEL,
-    FIRE,
-    WATER,
-    GRASS,
-    ELECTRIC,
-    PSYCHIC,
-    ICE,
-    DRAGON,
-    DARK,
-    FAIRY,
-    UNKNOWN,
-    elementCount
-};
-
-/*
-enum pokemon_egg_group
-{
-
-};
-*/
-
-public enum pokemon_move_class
-{
-    MELEE,
-    PROJECTILE,
-    AOE
-}
-
-/* This struct is used to contain information about a single move. The game 
- * basically stores a whole list of all the moves where each element of the list
- * is one of these structs! Rad!
-     */ 
-public class pokemon_move_data
-{
-    // TODO(BluCloos): Fill this struct out fam!
-    public string name;
-    public pokemon_type type;
-    public pokemon_move_class moveClass;
-    public float powerPoints;
-    public float basePower;
-    // TODO(BluCloos): At some point we are going to have to implement status
-    // effects. But as of now, who the fuck cares?
-};
-
-// TODO(BluCloos): I can't seem to find the right name for this...
-struct pokemon_move_meta
-{
-    public string moveName;
-    public byte levelLearnedAt;
-};
-
-// NOTE(BluCloos): Okay so basically I just figured out how I am going to make this backend 
-// interface properly with fsm addons! So I can just fire events and provide static methods that
-// can be called. This is by far the best solution to the problem. Awesome stuff.
-
-/* This structure stores save file information for a particular pokemon
- * */
-public struct pokemon_profile
-{
-    public int auroraDexNumber;
-
-    uint experiencePoints;
-    // Every time the experience points increase, the level is recalculated. If it is such that
-    // the pokemon has gained a level, the stats are then updated. An event is then raised that
-    // the pokemon has gained a level!  
-    uint level;
-
-    public List<string> learnedMoves;
-    public int[] currentMoves; // Set of 4 ints that point into the learnedMoves array.
-    // these specify the set of 'activeMoves' that the pokemon has.
-
-    // Current calculated stats based on the level of the pokemon.
-    // these are updated using the base stats of the pokemon every time 
-    // the pokemon levels up! Awesome, huh?
-    public byte hpStat;
-    public byte attackStat;
-    public byte defenseStat;
-    public byte spAttackStat;
-    public byte spDefenseStat;
-    public byte speedStat;
-
-    // these are the current stats and can differ from the calculated stats for
-    // the any number of reasons. For example, the pokemon may be damaged from battle.
-    // they may be using stat boosters like those X defend things.
-    public byte cHpStat;
-    public byte cattackStat;
-    public byte cdefenseStat;
-    public byte cspAttackStat;
-    public byte cspDefenseStat;
-    public byte cspeedStat;
-};
-
-// TODO(BluCloos): For memory saving purposes, should we not remove a bunch of the junk
-// in this structure?
-/* This class is used to contain information about a single pokemon. This gameObject stores a
- * whole list of them, basically the table of all the pokemon in the game.
-     */
-class pokemon_data
-{
-    public string name;
-    // TODO(BluCloos): Should this be an enumeration?
-    //public string ability1;
-    //public string ability2;
-    //public string ability3;
-    public pokemon_type type1;
-    public pokemon_type type2;
-    //public bool hasGender;
-    //public float percentChanceFemale;
-    //public uint minHatchSteps;
-    //public uint maxHatchSteps;
-    //public pokemon_egg_group eggGroup1;
-    //public pokemon_egg_group eggGroup2;
-    public float height;
-    public float weight;
-    public float walkingSpeed; // this is in meters per second
-    public float runningSpeed; // this is in meters per second
-    public byte hpBaseStat;
-    public byte attackBaseStat;
-    public byte defenseBaseStat;
-    public byte spAttackBaseStat;
-    public byte spDefenseBaseStat;
-    public byte speedBaseStat;
-    public string levelingType;
-    // TODO(BluCloos): Is this value actually an integer from 0 through 255?
-    public byte catchRate;
-    //public byte evolutionLevel;
-    // TODO(BluCloos): Should this remain a string or an enumeration?
-    //public string evolutionItem;
-    public List<pokemon_move_meta> moves;
-
-    public override string ToString()
-    {
-        string pokemonInfo = "Name: " + name + "\nType1: " + type1 + "\nType2: " + type2
-            + "\nHeight: " + height + "\nWeight: " + weight + "\nHP: " + hpBaseStat +
-            "\nATTACK: " + attackBaseStat + "\nDEFENSE: " + defenseBaseStat + "\nSPATTACK: "
-            + spAttackBaseStat + "\nSPDEFENSE: " + spDefenseBaseStat + "\nSPEED: " + speedBaseStat +
-            "\nLeveling Type: " + levelingType + "\nCatch Rate: " + catchRate;
-        string pokemonMoves = "";
-
-        for (int i = 0; i < moves.Count; i++)
-        {
-            pokemon_move_meta moveMeta = moves[i];
-            pokemonMoves +=  moveMeta.moveName + " @ " + moveMeta.levelLearnedAt + "\n";
-        }
-
-        return pokemonInfo + "\nMoves:\n" + pokemonMoves; 
-    }
-}
-#endregion
+using PokemonHeader;
+//using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    #region PublicVariables
+    // TODO(BluCloos): We might want to make some of these inspector variables be ranges to ensure that
+    // we only get sane values.
+    #region InspectorVariables
+    [SerializeField]
     [Tooltip("Total amount of pokemon in the Aurora regional dex.")]
-    public uint totalPokemon;
+    private uint totalPokemon = 0;
+    [SerializeField]
     [Tooltip("Total amount of moves in the game.")]
-    public uint totalMoves;
+    private uint totalMoves = 0;
+    [SerializeField]
     [Tooltip("The default walking speed of spawned Pokemon.")]
-    public float defaultWalkingSpeed = 1.4f;
+    private float defaultWalkingSpeed = 1.4f;
+    [SerializeField]
     [Tooltip("The default running speed of spawned Pokemon.")]
-    public float defaultRunningSpeed = 3.3f;
-    // This is a debug parameter. I use it to spawn any pokemon I want! Crazy!
-    public uint pokemonToSpawn;
+    private float defaultRunningSpeed = 3.3f;
+    [SerializeField]
+    [Tooltip("The amount of health bar lengths per second that Pokemon health bars decrease / increase at.")]
+    private float pokemonHealthVelocity = 1.2f;
+    // TODO(BluCloos): This is a debug parameter. I use it to spawn any pokemon I want! Crazy!
+    // so eventually this needs to get purged out of existence! In fact, it will die in response
+    // to the birth of the debug menu.
+    [SerializeField]
+    private uint pokemonToSpawn;
+    #endregion
+
+    #region References
+    private CameraRig mainCameraRig;
     #endregion
 
     #region PrivateVariables
-    private static CameraRig mainCameraRig; // initialized in start
-    private static PlayerController2 currentPlayerController; // initialized in start
-    private static GameManager gm; // initialized in awake
-    private static List<pokemon_data> pokemonTable = new List<pokemon_data>(); // initialized in start
-    private static Dictionary<string, pokemon_move_data> pokemonMoveTable = new Dictionary<string, pokemon_move_data>(); // initialized in start
+    private PlayerController2 currentPlayerController;
+    private static GameManager gm;
+    private List<PokemonData> pokemonTable = new List<PokemonData>();
+    private Dictionary<string, PokemonMoveData> pokemonMoveTable = new Dictionary<string, PokemonMoveData>();
+    float[,] pokemonTypeTable;
     #endregion
 
     #region PrivateFunctions
-    private float FloatFromString(string str)
-    {
-        float foo;
-        if (float.TryParse(str, out foo))
-            return foo;
-        else
-            return 0.0f;
-    }
-
-    private uint UnsignedIntFromString(string str)
-    {
-        uint foo;
-        if (uint.TryParse(str, out foo))
-            return foo;
-        else
-            return 0;
-    }
-
-    /* This function will take in a string and remove all whitespace before and after the main
-     * 'message': Ex) "   hello world!  " ---> "hello world!" 
-     */
-    private string StringTrimWhitespace(string str)
-    {
-        return str.Trim();
-    }
-
-    private void DebugLogStringAsHexSet(string str)
-    {
-        char[] strArr = str.ToCharArray();
-        string runningStr = "{";
-        for (int i = 0; i < str.Length; i++)
-        {
-            int val = Convert.ToInt32(strArr[i]);
-            runningStr += "0x" + val.ToString("X") + ", ";
-        }
-        runningStr += "}";
-        Debug.Log(runningStr);
-    }
-
-    // TODO(BluCloos): Surely there is an easier way to do this...
-    private pokemon_type PokemonTypeFromString(string typeName)
-    {
-        switch (typeName.ToLower())
-        {
-            case "normal":
-                return pokemon_type.NORMAL;
-            case "fighting":
-                return pokemon_type.FIGHTING;
-            case "flying":
-                return pokemon_type.FLYING;
-            case "poison":
-                return pokemon_type.POISON;
-            case "ground":
-                return pokemon_type.GROUND;
-            case "rock":
-                return pokemon_type.ROCK;
-            case "bug":
-                return pokemon_type.BUG;
-            case "ghost":
-                return pokemon_type.GHOST;
-            case "steel":
-                return pokemon_type.STEEL;
-            case "fire":
-                return pokemon_type.FIRE;
-            case "water":
-                return pokemon_type.WATER;
-            case "grass":
-                return pokemon_type.GRASS;
-            case "electric":
-                return pokemon_type.ELECTRIC;
-            case "psychic":
-                return pokemon_type.PSYCHIC;
-            case "ice":
-                return pokemon_type.ICE;
-            case "dragon":
-                return pokemon_type.DRAGON;
-            case "dark":
-                return pokemon_type.DARK;
-            case "fairy":
-                return pokemon_type.FAIRY;
-            default:
-                return pokemon_type.UNKNOWN;
-        }
-    }
-
-    /* This function loads the resource file called resourceName and parses out the
-     * data into a pokemon_data structure. If the pokemon resource does exist, this function will
-     * return null. For pokemon whos data is not yet defined, their table entry is a null
-     * reference. This is for data saving purposes. 
-     */
-    private pokemon_data ParsePokemonDataResource(string resourceName)
-    {
-        var textFile = Resources.Load<TextAsset>(resourceName);
-        if (textFile != null)
-        {
-            string[] lines = textFile.text.Split('\n');
-            bool inMoves = false;
-
-            pokemon_data pokemonData = new pokemon_data();
-            pokemonData.moves = new List<pokemon_move_meta>();
-            pokemonData.walkingSpeed = defaultWalkingSpeed;
-            pokemonData.runningSpeed = defaultRunningSpeed;
-
-            for (uint i = 0; i < lines.Length; i++)
-            {
-                string line = lines[i];
-                if (!inMoves)
-                {
-                    string[] lineSplit = line.Split(':');
-                    string handle = lineSplit[0].ToLower();
-                    string content = StringTrimWhitespace(lineSplit[1]);
-
-                    switch (handle)
-                    {
-                        case "name":
-                            pokemonData.name = content;
-                            break;
-                        case "type1":
-                            pokemonData.type1 = PokemonTypeFromString(content);
-                            break;
-                        case "type2":
-                            pokemonData.type2 = PokemonTypeFromString(content);
-                            break;
-                        case "height":
-                            pokemonData.height = FloatFromString(content);
-                            break;
-                        case "weight":
-                            pokemonData.weight = FloatFromString(content);
-                            break;
-                        case "walkingspeed":
-                            pokemonData.walkingSpeed = FloatFromString(content);
-                            break;
-                        case "runningspeed":
-                            pokemonData.runningSpeed = FloatFromString(content);
-                            break;
-                        case "hp":
-                            pokemonData.hpBaseStat = (byte)UnsignedIntFromString(content);
-                            break;
-                        case "attack":
-                            pokemonData.attackBaseStat = (byte)UnsignedIntFromString(content);
-                            break;
-                        case "defense":
-                            pokemonData.defenseBaseStat = (byte)UnsignedIntFromString(content);
-                            break;
-                        case "spattack":
-                            pokemonData.spAttackBaseStat = (byte)UnsignedIntFromString(content);
-                            break;
-                        case "spdefense":
-                            pokemonData.spDefenseBaseStat = (byte)UnsignedIntFromString(content);
-                            break;
-                        case "speed":
-                            pokemonData.speedBaseStat = (byte)UnsignedIntFromString(content);
-                            break;
-                        case "levelingtype":
-                            pokemonData.levelingType = content;
-                            break;
-                        case "catchrate":
-                            pokemonData.catchRate = (byte)UnsignedIntFromString(content);
-                            break;
-                        case "moves":
-                            inMoves = true;
-                            break;
-                        default:
-                            // uhhhhhhhhhhhhhhhhhhhhh I don't even know
-                            break;
-                    }
-                }
-                else
-                {
-                    pokemon_move_meta moveMeta;
-                    moveMeta.levelLearnedAt = 0;
-
-                    string[] lineSplit = line.Split('/');
-                    moveMeta.moveName = lineSplit[0];
-                    string level = lineSplit[1];
-
-                    if (!level.Equals("-"))
-                    {
-                        moveMeta.levelLearnedAt = (byte)UnsignedIntFromString(level);
-                    }
-
-                    pokemonData.moves.Add(moveMeta);
-                }
-            }
-
-            return pokemonData;
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    private pokemon_move_data ParsePokemonMoveDataResource(string resourceName)
-    {
-        var textFile = Resources.Load<TextAsset>(resourceName);
-        if (textFile != null)
-        {
-            string[] lines = textFile.text.Split('\n');
-            pokemon_move_data moveData = new pokemon_move_data();
-            for (int i = 0; i < lines.Length; i++)
-            {
-                // TODO(BluCloos): This code here is very similar to the fucking
-                // other code in the other parse function. This should be abstracted because
-                // that's what we programmers do! Fuck yeah!
-                string line = lines[i];
-                string[] lineSplit = line.Split(':');
-                string handle = lineSplit[0].ToLower();
-                string content = StringTrimWhitespace(lineSplit[1]);
-
-                switch (handle)
-                {
-                    case "name":
-                        moveData.name = content;
-                        break;
-                    case "pp":
-                        moveData.powerPoints = UnsignedIntFromString(content);
-                        break;
-                    case "power":
-                        moveData.powerPoints = UnsignedIntFromString(content);
-                        break;
-                    case "type":
-                        moveData.type = PokemonTypeFromString(content);
-                        break;
-                    case "class":
-                        switch (content.ToLower())
-                        {
-                            case "melee":
-                                moveData.moveClass = pokemon_move_class.MELEE;
-                                break;
-                            case "aoe":
-                                moveData.moveClass = pokemon_move_class.AOE;
-                                break;
-                            case "projectile":
-                                moveData.moveClass = pokemon_move_class.PROJECTILE;
-                                break;
-                        }
-                        break;
-                }
-            }
-
-            return moveData;
-        }
-        else
-        {
-            return null;
-        }
-    }
-
     /* As of now, this function loads all data regarding every Pokemon in
        the Aurora Pokedex. It also loads all the different moves in the game. 
     */
@@ -453,7 +58,8 @@ public class GameManager : MonoBehaviour
         for (uint i = 0; i < totalPokemon; i++)
         {
             string resName = (i + 1).ToString();
-            pokemon_data pokemonData = ParsePokemonDataResource(resName);
+            PokemonData pokemonData = FileParsing.ParsePokemonDataResource(resName, 
+                defaultWalkingSpeed, defaultRunningSpeed);
             pokemonTable.Add(pokemonData);
         }
 
@@ -461,30 +67,252 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < totalMoves; i++)
         {
             string resName = (i + 1).ToString() + "_move";
-            pokemon_move_data pokemonMoveData = ParsePokemonMoveDataResource(resName);
+            PokemonMoveData pokemonMoveData = FileParsing.ParsePokemonMoveDataResource(resName);
             pokemonMoveTable.Add(pokemonMoveData.name, pokemonMoveData);
         }
+
+        // Load the type table
+        gm.pokemonTypeTable = FileParsing.ParseTypeTableResource("moveTable");
+    }
+
+    private void DebugTests()
+    {
+        // Test the FileParsing class
+        Debug.Log("Testing FileParsing class");
+        FileParsing.DebugTest();
+        Debug.Log("Done Test");
+
+        // Testing the PokeMath class
+        Debug.Log("Testing PokeMath class");
+        PokeMath.DebugVerify();
+        Debug.Log("Done Test");
+
+        // Test that the type table has been initialized.
+        Debug.Log("Testing the type table");
+        float mod = GetTypeMod(pokemon_type.ELECTRIC, pokemon_type.GROUND);
+        Debug.Log("Electric vs Ground: " + mod);
+        mod = GetTypeMod(pokemon_type.GROUND, pokemon_type.POISON);
+        Debug.Log("Ground vs Poison: " + mod);
+        Debug.Log("Done Test");
+
+        // Test that the PokeData is OK
+        PokemonData pokeData = GetPokemonData(100);
+        Debug.Log(pokeData);
     }
     #endregion
 
-    #region PublicFunctions
+    #region PublicInterface
 
+    public static float GetPokemonHealthVelocity(){ return gm.pokemonHealthVelocity; }
+
+    /// <summary>
+    /// This function will create a new random pokemon with the given dex Id and level.
+    /// </summary>
+    public static pokemon_profile CreateNewPokemonProfile(int auroraDexNumber, int level)
+    {
+        pokemon_profile profile = new pokemon_profile();
+        // First things first we need to grab some important info
+        // aka we need the pokeData information!
+        PokemonData pokeData = GameManager.GetPokemonData(auroraDexNumber);
+        if (pokeData != null)
+        {
+            // TODO(BluCloos): There is a lot more stuff we are going to need to initialize.
+            // For now, we just need to set up
+
+            profile.auroraDexNumber = auroraDexNumber;
+            profile.experiencePoints = PokeMath.ExpFromLevel(level, pokeData.levelingType);
+            profile.level = level;
+
+            profile.hpEV = 0;
+            profile.attackEV = 0;
+            profile.defenseEV = 0;
+            profile.spAttackEV = 0;
+            profile.spDefenseEV = 0;
+            profile.speedEV = 0;
+
+            // TODO(BluCloos): Make the probability of higher IV less likely by making their probability align
+            // with an exponential that has a fraction base.
+            // this can be done by making space much larger near the lower vaules and space really small near the
+            // higher values. When I refer to space I just mean the actual range size of the Random.Range() call
+            profile.hpIV = (byte)Random.Range(0.0f, 31.0f);
+            profile.attackIV = (byte)Random.Range(0.0f, 31.0f);
+            profile.defenseIV = (byte)Random.Range(0.0f, 31.0f);
+            profile.spAttackIV = (byte)Random.Range(0.0f, 31.0f);
+            profile.spDefenseIV = (byte)Random.Range(0.0f, 31.0f);
+            profile.speedIV = (byte)Random.Range(0.0f, 31.0f);
+
+            // TODO(BluCloos): Actually implement natures. Of course, this is only necessary if we decide that it is, so... who knows?
+            profile.hpStat = PokeMath.CalculateHp(pokeData.hpBaseStat, profile.hpIV, profile.hpEV, profile.level);
+            profile.attackStat = PokeMath.CalculateStat(pokeData.attackBaseStat, profile.attackIV, profile.attackEV, 1.0f, profile.level);
+            profile.defenseStat = PokeMath.CalculateStat(pokeData.defenseBaseStat, profile.defenseIV, profile.defenseEV, 1.0f, profile.level);
+            profile.spDefenseStat = PokeMath.CalculateStat(pokeData.spDefenseBaseStat, profile.spDefenseIV, profile.spDefenseEV, 1.0f, profile.level);
+            profile.spAttackStat = PokeMath.CalculateStat(pokeData.spAttackBaseStat, profile.spAttackIV, profile.spAttackEV, 1.0f, profile.level);
+            profile.speedStat = PokeMath.CalculateStat(pokeData.speedBaseStat, profile.speedIV, profile.speedEV, 1.0f, profile.level);
+
+            profile.cHpStat = profile.hpStat;
+            profile.cAttackStat = profile.attackStat;
+            profile.cDefenseStat = profile.defenseStat;
+            profile.cSpAttackStat = profile.spAttackStat;
+            profile.cSpDefenseStat = profile.spDefenseStat;
+            profile.cSpeedStat = profile.speedStat;
+
+            // TODO(BluCloos): We need to make sure the the random generation of moves yeilds in at least one attacking move
+            // Here is how I think it should be implemented. We generate the moves as we are doing currently. After, we check to see
+            // if there is at least one attacking move. If there is none, we go through all the learnable moves, find the first attacking move,
+            // and replace the first random move with said attacking move.  
+
+            // generate a list of learnableMoves based on the level of the Pokemon
+            List<string> learnableMoves = new List<string>();
+            for (int i = 0; i < pokeData.moves.Count; i++)
+            {
+                pokemon_move_meta learnableMove = pokeData.moves[i];
+                if (learnableMove.levelLearnedAt <= level)
+                {
+                    learnableMoves.Add(learnableMove.moveName);
+                }
+            }
+
+            profile.learnedMoves = new List<string>();
+            profile.moves = new int[4];
+            // Now, based on the list of learnable moves, we are going to add said moves to our SICK pokemon
+            for (int i = 0; i < 4; i++)
+            {
+                if (learnableMoves.Count > 0)
+                {
+                    int randomMove = (int)Random.Range(0.0f, (float)(learnableMoves.Count - 1));
+                    string newMove = learnableMoves[randomMove];
+                    learnableMoves.RemoveAt(randomMove); // Remove it from the list so we don't encounter it again
+                    profile.learnedMoves.Add(newMove); // Actually add said new move to the pokemon!
+                }
+            }
+
+            // Assign the move indices!
+            for (int i = 0; i < 4; i++)
+            {
+                int newIndex = -1;
+                if (i < profile.learnedMoves.Count)
+                {
+                    newIndex = i;
+                }
+
+                profile.moves[i] = newIndex;
+            }
+        }
+        else
+        {
+            // Return an invalid profile
+            profile.auroraDexNumber = -1;
+        }
+
+        return profile;
+    }
+
+    /// <summary>
+    /// This function returns the modifier for moves of the attackingType against the defendingType
+    /// </summary>
+    public static float GetTypeMod(pokemon_type attackingType, pokemon_type defendingType)
+    {
+        return gm.pokemonTypeTable[(int)attackingType, (int)defendingType];
+    }
+
+    /// <summary>
+    /// Given the name of the move this function returns the data structure for that move.
+    /// </summary>
+    public static PokemonMoveData GetPokemonMoveData(string key)
+    {
+        if (gm.pokemonMoveTable.ContainsKey(key))
+            return gm.pokemonMoveTable[key];
+        else
+            return null;
+    }
+
+    /// <summary>
+    /// This function will return the data corresponding to the pokemon dex number provided.
+    /// If the data can not be found in the global tables, this function will return null;
+    /// </summary>
+    public static PokemonData GetPokemonData(int auroraDexNumber)
+    {
+        if (auroraDexNumber > gm.pokemonTable.Count || auroraDexNumber <= 0)
+        {
+            Debug.LogWarning("auroraDexNumber out of range!: " + auroraDexNumber);
+            return null;
+        }
+
+        return gm.pokemonTable[auroraDexNumber - 1];
+    }
+
+    public static void DebugPrintPokemon(pokemon_profile profile)
+    {
+        if (profile.auroraDexNumber != -1)
+        {
+            Debug.Log("Printing Pokemon Profile!");
+            Debug.Log("Dex Number: " + profile.auroraDexNumber);
+            Debug.Log("EXP: " + profile.experiencePoints);
+            Debug.Log("Level: " + profile.level);
+
+            Debug.Log("HP IV: " + profile.hpIV);
+            Debug.Log("ATTACK IV: " + profile.attackIV);
+            Debug.Log("DEFENSE IV: " + profile.defenseIV);
+            Debug.Log("SPATTACK IV: " + profile.spAttackIV);
+            Debug.Log("SPDEFENSE IV: " + profile.spDefenseIV);
+            Debug.Log("SPEED IV: " + profile.speedIV);
+
+            Debug.Log("HP Stat: " + profile.hpStat);
+            Debug.Log("ATTACK Stat: " + profile.attackStat);
+            Debug.Log("DEFENSE Stat: " + profile.defenseStat);
+            Debug.Log("SPATTACK Stat: " + profile.spAttackStat);
+            Debug.Log("SPDEFENSE Stat: " + profile.spDefenseStat);
+            Debug.Log("SPEED Stat: " + profile.speedStat);
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (profile.moves[i] != -1)
+                {
+                    Debug.Log("Move" + i + ": " + profile.learnedMoves[profile.moves[i]]);
+                }
+            }
+
+            Debug.Log("Done.");
+        }
+        else
+        {
+            Debug.Log("Pokemon Profile invalid!");
+        }
+    }
+
+    public static void DebugPrintPokemonMove(PokemonMoveData move)
+    {
+        if (move != null)
+        {
+            Debug.Log("Printing Pokemon Move:");
+            Debug.Log("Name: " + move.name);
+            Debug.Log("Type: " + move.type);
+            Debug.Log("MoveClass: " + move.moveClass);
+            Debug.Log("PowerPoints: " + move.powerPoints);
+            Debug.Log("BasePower: " + move.basePower);
+            Debug.Log("Acurracy: " + move.accuracy);
+            Debug.Log("Done.");
+        }
+    }
+
+    /// <summary>
+    /// This function will change the current player being controlled to the one given. 
+    /// Note that this function will not delete the current player, it will merely
+    /// make it ignore input. 
+    /// </summary>
     public static void SwitchPlayer(PlayerController2 pc)
     {
-        // TODO(BluCloos): Auto position the camera to avoid the fast teleport of the camera!
-        // NOTE(BluCloos): The above is only applicable when the camera has smooth follow on,
-        // which of course we have to assume is like all the time...
-        if (currentPlayerController != null)
-            currentPlayerController.Deactivate();
-        currentPlayerController = pc;
-        currentPlayerController.Activate();
+        if (gm.currentPlayerController != null)
+            gm.currentPlayerController.Deactivate();
+        gm.currentPlayerController = pc;
+        gm.currentPlayerController.Activate();
 
         // modify the camera rig to target the current player controller and
         // change the zoom settings so that it 'feels better'.
         // TODO(Noah): Right now the mapping for the maximum character zoom is not really setup
         // at all.
-        mainCameraRig.target = currentPlayerController.gameObject.transform;
-        mainCameraRig.offset = new Vector3(0.0f, currentPlayerController.GetHeight() / 2.0f, 0.5f);
+        gm.mainCameraRig.target = gm.currentPlayerController.gameObject.transform;
+        gm.mainCameraRig.offset = new Vector3(0.0f, gm.currentPlayerController.GetHeight() / 2.0f, 0.5f);
         
         // NOTE(Reader): This math is basically a cheese. Im just using 
         // known value pairs of minCameraDistances and character heights
@@ -492,18 +320,26 @@ public class GameManager : MonoBehaviour
         // the minimum camera distance. Think grade 9 maths. y=mx+b 
         float m = (2.0f / 1.1f);
         float b = 4.0f - m * 1.5f;
-        mainCameraRig.minDistance = m * currentPlayerController.GetHeight() + b;
+        gm.mainCameraRig.minDistance = m * gm.currentPlayerController.GetHeight() + b;
     }
 
+    /// <summary>
+    /// This function will spawn a pokemon at the provided world position.
+    /// This function is multi-purpose. You may use it to create either a randomly generated pokemon
+    /// or spawn an existing pokemon. The newPokemon parameter controls this behaviour. If you are creating
+    /// a randomly generated pokemon, the profile need only be initialized with the dex index; otherwise, it
+    /// must be full initialized. If the pokemon was unable to be initialized this function will return null.
+    /// This will happen when the data for the pokemon is not in the global table.
+    /// </summary>
     public static Pokemon InstantiatePokemon(pokemon_profile profile, bool newPokemon, Vector3 worldPos)
     {
         GameObject pokePrefab = Resources.Load<GameObject>("obj_" + profile.auroraDexNumber);
-        pokemon_data pokeData = pokemonTable[profile.auroraDexNumber - 1];
+        PokemonData pokeData = GetPokemonData(profile.auroraDexNumber);
         if (pokePrefab != null && pokeData != null)
         {
             GameObject pokeObj = Instantiate(pokePrefab, worldPos, Quaternion.identity);
 
-            pokeObj.layer = LayerMask.NameToLayer("Ignore Raycast");
+            pokeObj.layer = LayerMask.NameToLayer("Player");
 
             // Set the height of the pokemon
             pokeObj.transform.localScale = new Vector3(pokeData.height, pokeData.height, pokeData.height);
@@ -544,18 +380,27 @@ public class GameManager : MonoBehaviour
             // Take a look at the actual PlayerController script if you are curious.
             pc.UpdatePlayer();
 
+            // Instantiate the hp bar on the pokemon
+            GameObject healthPrefab = Resources.Load<GameObject>("PokemonHPBar");
+            GameObject healthObj = Instantiate(healthPrefab, pokeObj.transform, false);
+            healthObj.transform.localPosition = new Vector3(0.0f, 1.2f, 0.0f);
 
             Pokemon pokePoke = pokeObj.AddComponent<Pokemon>();
 
             // Set up the pokemon profile
+            bool result;
             if (newPokemon)
             {
                 // TODO(BluCloos): Generate the new pokemon information
+                result = pokePoke.InitializeAsNew(profile.auroraDexNumber, 34);
             }
             else
             {
                 pokePoke._set_profile(profile);
+                result = true;
             }
+            
+            // TODO(BluCloos): Handle the cases where the pokemon spawning does not work!
 
             return pokePoke;
         }
@@ -579,15 +424,16 @@ public class GameManager : MonoBehaviour
         {
             gm = this;
             DontDestroyOnLoad(gameObject);
+
+            mainCameraRig = Camera.main.GetComponent<CameraRig>();
+            if (mainCameraRig == null)
+                Debug.Log("Warning: Please attach a CameraRig component to the main camera!");
+
         }
     }
 
     void Start()
     {
-        mainCameraRig = Camera.main.GetComponent<CameraRig>();
-        if (mainCameraRig == null)
-            Debug.Log("Warning: Please attach a CameraRig component to the main camera!");
-
         LoadPokemonTables();
 
         // Find the player and set the main camera to target the player
@@ -604,8 +450,10 @@ public class GameManager : MonoBehaviour
 
         // spawn a stupid lil debug pokemon, could be fun!
         pokemon_profile stupidPoke = new pokemon_profile();
-        stupidPoke.auroraDexNumber = 23;
-        //InstantiatePokemon(stupidPoke, false, new Vector3(1.0f, 2.0f, 1.0f));
+        stupidPoke.auroraDexNumber = 100;
+        InstantiatePokemon(stupidPoke, true, new Vector3(1.0f, 2.0f, 1.0f));
+
+        DebugTests();
     }
 
     bool playingPokemon = false;

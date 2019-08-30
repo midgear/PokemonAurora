@@ -117,6 +117,14 @@ public class PlayerController2 : MonoBehaviour
         playerAnimator.applyRootMotion = rootMotion;
     }
 
+    public void DebugDrawSphere(Vector3 pos, float radius, Color color)
+    {
+        Draw_sphere_request sphereRequest;
+        sphereRequest.pos = pos;
+        sphereRequest.radius = radius;
+        sphereRequest.color = color;
+        sphereRequestBuffer.Add(sphereRequest);
+    }
     #endregion
 
     #region PlayerController2Functions
@@ -133,15 +141,6 @@ public class PlayerController2 : MonoBehaviour
         yield return new WaitForSeconds(timeToWait);
         ignoreInput = false;
         yield return null;
-    }
-
-    private void DebugDrawSphere(Vector3 pos, float radius, Color color)
-    {
-        Draw_sphere_request sphereRequest;
-        sphereRequest.pos = pos;
-        sphereRequest.radius = radius;
-        sphereRequest.color = color;
-        sphereRequestBuffer.Add(sphereRequest);
     }
    
     private bool IsWallFromNormal(Vector3 normal)
@@ -654,8 +653,16 @@ public class PlayerController2 : MonoBehaviour
                     playerAnimator.SetBool("Grounded", false);
                 }
 
-                Vector3 localMoveVector = new Vector3(moveVector.x, 0.0f, moveVector.z) / Time.deltaTime;
-                playerAnimator.SetFloat("V_Move", localMoveVector.magnitude / runningSpeed);
+                if (!grounded)
+                {
+                    Vector3 localMoveVector = new Vector3(moveVector.x, 0.0f, moveVector.z) / Time.deltaTime;
+                    playerAnimator.SetFloat("V_Move", localMoveVector.magnitude / runningSpeed);
+                }
+                else
+                {
+                    float V_Move = (moving) ? ( (running) ? 1.0f : 0.5f ) : 0.0f;
+                    playerAnimator.SetFloat("V_Move", V_Move);
+                }
             }
 
             // Actually move the character using the movement vector. Oh, and also account for any root motion magic!

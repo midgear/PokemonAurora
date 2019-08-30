@@ -1,0 +1,43 @@
+Aurora Dex: 5
+Name: Espeon
+Ability1: Syncrhonize
+Ability2: Magic Bounce
+Ability3: Hidden Ability
+Type1: Psychic
+Type2:
+HasGender: True
+PercentChanceFemale: 12.5
+HatchTIme: 8995 - 9251
+EggGroup1: Field
+EggGroup2: 
+Height: 0.9
+Weight: 26.5
+Hp: 65
+Attack: 65
+Defense: 60
+SpAttack: 130
+SpDefense: 95
+Speed: 110
+LevelingType: Medium Fast
+CatchRate: 11.9
+EvolutionLevel: 
+EvolutionItem: Sun Shard
+WalkingSpeed: 1.2
+RunningSpeed: 3.3
+Moves:
+Confusion / -
+Helping Hand / -
+Tackle / -
+Tail Whip / -
+Confusion / -
+Sand Attack / 5
+Baby-Doll Eyes / 9
+Quick Attack / 13
+Swift / 17
+Psybeam / 20
+Future Sight / 25
+Psych Up / 29
+Morning Sun / 33
+Psychic / 37
+Last Resort / 41
+Power Swap / 45

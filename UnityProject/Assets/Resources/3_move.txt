@@ -1,0 +1,5 @@
+Name: Hydro Pump
+Type: Water
+Class: Projectile
+PP: 5
+Power: 110

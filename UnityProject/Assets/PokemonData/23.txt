@@ -1,0 +1,28 @@
+Name: Methapod
+Ability1: Shed Skin
+Ability2: 
+Ability3: 
+Type1: Bug
+Type2:
+HasGender: True
+PercentChanceFemale: 50
+HatchTIme: 3855 - 4111
+EggGroup1: Bug
+EggGroup2: 
+Height: .7
+Weight: 9.9
+Hp: 50
+Attack: 20
+Defense: 55
+SpAttack: 25
+SpDefense: 25
+Speed: 30
+LevelingType: Medium fast
+CatchRate: 120
+EvolutionLevel: 10
+EvolutionItem: 
+WalkingSpeed: 0.5
+RunningSpeed: 1
+Moves: 
+Harden/-
+

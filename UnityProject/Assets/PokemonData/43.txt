@@ -1,0 +1,43 @@
+Name: Pachirisu
+Ability1: Run Away
+Ability2: Pickup
+Ability3: Volt Absorb
+Type1: Electric
+Type2: 
+HasGender: true
+PercentChanceFemale: 50
+HatchTIme: 2570 - 2826
+EggGroup1: Field
+EggGroup2: Fairy
+Height: 0.4
+Weight: 3.9
+Hp: 60
+Attack: 45
+Defense: 70
+SpAttack: 45
+SpDefense: 90
+Speed: 95
+LevelingType: Medium Fast
+CatchRate: 200
+EvolutionLevel: 
+EvolutionItem: 
+WalkingSpeed: 1.2
+RunningSpeed: 3.3
+Moves:
+Growl/-
+Bide/-
+Quick Attack/5
+Charm/9
+Spark/13
+Endure/17
+Nuzzle/19
+Swift/21
+Electro Ball/25
+Sweet Kiss/29
+Thunder Wave/33
+Super Fang/37
+Discharge/41
+Last Resort/45
+Hyper Fang/49
+Thunderbolt/60
+Thunder/70

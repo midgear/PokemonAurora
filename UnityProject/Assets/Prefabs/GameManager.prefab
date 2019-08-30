@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalPokemon: 100
-  totalMoves: 2
+  totalMoves: 3
   defaultWalkingSpeed: 1.4
   defaultRunningSpeed: 3.3
-  pokemonToSpawn: 45
+  pokemonHealthVelocity: 1.2
+  pokemonToSpawn: 100
