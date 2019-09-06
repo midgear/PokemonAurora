@@ -90,22 +90,7 @@ ModelImporter:
   - first:
       74: -4433511890622308673
     second: 0133_Eevee_skeleton|pm0133_R_WakeUp
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: pm0133_00_Body1.tga
-    second: {fileID: 2100000, guid: a5faeaf40f572894186b388fefc1476d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: pm0133_00_Eye1.tga
-    second: {fileID: 2100000, guid: 029667879a255db4f83feda05f8645ff, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: pm0133_00_Mouth1.tga
-    second: {fileID: 2100000, guid: f726e8ba9a1b3014080ac2b00b9f3b50, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
@@ -977,7 +962,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.03155927
+    globalScale: 0.01297934
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -1023,7 +1008,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.00031559268
+    globalScale: 0.01297934
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

@@ -94,12 +94,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: pm0819_11_Body1.tga
-    second: {fileID: 2100000, guid: 0c20e190e3080f54cbd50744a8020983, type: 2}
+    second: {fileID: 2100000, guid: f547c74bc7a988445836c7f5e3d08529, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: pm0819_11_Eff1.tga
-    second: {fileID: 2100000, guid: 9f1d05b1879e90f4a9d9dcc0142e57c7, type: 2}
+    second: {fileID: 2100000, guid: d3667b7412842ad4eb9408157f19e714, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -284,7 +284,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -400,7 +400,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -429,7 +429,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -458,7 +458,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -959,7 +959,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.0001744747
+    globalScale: 0.01744747
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

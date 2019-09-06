@@ -2,7 +2,7 @@
 // transparency shader receiving shadows, useful for blending roads with the terrain on the outer edges and useful for road decals
 // This uses decal:blend so make sure the road lays on top of the terrain or any other object
 
-Shader "EasyRoads3D/ER Road Transparency" {
+Shader "EasyRoads3D/ER Road Transparency - HD Roads" {
     Properties {
 
 		[Header(Road Texture)]
@@ -85,6 +85,7 @@ Shader "EasyRoads3D/ER Road Transparency" {
             o.Alpha = alpha;
             o.Smoothness = _met.a;//_Glossiness;
             o.Metallic = _met.r;//_Metallic;
+            o.Occlusion = _met.g;//
         }
         ENDCG
     }

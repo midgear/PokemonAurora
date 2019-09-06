@@ -179,7 +179,6 @@ public class runtimeScript : MonoBehaviour {
 			v.y += 1;
 		
 			go.transform.position = v;
-			go.transform.forward = road.GetLookatSmooth(distance, currentElement);;
 		}
 
         // spline point info center of the road

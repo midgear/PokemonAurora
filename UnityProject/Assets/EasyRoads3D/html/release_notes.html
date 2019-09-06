@@ -24,7 +24,7 @@
 	  <tr>
 	    <td colspan="2" class="style1"><p class="style1">&nbsp;</p>
 	      <p class="header1" style="color:#000">Release Notes 
-	      v3.1.8.f2<hr>
+	      v3.1.8<hr>
 	      <p class="style21">&nbsp;</p>
 	      <p class="header2">Important</p>
 	      <p class="style21">&nbsp;</p>
@@ -55,7 +55,19 @@
           <p class="style1">&nbsp;</p>-->
 <p class="style1">&nbsp;</p>
 <p class="style1"><strong>New:</strong></p>
-<p class="style1">- Connections Tab: option to mark prefabs as Favourite, it will move the prefab up to the top for quick selection when many connection prefabs are present in the connection prefabs folder.</p>
+<p class="style1">- Snapping road markers to join two roads at the start and end  is now supported. This works by moving the start or end marker over another start / end marker, the other marker will light up. The markers will connect after  releasing the mouse button. The road will be closed if the involved markers are part of the same road. The two roads will be joined in one road when there is a match on the road type, otherwise the marker handle will appear in orange and the two roads will connect through an I Connector.</p>
+<p class="style1">- Scripting API support for activating side objects on roads</p>
+<p class="style1">ERRoadNetwork.<span class="styleAPIBold">GetSideObjectByName</span>(string name)<br>
+  returns the object of type SideObject<br>
+  <br> 
+  ERRoad.<span class="styleAPIBold">SideObjectSetActive</span>(SideObject obj, bool value) <br>
+  activates / deactivates the side object for this road object<br>
+  <br>
+  ERRoad.<span class="styleAPIBold">SideObjectMarkerSetActive</span>(SideObject obj, int markerIndex, bool value)<br>
+  activates / deactivates the side object for the passed marker index for this road object<br>
+  <br>
+  ERRoad.<span class="styleAPIBold">SideObjectMarkerSetActive</span>(SideObject obj, int[] markerIndexes, bool value)<br>
+  activates / deactivates the side object for the passed array of marker indexes for this road object</p>
 <p class="style1">&nbsp;</p>
 <!--
 <p class="style1"><strong>Changed:</strong></p>
@@ -66,12 +78,13 @@
 <p class="style1">&nbsp; </p>
 -->
 <p class="style1"><strong>Improved:</strong></p>
-<p class="style1">- &quot;Follow Terrain Contours&quot; presets for road types</p>
+<p class="style1">- Circular road sections at the start and end of a road when crossings are attached</p>
+<p class="style1">- Road data import: improved accuracy of the imported osm / kml data and additional bounds stats.</p>
+<p class="style1">- Customizable grid size in General Settings &gt; Scene Settings &gt; Grid Control</p>
+<p class="style1">- Option to switch of terrain deformation for built in crossings in the General Settings</p>
 <p class="style1">&nbsp;</p>
 <p class="style1"><strong>Fixed:</strong></p>
-<p class="style1">- Issues with the new v3.1.8 road snapping feature when crossings are involved and road sections with only 2 markers</p>
-<p class="style1">- Possible issues in v3.1.8 with connections in the Custom Prefab system when shapes like sidewalks are involved</p>
-<p class="style1">- Errors after selecting roundabout prefabs in the project folder or when moving the Prefab Displey slider in the Connection Prefabs tab</p>
+<p class="style1">- Possible inaccuracies with side objects clamped to the road side when the road shape is raised higher above the terrain.</p>
 <p class="style1">- Miscellaneous other small bugs and improvements</p>
 <p class="style1">&nbsp;</p>
           <p class="header2">To Do / Current limitations:          </p>

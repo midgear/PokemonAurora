@@ -40,13 +40,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2389506915403282515}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da19ebfac3b6a7645a04b27e5c82b262, type: 3}
+  m_Script: {fileID: 11500000, guid: 10ad4e52dba3f2d4ea5d20ffcd7a7c25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalPokemon: 0
-  totalMoves: 0
+  totalPokemon: 100
+  totalMoves: 3
   defaultWalkingSpeed: 1.4
   defaultRunningSpeed: 3.3
   pokemonHealthVelocity: 1.2
-  pokemonSpawnLocation: {x: 0, y: 0, z: 0}
-  pokemonToSpawn: 0
+  pokemonToSpawn: 100

@@ -3,10 +3,9 @@
 --- !u!1 &100000
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
   m_Component:
   - component: {fileID: 400000}
   - component: {fileID: 11400002}
@@ -22,12 +21,30 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 400002}
+  - component: {fileID: 11400004}
+  - component: {fileID: 3300002}
+  - component: {fileID: 2300002}
+  - component: {fileID: 6400002}
+  m_Layer: 31
+  m_Name: surface
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 321.1243, y: 0, z: 50.368233}
@@ -37,286 +54,131 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+--- !u!4 &400002
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400000}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &2300000
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1684943744, guid: f56d46228aee4734f9114056c53bb57e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uvArrayFront:
-  - 0
-  - 0.083333336
-  - 0.5
-  - 0.9166667
-  - 1
-  uvArrayBack:
-  - 0
-  - 0.083333336
-  - 0.5
-  - 0.9166667
-  - 1
-  uvArrayLeft:
-  - 0
-  - 0.083333336
-  - 0.5
-  - 0.9166667
-  - 1
-  uvArrayRight:
-  - 0
-  - 0.083333336
-  - 0.5
-  - 0.9166667
-  - 1
-  ODCQCQDDQO: 
-  OOCDOQOCQC: 
-  OQDOQDQODC: 
-  OQCDODODDO: 
-  OQQQQQQDQC: 
-  ODOQDCDQQO: 
-  ODQQDCCCCO: 
-  OCDOQOOODQ: 
-  ODCQCQDDQOStart: 
-  OOCDOQOCQCStart: 
-  OQDOQDQODCStart: 
-  OQCDODODDOStart: 
-  OQQQQQQDQCStart: 
-  ODOQDCDQQOStart: 
-  ODQQDCCCCOStart: 
-  OCDOQOOODQStart: 
-  frontLeftRoadInts: 
-  frontRightRoadInts: 
-  backLeftRoadInts: 
-  backRightRoadInts: 
-  leftLeftRoadInts: 
-  leftRightRoadInts: 
-  rightLeftRoadInts: 
-  rightRightRoadInts: 
-  leftStartSidewalkCornerInt: 2
-  rightStartSidewalkCornerInt: 2
-  leftEndSidewalkCornerInt: 2
-  rightEndSidewalkCornerInt: 2
-  leftLeftSidewalkCornerInt: 2
-  rightLeftSidewalkCornerInt: 2
-  leftRightSidewalkCornerInt: 2
-  rightRightSidewalkCornerInt: 2
-  sidewalkControlPoints:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  sidewalkControlStatus: 
-  copySettingsFlag: 0
-  generalSettingsFlag: 1
-  connectionSettingsFlag: 1
-  cornerSettingsFlag: 1
-  sidewalkSettingsFlag: 0
-  QDOOOQOOQQQQD:
-  - Front Connection
-  - Back Connection
-  - Left Connection
-  - Right Connection
-  selectedConnection: 0
-  startAngle: 0
-  roundedCorners: 1
-  roundingRadius: 1
-  roundingSegments: 5
-  innerSegmentDistance: 0.5
-  tCrossing: 0
-  tStraightBending: 1
-  oldTCrossing: 0
-  tCrossingLeftRight: 1
-  oldtCrossingLeftRight: 1
-  geometryType: 0
-  resolution: 1
-  includeSidewalks: 1
-  defaultSidewalkEnabledStatus: 1
-  planarUVs: 0
-  planarTiling: 1
-  isSceneObject: 1
-  connectionHandling: 0
-  roadTypesDynamic: []
-  frontRoadTypeInt: 0
-  frontRoadTypeID: 0
-  frontRoadWidth: 6
-  frontMaterial: {fileID: 2100000, guid: 3c555588afad81d428ad1704d5d015a7, type: 2}
-  frontRoadMaterial: {fileID: 2100000, guid: f182e2714eb8a714a99ed091081ce16c, type: 2}
-  frontRoadUVTiling: 1
-  backRoadTypeInt: 0
-  backRoadTypeID: 0
-  backRoadWidth: 6
-  backMaterial: {fileID: 2100000, guid: 3c555588afad81d428ad1704d5d015a7, type: 2}
-  backRoadMaterial: {fileID: 2100000, guid: f182e2714eb8a714a99ed091081ce16c, type: 2}
-  backRoadUVTiling: 1
-  leftRoadTypeInt: 0
-  leftRoadTypeID: 0
-  leftRoadWidth: 6
-  leftMaterial: {fileID: 2100000, guid: 3c555588afad81d428ad1704d5d015a7, type: 2}
-  leftRoadMaterial: {fileID: 2100000, guid: f182e2714eb8a714a99ed091081ce16c, type: 2}
-  leftRoadUVTiling: 1
-  rightRoadTypeInt: 0
-  rightRoadTypeID: 0
-  rightRoadWidth: 6
-  rightMaterial: {fileID: 2100000, guid: 3c555588afad81d428ad1704d5d015a7, type: 2}
-  rightRoadMaterial: {fileID: 2100000, guid: f182e2714eb8a714a99ed091081ce16c, type: 2}
-  rightRoadUVTiling: 1
-  selectedRoadType: 0
-  uniformCornersFlag: 1
-  selectedCorner: 0
-  selectedCornerPreset: 0
-  cornerPresetName: 
-  selectedSidewalkPreset: 0
-  sidewalkPresetName: 
-  OCCDCDQDQOCorner: 0
-  leftBottom: {x: -3.2928934, y: 0.5, z: -3.2928932}
-  rightBottom: {x: 3.2928934, y: 0.5, z: -3.2928932}
-  leftTop: {x: -3.2928934, y: 0.5, z: 3.2928932}
-  rightTop: {x: 3.2928934, y: 0.5, z: 3.2928932}
-  frontCenter: {x: 0, y: 0, z: -5.5}
-  backCenter: {x: 0, y: 0, z: 5.5}
-  leftCenter: {x: -5.5, y: 0, z: 0}
-  rightCenter: {x: 5.5, y: 0, z: 0}
-  prefabId: 0
-  prefabScript: {fileID: 11400000}
-  connectionElement:
-    centerPoint: {x: 0, y: 0, z: -5.5}
-    tmpCenterPoint: {x: 0, y: 0, z: -5.5}
-    stageCenterPoint: {x: 0, y: 0, z: 0}
-    tmpStageCenterPoint: {x: 0, y: 0, z: 0}
-    blendData: []
-    controlPointV3: {x: 0, y: 0, z: 0}
-    controlPoint: {x: 0, y: 0}
-    blendDistance: 0
-    extendBounds: 0
-    blendCornerPoints: []
-    blendCornerPointInts: 
-    blendCornerPointWeights: []
-    blendCornerPointsTransformed: []
-    blendRatio: 1
-    curveStrength: 0
-    roadShapeVecs:
-    - {x: -3, y: 0}
-    - {x: 3, y: 0}
-    roadShapeVecsString: 
-    roadShapeMatchCount: 0
-    roadShapeUVY:
-    - 0
-    - 1
-    roadShapeUVY2: []
-    hardEdge: 
-    roadShapeMaterialInts: 010000000100000001000000010000000100000000000000000000000100000001000000010000000100000001000000
-    sidewalkLeftVecs:
-    - {x: -4.5, y: 0.25}
-    - {x: -4.25, y: 0.25}
-    - {x: -3.25, y: 0.25}
-    - {x: -3, y: 0.25}
-    - {x: -3, y: 0}
-    sidewalkLeftUVY:
-    - 1
-    - 0.85714287
-    - 0.2857143
-    - 0.14285715
-    - 0
-    sidewalkLeftMaterialInts: 
-    sidewalkRightVecs:
-    - {x: 3, y: 0}
-    - {x: 3, y: 0.25}
-    - {x: 3.25, y: 0.25}
-    - {x: 4.25, y: 0.25}
-    - {x: 4.5, y: 0.25}
-    sidewalkRightUVY:
-    - 0
-    - 0.14285715
-    - 0.2857143
-    - 0.85714287
-    - 1
-    sidewalkRightMaterialInts: 
-    connectionVecs: []
-    connectionVecInts: 76000000740000006f0000006a0000006500000001000000150000008b00000090000000950000009a0000009c000000
-    fullConnectionVecInts: 
-    sidewalkLeftConnectionVecInts: 76000000740000006f0000006a00000065000000
-    sidewalkRightConnectionVecInts: 8b00000090000000950000009a0000009c000000
-    doConnectionTri: 
-    outerVecInts: 
-    rotationPriority: 0
-    centerPointAngle: 1000
-    connectedRoad: {fileID: 0}
-    connectedMarker: -1
-    connectedRoadGO: {fileID: 0}
-    includeLeftSidewalk: 1
-    includeRightSidewalk: 1
-    roadMaterial: {fileID: 2100000, guid: f182e2714eb8a714a99ed091081ce16c, type: 2}
-    roadMaterials:
-    - {fileID: 2100000, guid: f182e2714eb8a714a99ed091081ce16c, type: 2}
-    - {fileID: 2100000, guid: d74dc327ca3fad8408eeeaf8ad54a110, type: 2}
-    centerPointPercentage: 0.5
-    leftIndent: 2
-    rightIndent: 1
-    leftSurrounding: 10
-    rightSurrounding: 9
-    leftIndentV3: {x: -7.4296875, y: -0.02, z: -7.4296875}
-    leftSurroundingV3: {x: -10.252136, y: 0, z: -10.252129}
-    rightIndentV3: {x: 7.4296875, y: -0.02, z: -7.4296875}
-    rightSurroundingV3: {x: 10.252136, y: 0, z: -10.252129}
-    leftRoadpoint: {x: 0, y: 0, z: 0}
-    rightRoadpoint: {x: 0, y: 0, z: 0}
-    leftCornerInt: -1
-    rightCornerInt: -1
-    leftIndentInt: 0
-    rightIndentInt: 0
-    leftInt: 0
-    rightInt: 0
-    leftIntFull: 0
-    rightIntFull: 0
-    alignmentHandleVec: {x: 0, y: 0, z: -2.75}
-    additionalIndentDistance: 1.948485
-    connectionAngle: 0
-    alignmentHandleVecRotationGizmo: {x: 0, y: 0, z: 0}
-    roadType: 0
-    roadTypeTimestamp: 0
-  crossingOuterElement: 0
-  crossingName: dynamic X crossing
-  guiChanged: 1
-  includeSidewalkChangeFlag: 0
-  debugVecs: []
-  maxConnectionWidth: 75
-  crossingStructure: 0
-  baseScript: {fileID: 0}
-  siblings1: []
-  prioritySiblings: []
-  crossPointCenter: {x: 0, y: 0, z: 0}
-  edges: []
-  primaryPriorityConnection: {fileID: 0}
-  secondPriorityConnection: {fileID: 0}
-  adjustMainRadiusFlag: 0
-  disableAdjustMainRadiusFlag: 0
-  showScaleSliderAtPrimary: 0
-  showScaleSliderAtSecondary: 0
-  priorityWayType: 0
-  leftIntOffset: 0
-  rightIntOffset: 0
-  isUpdating: 0
-  serializeTest: 5
-  updateQueue: 0
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 3c555588afad81d428ad1704d5d015a7, type: 2}
+  - {fileID: 2100000, guid: d74dc327ca3fad8408eeeaf8ad54a110, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!23 &2300002
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 6df83606ee896204ea5f2925b610f5fb, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &3300000
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Mesh: {fileID: 0}
+--- !u!33 &3300002
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Mesh: {fileID: 0}
+--- !u!64 &6400000
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}
+--- !u!64 &6400002
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -403,8 +265,6 @@ MonoBehaviour:
     leftSurroundingV3: {x: -10.252136, y: 0, z: -10.252129}
     rightIndentV3: {x: 7.4296875, y: -0.02, z: -7.4296875}
     rightSurroundingV3: {x: 10.252136, y: 0, z: -10.252129}
-    leftRoadpoint: {x: 0, y: 0, z: 0}
-    rightRoadpoint: {x: 0, y: 0, z: 0}
     leftCornerInt: -1
     rightCornerInt: -1
     leftIndentInt: 0
@@ -498,8 +358,6 @@ MonoBehaviour:
     leftSurroundingV3: {x: 10.252136, y: 0, z: 10.252129}
     rightIndentV3: {x: -7.4296875, y: -0.02, z: 7.4296875}
     rightSurroundingV3: {x: -10.252136, y: 0, z: 10.252129}
-    leftRoadpoint: {x: 0, y: 0, z: 0}
-    rightRoadpoint: {x: 0, y: 0, z: 0}
     leftCornerInt: -1
     rightCornerInt: -1
     leftIndentInt: 0
@@ -593,8 +451,6 @@ MonoBehaviour:
     leftSurroundingV3: {x: -10.252136, y: 0, z: 10.252129}
     rightIndentV3: {x: -7.4296875, y: -0.02, z: -7.4296875}
     rightSurroundingV3: {x: -10.252136, y: 0, z: -10.252129}
-    leftRoadpoint: {x: 0, y: 0, z: 0}
-    rightRoadpoint: {x: 0, y: 0, z: 0}
     leftCornerInt: -1
     rightCornerInt: -1
     leftIndentInt: 0
@@ -688,8 +544,6 @@ MonoBehaviour:
     leftSurroundingV3: {x: 10.252136, y: 0, z: -10.252129}
     rightIndentV3: {x: 7.4296875, y: -0.02, z: 7.4296875}
     rightSurroundingV3: {x: 10.252136, y: 0, z: 10.252129}
-    leftRoadpoint: {x: 0, y: 0, z: 0}
-    rightRoadpoint: {x: 0, y: 0, z: 0}
     leftCornerInt: -1
     rightCornerInt: -1
     leftIndentInt: 0
@@ -833,7 +687,6 @@ MonoBehaviour:
     cornerSegments: 5
     innerSegmentDistance: 0.5
     startAngle: 0
-  siblings: []
   meshVecs:
   - {x: 0, y: 0, z: 0}
   - {x: -3, y: 0, z: -5.5}
@@ -1367,9 +1220,7 @@ MonoBehaviour:
   deformTerrain: 1
   isRoundabout: 0
   isERCrossing: 0
-  isYConnector: 0
   isIConnector: 0
-  isFlexConnector: 0
   roundaboutScript: {fileID: 0}
   crossingsScript: {fileID: 0}
   iConnectorScript: {fileID: 0}
@@ -1452,77 +1303,275 @@ MonoBehaviour:
   debugVecs1: []
   debugVecs2: []
   lightmapAdjusted: 0
-  isFlexUpdating: 0
-  lockScale: 1
-  extraIndentMargin: 0
-  indent: 0
-  surrounding: 0
---- !u!33 &3300000
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Mesh: {fileID: 0}
---- !u!23 &2300000
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100000}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1684943744, guid: f56d46228aee4734f9114056c53bb57e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uvArrayFront:
+  - 0
+  - 0.083333336
+  - 0.5
+  - 0.9166667
+  - 1
+  uvArrayBack:
+  - 0
+  - 0.083333336
+  - 0.5
+  - 0.9166667
+  - 1
+  uvArrayLeft:
+  - 0
+  - 0.083333336
+  - 0.5
+  - 0.9166667
+  - 1
+  uvArrayRight:
+  - 0
+  - 0.083333336
+  - 0.5
+  - 0.9166667
+  - 1
+  OOOCOQDCQC: 
+  OQQCCCCODC: 
+  OCQOCDOOCD: 
+  OQCDQDOOQD: 
+  OCDCOOOQCO: 
+  OCCCQDOOQO: 
+  OCQQCQCCDD: 
+  OQQOQCODDD: 
+  OOOCOQDCQCStart: 
+  OQQCCCCODCStart: 
+  OCQOCDOOCDStart: 
+  OQCDQDOOQDStart: 
+  OCDCOOOQCOStart: 
+  OCCCQDOOQOStart: 
+  OCQQCQCCDDStart: 
+  OQQOQCODDDStart: 
+  frontLeftRoadInts: 
+  frontRightRoadInts: 
+  backLeftRoadInts: 
+  backRightRoadInts: 
+  leftLeftRoadInts: 
+  leftRightRoadInts: 
+  rightLeftRoadInts: 
+  rightRightRoadInts: 
+  leftStartSidewalkCornerInt: 2
+  rightStartSidewalkCornerInt: 2
+  leftEndSidewalkCornerInt: 2
+  rightEndSidewalkCornerInt: 2
+  leftLeftSidewalkCornerInt: 2
+  rightLeftSidewalkCornerInt: 2
+  leftRightSidewalkCornerInt: 2
+  rightRightSidewalkCornerInt: 2
+  sidewalkControlPoints:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  sidewalkControlStatus: 
+  copySettingsFlag: 0
+  generalSettingsFlag: 1
+  connectionSettingsFlag: 1
+  cornerSettingsFlag: 1
+  sidewalkSettingsFlag: 0
+  QDOOOQOOQQQQD:
+  - Front Connection
+  - Back Connection
+  - Left Connection
+  - Right Connection
+  selectedConnection: 0
+  startAngle: 0
+  roundedCorners: 1
+  roundingRadius: 1
+  roundingSegments: 5
+  innerSegmentDistance: 0.5
+  tCrossing: 0
+  tStraightBending: 1
+  oldTCrossing: 0
+  tCrossingLeftRight: 1
+  oldtCrossingLeftRight: 1
+  geometryType: 0
+  resolution: 1
+  includeSidewalks: 1
+  defaultSidewalkEnabledStatus: 1
+  planarUVs: 0
+  planarTiling: 1
+  isSceneObject: 1
+  connectionHandling: 0
+  roadTypesDynamic: []
+  frontRoadTypeInt: 0
+  frontRoadTypeID: 0
+  frontRoadWidth: 6
+  frontMaterial: {fileID: 2100000, guid: 3c555588afad81d428ad1704d5d015a7, type: 2}
+  frontRoadMaterial: {fileID: 2100000, guid: f182e2714eb8a714a99ed091081ce16c, type: 2}
+  frontRoadUVTiling: 1
+  backRoadTypeInt: 0
+  backRoadTypeID: 0
+  backRoadWidth: 6
+  backMaterial: {fileID: 2100000, guid: 3c555588afad81d428ad1704d5d015a7, type: 2}
+  backRoadMaterial: {fileID: 2100000, guid: f182e2714eb8a714a99ed091081ce16c, type: 2}
+  backRoadUVTiling: 1
+  leftRoadTypeInt: 0
+  leftRoadTypeID: 0
+  leftRoadWidth: 6
+  leftMaterial: {fileID: 2100000, guid: 3c555588afad81d428ad1704d5d015a7, type: 2}
+  leftRoadMaterial: {fileID: 2100000, guid: f182e2714eb8a714a99ed091081ce16c, type: 2}
+  leftRoadUVTiling: 1
+  rightRoadTypeInt: 0
+  rightRoadTypeID: 0
+  rightRoadWidth: 6
+  rightMaterial: {fileID: 2100000, guid: 3c555588afad81d428ad1704d5d015a7, type: 2}
+  rightRoadMaterial: {fileID: 2100000, guid: f182e2714eb8a714a99ed091081ce16c, type: 2}
+  rightRoadUVTiling: 1
+  selectedRoadType: 0
+  uniformCornersFlag: 1
+  selectedCorner: 0
+  selectedCornerPreset: 0
+  cornerPresetName: 
+  selectedSidewalkPreset: 0
+  sidewalkPresetName: 
+  OQCQODCQCQCorner: 0
+  leftBottom: {x: -3.2928934, y: 0.5, z: -3.2928932}
+  rightBottom: {x: 3.2928934, y: 0.5, z: -3.2928932}
+  leftTop: {x: -3.2928934, y: 0.5, z: 3.2928932}
+  rightTop: {x: 3.2928934, y: 0.5, z: 3.2928932}
+  frontCenter: {x: 0, y: 0, z: -5.5}
+  backCenter: {x: 0, y: 0, z: 5.5}
+  leftCenter: {x: -5.5, y: 0, z: 0}
+  rightCenter: {x: 5.5, y: 0, z: 0}
+  prefabId: 0
+  prefabScript: {fileID: 11400000}
+  connectionElement:
+    centerPoint: {x: 0, y: 0, z: -5.5}
+    tmpCenterPoint: {x: 0, y: 0, z: -5.5}
+    stageCenterPoint: {x: 0, y: 0, z: 0}
+    tmpStageCenterPoint: {x: 0, y: 0, z: 0}
+    blendData: []
+    controlPointV3: {x: 0, y: 0, z: 0}
+    controlPoint: {x: 0, y: 0}
+    blendDistance: 0
+    extendBounds: 0
+    blendCornerPoints: []
+    blendCornerPointInts: 
+    blendCornerPointWeights: []
+    blendCornerPointsTransformed: []
+    blendRatio: 1
+    curveStrength: 0
+    roadShapeVecs:
+    - {x: -3, y: 0}
+    - {x: 3, y: 0}
+    roadShapeVecsString: 
+    roadShapeMatchCount: 0
+    roadShapeUVY:
+    - 0
+    - 1
+    roadShapeUVY2: []
+    hardEdge: 
+    roadShapeMaterialInts: 010000000100000001000000010000000100000000000000000000000100000001000000010000000100000001000000
+    sidewalkLeftVecs:
+    - {x: -4.5, y: 0.25}
+    - {x: -4.25, y: 0.25}
+    - {x: -3.25, y: 0.25}
+    - {x: -3, y: 0.25}
+    - {x: -3, y: 0}
+    sidewalkLeftUVY:
+    - 1
+    - 0.85714287
+    - 0.2857143
+    - 0.14285715
+    - 0
+    sidewalkLeftMaterialInts: 
+    sidewalkRightVecs:
+    - {x: 3, y: 0}
+    - {x: 3, y: 0.25}
+    - {x: 3.25, y: 0.25}
+    - {x: 4.25, y: 0.25}
+    - {x: 4.5, y: 0.25}
+    sidewalkRightUVY:
+    - 0
+    - 0.14285715
+    - 0.2857143
+    - 0.85714287
+    - 1
+    sidewalkRightMaterialInts: 
+    connectionVecs: []
+    connectionVecInts: 76000000740000006f0000006a0000006500000001000000150000008b00000090000000950000009a0000009c000000
+    fullConnectionVecInts: 
+    sidewalkLeftConnectionVecInts: 76000000740000006f0000006a00000065000000
+    sidewalkRightConnectionVecInts: 8b00000090000000950000009a0000009c000000
+    doConnectionTri: 
+    outerVecInts: 
+    rotationPriority: 0
+    centerPointAngle: 1000
+    connectedRoad: {fileID: 0}
+    connectedMarker: -1
+    connectedRoadGO: {fileID: 0}
+    includeLeftSidewalk: 1
+    includeRightSidewalk: 1
+    roadMaterial: {fileID: 2100000, guid: f182e2714eb8a714a99ed091081ce16c, type: 2}
+    roadMaterials:
+    - {fileID: 2100000, guid: f182e2714eb8a714a99ed091081ce16c, type: 2}
+    - {fileID: 2100000, guid: d74dc327ca3fad8408eeeaf8ad54a110, type: 2}
+    centerPointPercentage: 0.5
+    leftIndent: 2
+    rightIndent: 1
+    leftSurrounding: 10
+    rightSurrounding: 9
+    leftIndentV3: {x: -7.4296875, y: -0.02, z: -7.4296875}
+    leftSurroundingV3: {x: -10.252136, y: 0, z: -10.252129}
+    rightIndentV3: {x: 7.4296875, y: -0.02, z: -7.4296875}
+    rightSurroundingV3: {x: 10.252136, y: 0, z: -10.252129}
+    leftCornerInt: -1
+    rightCornerInt: -1
+    leftIndentInt: 0
+    rightIndentInt: 0
+    leftInt: 0
+    rightInt: 0
+    leftIntFull: 0
+    rightIntFull: 0
+    alignmentHandleVec: {x: 0, y: 0, z: -2.75}
+    additionalIndentDistance: 1.948485
+    connectionAngle: 0
+    alignmentHandleVecRotationGizmo: {x: 0, y: 0, z: 0}
+    roadType: 0
+    roadTypeTimestamp: 0
+  crossingOuterElement: 0
+  crossingName: dynamic X crossing
+  guiChanged: 1
+  includeSidewalkChangeFlag: 0
+  debugVecs: []
+  maxConnectionWidth: 75
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 3c555588afad81d428ad1704d5d015a7, type: 2}
-  - {fileID: 2100000, guid: d74dc327ca3fad8408eeeaf8ad54a110, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!64 &6400000
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100000}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -257043915, guid: f56d46228aee4734f9114056c53bb57e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11400006
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -1613,8 +1662,6 @@ MonoBehaviour:
     leftSurroundingV3: {x: -10.252136, y: 0, z: -10.252129}
     rightIndentV3: {x: 7.4296875, y: -0.02, z: -7.4296875}
     rightSurroundingV3: {x: 10.252136, y: 0, z: -10.252129}
-    leftRoadpoint: {x: 0, y: 0, z: 0}
-    rightRoadpoint: {x: 0, y: 0, z: 0}
     leftCornerInt: -1
     rightCornerInt: -1
     leftIndentInt: 0
@@ -1712,8 +1759,6 @@ MonoBehaviour:
     leftSurroundingV3: {x: 10.252136, y: 0, z: 10.252129}
     rightIndentV3: {x: -7.4296875, y: -0.02, z: 7.4296875}
     rightSurroundingV3: {x: -10.252136, y: 0, z: 10.252129}
-    leftRoadpoint: {x: 0, y: 0, z: 0}
-    rightRoadpoint: {x: 0, y: 0, z: 0}
     leftCornerInt: -1
     rightCornerInt: -1
     leftIndentInt: 0
@@ -1811,8 +1856,6 @@ MonoBehaviour:
     leftSurroundingV3: {x: -10.252136, y: 0, z: 10.252129}
     rightIndentV3: {x: -7.4296875, y: -0.02, z: -7.4296875}
     rightSurroundingV3: {x: -10.252136, y: 0, z: -10.252129}
-    leftRoadpoint: {x: 0, y: 0, z: 0}
-    rightRoadpoint: {x: 0, y: 0, z: 0}
     leftCornerInt: -1
     rightCornerInt: -1
     leftIndentInt: 0
@@ -1910,8 +1953,6 @@ MonoBehaviour:
     leftSurroundingV3: {x: 10.252136, y: 0, z: -10.252129}
     rightIndentV3: {x: 7.4296875, y: -0.02, z: 7.4296875}
     rightSurroundingV3: {x: 10.252136, y: 0, z: 10.252129}
-    leftRoadpoint: {x: 0, y: 0, z: 0}
-    rightRoadpoint: {x: 0, y: 0, z: 0}
     leftCornerInt: -1
     rightCornerInt: -1
     leftIndentInt: 0
@@ -2059,7 +2100,6 @@ MonoBehaviour:
     cornerSegments: 5
     innerSegmentDistance: 0.5
     startAngle: 0
-  siblings: []
   meshVecs:
   - {x: 0, y: 0, z: 0}
   - {x: -3, y: 0, z: -5.5}
@@ -2625,9 +2665,7 @@ MonoBehaviour:
   deformTerrain: 1
   isRoundabout: 0
   isERCrossing: 0
-  isYConnector: 0
   isIConnector: 0
-  isFlexConnector: 0
   roundaboutScript: {fileID: 0}
   crossingsScript: {fileID: 0}
   iConnectorScript: {fileID: 0}
@@ -2710,113 +2748,14 @@ MonoBehaviour:
   debugVecs1: []
   debugVecs2: []
   lightmapAdjusted: 0
-  isFlexUpdating: 0
-  lockScale: 1
-  extraIndentMargin: 0
-  indent: 0
-  surrounding: 0
---- !u!1 &100002
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 400002}
-  - component: {fileID: 11400004}
-  - component: {fileID: 3300002}
-  - component: {fileID: 2300002}
-  - component: {fileID: 6400002}
-  m_Layer: 31
-  m_Name: surface
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &400002
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100002}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400000}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &11400004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -257043915, guid: f56d46228aee4734f9114056c53bb57e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!33 &3300002
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100002}
-  m_Mesh: {fileID: 0}
---- !u!23 &2300002
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 6df83606ee896204ea5f2925b610f5fb, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!64 &6400002
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100002}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 0}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1

@@ -1,0 +1,25 @@
+Name: <pokemonName>
+Ability1: <ability1>
+Ability2: <ability2>
+Ability3: <ability3>
+Type1: <type1>
+Type2: <type2>
+HasGender: <hasGender?>
+PercentChanceFemale: <percentChanceFemale>
+HatchTIme: <minSteps> - <maxSteps>
+EggGroup1: <eggGroup1>
+EggGroup2: <eggGroup2>
+Height: <heightInMeters>
+Weight: <weightInKilograms>
+Hp: <hpBaseStat>
+Attack: <attackBaseStat>
+Defense: <defenseBaseStat>
+SpAttack: <spAttackBaseStat>
+SpDefense: <spDefenseBaseStat>
+Speed: <speedBaseStat>
+LevelingType: <levelingType>
+CatchRate: <catchRate>
+EvolutionLevel: <level>
+EvolutionItem: <itemName>
+Moves:
+<moveName>/<learnLevel>

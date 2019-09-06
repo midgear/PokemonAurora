@@ -62,8 +62,7 @@ public class PlayerController2 : MonoBehaviour
     [Tooltip("When calculating the position of the feet of the player, this value is added as an " +
         "offset to transform.position")]
     public float feetOffset = 0.0f;
-    [Tooltip("Step search distance")]
-    public float stepSearch = 0.1f;
+    
     #endregion
 
     #region ConstantVariables
@@ -436,7 +435,7 @@ public class PlayerController2 : MonoBehaviour
     {
         // Okay so here is the plan boys. Shoot the capusle cast forward and make sure we got an edge. Then
         // verify against the step distance. If all is ok, boom! Do the step! Wow, abstraction rlly makes things super simple.
-        Vector3 origin = GetMidsectionPos() + directionVector * stepSearch;
+        Vector3 origin = GetMidsectionPos() + directionVector * tolerance;
         RaycastHit stepHit;
         if (Physics.SphereCast(origin, capsuleRadius, Vector3.down, out stepHit, Mathf.Infinity, walkingLayerMask))
         {
@@ -459,7 +458,7 @@ public class PlayerController2 : MonoBehaviour
                     Vector3 moveVector = Vector3.up * signedDelta;
                     DebugControllerMove(moveVector);
                 }
-            } 
+            }
         }
     }
 

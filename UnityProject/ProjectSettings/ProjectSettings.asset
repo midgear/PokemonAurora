@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: Snowy World
+  companyName: DefaultCompany
   productName: PokemonAurora
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -625,7 +625,6 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
-    Collab: 0
     UNet: 1
   luminIcon:
     m_Name: 
@@ -646,10 +645,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 80a7b11c-0dd3-45fe-acc3-045d67996c41
+  cloudProjectId: 
   framebufferDepthMemorylessMode: 0
-  projectName: PokemonAurora
-  organizationId: midgear
+  projectName: 
+  organizationId: 
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

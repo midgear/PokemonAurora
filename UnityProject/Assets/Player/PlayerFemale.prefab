@@ -225,10 +225,10 @@ GameObject:
   - component: {fileID: 9152616809772851109}
   - component: {fileID: 4046428354082037975}
   - component: {fileID: 604939519992294552}
-  - component: {fileID: 2948321424797941480}
   - component: {fileID: 1108058511140907135}
   - component: {fileID: 4241798712781609414}
   - component: {fileID: 2007675996256771934}
+  - component: {fileID: 4048966431927862912}
   m_Layer: 0
   m_Name: PlayerFemale
   m_TagString: Player
@@ -296,42 +296,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.83, z: 0}
---- !u!114 &2948321424797941480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 604939519992294553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40191eb866f09d8488076c18114538e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkingSpeed: 1.4
-  runningSpeed: 3.3
-  jumpHeight: 1
-  gravityAcceleration: -9.81
-  airMovementFactor: 0.5
-  rotationsPerMinute: 80
-  terminalVelocity: -53
-  stepOffset: 0.3
-  canJump: 1
-  showDirectionVector: 0
-  showGroundedHitPos: 0
-  showEdgeCheck: 0
-  showGroundDistanceCheck: 0
-  showStepCheck: 0
-  showSurfaceNomral: 0
-  slopeLimit: 55
-  walkingLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  localCapsuleSphere1: {x: 0, y: 0.13, z: 0}
-  localCapsuleSphere2: {x: 0, y: 1.25, z: 0}
-  capsuleRadius: 0.15
-  rootMotion: 1
-  feetOffset: 0
 --- !u!114 &1108058511140907135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5618,6 +5582,42 @@ MonoBehaviour:
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
   eventHandlerComponentsAdded: 0
+--- !u!114 &4048966431927862912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604939519992294553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da47361d8264fb84b8b4982495f7f0bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkingSpeed: 1.7
+  runningSpeed: 3.3
+  jumpHeight: 1
+  gravityAcceleration: -9.81
+  airMovementFactor: 0.5
+  rotationsPerMinute: 80
+  terminalVelocity: -53
+  stepOffset: 0.3
+  canJump: 0
+  showDirectionVector: 0
+  showGroundedHitPos: 1
+  showEdgeCheck: 1
+  showGroundDistanceCheck: 1
+  showStepCheck: 0
+  showSurfaceNomral: 0
+  slopeLimit: 50
+  walkingLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  localCapsuleSphere1: {x: 0, y: 1.2, z: 0}
+  localCapsuleSphere2: {x: 0, y: 0.29, z: 0}
+  capsuleRadius: 0.29
+  rootMotion: 1
+  feetOffset: 0
 --- !u!1 &643027225830089694
 GameObject:
   m_ObjectHideFlags: 0

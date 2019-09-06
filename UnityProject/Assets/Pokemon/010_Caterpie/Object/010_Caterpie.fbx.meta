@@ -57,7 +57,17 @@ ModelImporter:
   - first:
       74: 1440091715606015729
     second: 010_Caterpie_skeleton|PM010_R_WakeUp
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: 804c3c999e13f31468a58d9aa2103dff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pm0010_00_Body1.tga
+    second: {fileID: 2100000, guid: ed8e467d623fc154b99b445e8a9d1ae5, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -329,7 +339,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -358,7 +368,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -387,7 +397,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -656,7 +666,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.00048497698
+    globalScale: 0.0484977
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
